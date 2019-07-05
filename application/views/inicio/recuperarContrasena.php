@@ -29,7 +29,7 @@
 <div class="bg-gradient-light " style='height: 100%;'>
     <div class='container'>
         <div class="row">
-            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="col-sm-9 col-md-7 col-lg-5">
                 <div class="card card-signin my-3">
                     <div class="card-body">
                         <form name='frmlogin' action='<?php echo site_url('inicio/resetearContrasena') ?>' method='post' accept-charset="utf-8">

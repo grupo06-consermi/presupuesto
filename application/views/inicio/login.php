@@ -29,7 +29,7 @@
 <div class="bg-gradient-light " style='height: 100%;'>
     <div class='container'>
         <div class="row">
-            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="col-sm-9 col-md-7 col-lg-5">
                 <div class='centered' style='margin-top: 20px;'>
                     <h3 style='text-align: center'>Sistema gestión de presupuestos</h3>
                 </div>
