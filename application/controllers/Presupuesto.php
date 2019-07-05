@@ -53,7 +53,7 @@
             $this->presupuesto_model->pres_costo_materiales = $_POST['costoMateriales'];
             $this->presupuesto_model->pres_costo_total      = $_POST['costoTotal'];
             $this->presupuesto_model->cli_codigo            = $_POST['cli_codigo'];
-            $this->presupuesto_model->pres_encargado        = ''; // $_POST[''];
+            $this->presupuesto_model->pres_encargado        = $_POST['encargado'];
             $this->presupuesto_model->detalles              = json_decode($_POST['detalles'], true);
 
             echo $this->presupuesto_model->insertar();

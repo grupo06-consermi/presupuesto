@@ -12,8 +12,11 @@
                 $fecha1 = new DateTime("$f1[0]-$f1[1]-01");
                 $fecha2 = new DateTime("$f2[0]-$f2[1]-01");
             } else {
-                $fecha1 = new DateTime($fecha1);
-                $fecha2 = new DateTime($fecha2);
+                try {
+                    $fecha1 = new DateTime($fecha1);
+                    $fecha2 = new DateTime($fecha2);
+                } catch (Exception $e) {
+                }
             }
             $diff      = date_diff($fecha1, $fecha2);
             $nro_meses = ($diff->y * 12) + $diff->m;
@@ -556,3 +559,64 @@
             redirect('inicio/login');
         }
     }
+
+    function TipoRUC($tipo) {
+        switch ($tipo) {
+            case "empresa":
+                return 20;
+            case "natural":
+                return 10;
+            case "extranjero":
+                return 17;
+            default:
+                return 0;
+        }
+    }
+
+    // validaciones globales
+    function ValidaRucPeru($ruc, $tipo) {
+
+        $ruc    = trim($ruc);
+        $factor = "5432765432";
+        $dig11  = substr($ruc, 10, 1);
+
+        // validaciones:
+
+        if (!is_numeric($ruc) || strlen($ruc) != 11) {
+            return false;
+        }
+
+        $valid_ini = array("10", "20", "17", "15");
+        $dig_ini   = substr($ruc, 0, 2);
+
+        if (!in_array($dig_ini, $valid_ini, true)) {
+            return false;
+        }
+
+        if ($dig_ini != TipoRUC($tipo)) {
+            return false;
+        }
+
+        // algoritmo:
+
+        $producto = array();
+        for ($i = 0; $i < 10; $i++) {
+            $producto[] = substr($ruc, $i, 1) * substr($factor, $i, 1);
+        }
+
+        $suma = 0;
+        foreach ($producto as $p) {
+            $suma += $p;
+        }
+
+        $residuo = $suma % 11;
+        $resta   = 11 - $residuo;
+        $chk_dig = substr($resta, -1);
+
+        if ($chk_dig == $dig11) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+

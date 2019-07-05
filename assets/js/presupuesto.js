@@ -188,6 +188,7 @@ var Presupuesto = function () {
         form_data.append('costoManoObra', $('#costo_mano_obra').val());
         form_data.append('costoMateriales', $('#costo_materiales').val());
         form_data.append('costoTotal', $('#costo_total').val());
+        form_data.append('encargado', $('#encargado').val());
         form_data.append('detalles', JSON.stringify(detalles));
 
         $.ajax({

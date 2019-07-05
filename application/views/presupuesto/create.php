@@ -85,6 +85,9 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="btn-group" style="margin-bottom: 1.3em;">
+                            <div>
+                            <span class='font-weight-bold'>Productos</span>
+                            </div>
                             <button onclick="Presupuesto.reset()" type="button" data-target="#modal-presupuesto"
                                     data-toggle="modal" class="btn btn-success">
                                 <i class="fa fa-plus"></i>
@@ -147,13 +150,11 @@
                         </div>
                     </div>
                 </div>
-                <div hidden class="row">
+                <div class="row">
                     <div class="col-xs-12">
                         <div class="form-group">
                             <label for="encargado" class="control-label">Encargado</label>
-                            <select name="encargado" id="encargado" class="form-control">
-                                <option value="">-- SELECCIONE --</option>
-                            </select>
+                            <input  name="encargado" id="encargado" type="text" class="form-control">
                         </div>
                     </div>
                 </div>
