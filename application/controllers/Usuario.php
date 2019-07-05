@@ -1,9 +1,15 @@
 <?php
 
+    /**
+     * @property  RolModel RolModel
+     * @property  EmpleadoModel EmpleadoModel
+     * @property  UsuarioModel UsuarioModel
+     */
     class usuario extends CI_Controller
     {
         public function __construct() {
             parent::__construct();
+            verificarLogin();
             $this->load->model('UsuarioModel');
             $this->load->model('RolModel');
             $this->load->model('EmpleadoModel');
@@ -38,10 +44,9 @@
                 if ($this->input->post('btnRegistrar')) {
 
                     $this->UsuarioModel->usu_cod = $this->input->post('txtUsuUsuarioCod');;
-                    $this->UsuarioModel->usu_nombre = $this->input->post('txtRolNombre');
-                    $this->UsuarioModel->emp_codigo = $this->input->post('txtUsuEmpCodigo');
-                    $this->UsuarioModel->usu_nombre = $this->input->post('txtUsuNombre');
-                    // $this->UsuarioModel->usu_clave  = $this->input->post('txtUsuClave');
+                    $this->UsuarioModel->usu_nombre    = $this->input->post('txtRolNombre');
+                    $this->UsuarioModel->emp_codigo    = $this->input->post('txtUsuEmpCodigo');
+                    $this->UsuarioModel->usu_nombre    = $this->input->post('txtUsuNombre');
                     $this->UsuarioModel->rol_cod       = $this->input->post('txtUsuRolCod');
                     $this->UsuarioModel->usu_situacion = 1;
 
@@ -95,7 +100,6 @@
         }
 
         public function cerrarSesion() {
-            session_start();
             unset ($_SESSION['auth.usu_cod']);
             unset ($_SESSION['auth.emp_cod']);
             unset ($_SESSION['auth.rol_id']);
@@ -104,6 +108,6 @@
             unset ($_SESSION['auth.emp_ape_pat']);
             unset ($_SESSION['auth.emp_ape_mat']);
             unset ($_SESSION['auth.usu_ultimo_acceso']);
-            $this->load->view('inicio/login');
+            redirect('inicio/login');
         }
     }

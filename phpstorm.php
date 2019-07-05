@@ -1,5 +1,4 @@
 <?php
-
 die('This file is used for development purposes only.');
 /**
  * PhpStorm Code Completion to CodeIgniter + HMVC

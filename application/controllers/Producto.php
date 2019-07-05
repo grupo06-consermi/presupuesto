@@ -1,7 +1,12 @@
 <?php
 
 class Producto extends CI_Controller {
-    
+
+    public function __construct() {
+        parent::__construct();
+        verificarLogin();
+    }
+
     public function index() {
         $buscar = empty($this->input->post('q')) ? '' : $this->input->post('q') ;
         $this->load->model('producto_model');

@@ -67,7 +67,7 @@
                 
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="<?= site_url("Autenticacion/logout") ?>">Desconectar</a></li>
+                <li><a href="<?= site_url("Usuario/cerrarSesion") ?>">Desconectar</a></li>
             </ul>
         </div>
     </div>

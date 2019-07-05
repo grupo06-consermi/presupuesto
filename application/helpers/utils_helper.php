@@ -550,3 +550,9 @@
         // ENT_QUOTES: Codifica comillas simples y dobles
         return htmlspecialchars($string, ENT_QUOTES);
     }
+
+    function verificarLogin() {
+        if (!isset($_SESSION['auth.usu_cod'])) {
+            redirect('inicio/login');
+        }
+    }

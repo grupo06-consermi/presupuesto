@@ -4,6 +4,7 @@
     {
         public function __construct() {
             parent::__construct();
+            verificarLogin();
             $this->load->model('RolModel');
             $this->load->view('index/header');
             $this->load->view('index/menu');

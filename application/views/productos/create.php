@@ -99,10 +99,6 @@
                     <a href='<?php echo site_url('producto') ?>' class='btn btn-danger id='btnCancelar'>Cancelar</a>
                 </div>
             </div>
-            
         </form>
     </div>
-
-    
-
 </div>
