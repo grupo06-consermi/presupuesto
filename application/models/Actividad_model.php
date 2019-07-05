@@ -10,7 +10,7 @@
         function getRow($act_cod) {
 
             $query  = $this->db->query("CALL pa_actividad_getRow(?)", [$act_cod]);
-            $result = $query->result_array();
+            $result = $query->result();
             $this->db->next_result();
             return $result;
         }
@@ -18,7 +18,7 @@
         function getByID($act_cod) {
 
             $query  = $this->db->query("CALL pa_actividad_getByID(?)", [$act_cod]);
-            $result = $query->result_array();
+            $result = $query->result();
             $this->db->next_result();
             return $result;
         }
@@ -26,14 +26,14 @@
         function listCbo($act_cod = 0) {
 
             $query  = $this->db->query("CALL pa_actividad_listCbo(?)", [$act_cod]);
-            $result = $query->result_array();
+            $result = $query->result();
             $this->db->next_result();
             return $result;
         }
 
         function listar($buscar = '') {
             $query  = $this->db->query("CALL pa_actividad_list(?)", [$buscar]);
-            $result = $query->result_array();
+            $result = $query->result();
             $this->db->next_result();
             return $result;
         }

@@ -14,7 +14,8 @@
         var $pres_costo_total;
         var $cli_codigo;
         var $pres_encargado;
-        var $detalles;
+        var $prod_list;
+        var $emp_list;
 
         public function fetch_all($buscar = '') {
             $query = $this->db->query("CALL pa_presupuesto_listar('%$buscar%')");
@@ -41,7 +42,7 @@
             $pres_id = $query->result_array()[0]['pres_cod'];
 
 
-             foreach ($this->detalles as $d) {
+             foreach ($this->prod_list as $d) {
                   $rs = $rs && $this->db->query('CALL pa_detalle_presupuesto_insert(?,?,?,?)', [
                           $pres_id,
                           $d['codigo'],
@@ -49,6 +50,8 @@
                           $d['precio']
                       ]);
               }
+
+
 
             return $pres_id;
         }

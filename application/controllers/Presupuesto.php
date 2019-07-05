@@ -5,6 +5,7 @@
      * @property   producto_model producto_model
      * @property   presupuesto_model presupuesto_model
      * @property   Cliente_model cliente_model
+     * @property  empleado_model empleado_model
      */
     class Presupuesto extends CI_Controller
     {
@@ -14,6 +15,7 @@
             $this->load->model('presupuesto_model');
             $this->load->model('producto_model');
             $this->load->model('cliente_model');
+            $this->load->model('empleado_model');
         }
 
         public function index() {
@@ -35,11 +37,12 @@
         }
 
         public function create() {
-            $products = $this->producto_model->fetch_all_state();
-            $clientes = $this->cliente_model->fetch_all();
+            $products  = $this->producto_model->fetch_all_state();
+            $clientes  = $this->cliente_model->fetch_all();
+            $empleados = $this->empleado_model->fetch_all();
             $this->load->view('index/header');
             $this->load->view('index/menu');
-            $this->load->view('presupuesto/create', compact('products', 'clientes'));
+            $this->load->view('presupuesto/create', compact('products', 'clientes', 'empleados'));
         }
 
         public function guardar($pre_id = 0) {
@@ -54,7 +57,8 @@
             $this->presupuesto_model->pres_costo_total      = $_POST['costoTotal'];
             $this->presupuesto_model->cli_codigo            = $_POST['cli_codigo'];
             $this->presupuesto_model->pres_encargado        = $_POST['encargado'];
-            $this->presupuesto_model->detalles              = json_decode($_POST['detalles'], true);
+            $this->presupuesto_model->prod_list             = json_decode($_POST['prod_list'], true);
+            $this->presupuesto_model->emp_list              = json_decode($_POST['emp_list'], true);
 
             echo $this->presupuesto_model->insertar();
         }
