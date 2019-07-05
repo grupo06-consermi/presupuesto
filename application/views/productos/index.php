@@ -8,8 +8,7 @@
                 <div class="card">
                 <div class="card-body">
                     <h3 class="card-title">Almacen</h3>
-                    <p class="card-text">Agrear/Editar/Eliminar</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <a href="<?= site_url(array('almacen')) ?>" class="btn btn-primary">IR</a>
                 </div>
                 </div>
             </div>
@@ -17,8 +16,7 @@
                 <div class="card">
                 <div class="card-body">
                     <h3 class="card-title">Categorias</h3>
-                    <p class="card-text">Agrear/Editar/Eliminar</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <a href="<?= site_url(array('categoria')) ?>" class="btn btn-primary">IR</a>
                 </div>
                 </div>
             </div>
@@ -26,17 +24,15 @@
                 <div class="card">
                 <div class="card-body">
                     <h3 class="card-title">Marcas</h3>
-                    <p class="card-text">Agrear/Editar/Eliminar</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <a href="<?= site_url(array('marca')) ?>" class="btn btn-primary">IR</a>
                 </div>
                 </div>
             </div>
             <div class="col-sm-3">
                 <div class="card">
                 <div class="card-body">
-                    <h3 class="card-title">Unidad de Medidas </h3>
-                    <p class="card-text">Agregar/Editar/Eliminar</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <h3 class="card-title">Unidades</h3>
+                    <a href="<?= site_url(array('unidad')) ?>" class="btn btn-primary">IR</a>
                 </div>
                 </div>
             </div>

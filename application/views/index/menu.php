@@ -32,12 +32,7 @@
                     <a href="#"  data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mantenimiento <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="<?= site_url(array('producto')) ?>">Productos</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="<?= site_url(array('almacen')) ?>">Almacen</a></li>
-                        <li><a href="<?= site_url(array('categoria')) ?>">Categorias</a></li>
-                        <li><a href="<?= site_url(array('marca')) ?>">Marcas</a></li>
-                        <li><a href="<?= site_url(array('unidad')) ?>">Unidades de Medidas</a></li>
-                       
+                                             
                         <li role="separator" class="divider"></li>
                         <li><a href="<?= site_url(array('cliente')) ?>">Clientes</a></li>
                         <li><a href="<?= site_url(array('empleado')) ?>">Empleados</a></li>

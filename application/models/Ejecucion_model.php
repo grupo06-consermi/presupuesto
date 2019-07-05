@@ -11,9 +11,8 @@ class Ejecucion_model extends CI_Model {
         return $rs;
     }
     
-
     public function getId($id) {
-        $query = $this->db->query("CALL PA_almacen_x_Cod($id)");
+        $query = $this->db->query("CALL PA_orden_ejecucion_x_Cod($id)");
         $result = $query->row();
         $query->next_result();
         $query->free_result();
@@ -28,7 +27,7 @@ class Ejecucion_model extends CI_Model {
         $emisor =  $_POST['ord_emisor'];
         $pres =  $_POST['pres_cod'];
         $estado =  $_POST['ord_estado'];
-        $result = $this->db->query("CALL PA_Actualizar_almacen('$id','$num', '$fecha', '$odm', '$emisor', '$pres ', '$estado ')");
+        $result = $this->db->query("CALL PA_Actualizar_orden_ejecucion('$id','$num', '$fecha', '$odm', '$emisor', '$pres ', '$estado ')");
         return $result ? true : false;
     }
 
@@ -39,12 +38,12 @@ class Ejecucion_model extends CI_Model {
         $emisor =  $_POST['ord_emisor'];
         $pres =  $_POST['pres_cod'];
         $estado =  $_POST['ord_estado'];
-        $result = $this->db->query("CALL PA_Registrar_almacen('$num', '$fecha', '$odm', '$emisor', '$pres ', '$estado ')");
+        $result = $this->db->query("CALL PA_Registrar_orden_ejecucion('$num', '$fecha', '$odm', '$emisor', '$pres ', '$estado ')");
         return $result ? true : false;
     }
 
     public function destroy($id) {
-        $result = $this->db->query("CALL PA_Borrar_almacen('$id')");
+        $result = $this->db->query("CALL PA_Borrar_orden_ejecucion('$id')");
         return $result ? true : false;
     }
 

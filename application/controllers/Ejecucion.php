@@ -21,16 +21,18 @@
             $presupuestos = $this->presupuesto_model->fetch_all();
             $this->load->view('index/header');
             $this->load->view('index/menu');
-            $this->load->view('ejecuciones/create', compact('presupuesto'));
+            $this->load->view('ejecuciones/create', compact('presupuestos'));
 
         }
 
         public function edit($id) {
             $this->load->model('ejecucion_model');
-            $almacen = $this->ejecucion_model->getId($id);
+            $this->load->model('presupuesto_model');
+            $ejecucion = $this->ejecucion_model->getId($id);
+            $presupuestos = $this->presupuesto_model->fetch_all();
             $this->load->view('index/header');
             $this->load->view('index/menu');
-            $this->load->view('ejecuciones/edit', compact('almacen'));
+            $this->load->view('ejecuciones/edit', compact('ejecucion','presupuestos'));
 
         }
 
