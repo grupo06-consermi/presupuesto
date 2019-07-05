@@ -1,7 +1,7 @@
 
-<div  style='padding: 1.5em;'>
+<div class="container">
     <div class="callout callout-info">
-        <h2>Lista de Marcas</h2>
+        <h2>Lista de Proveedores</h2>
     </div>
 
     <div class="row">
@@ -26,7 +26,7 @@
         </div>
         
         <div class="col-xs-12">
-            <a class="btn btn-success" href="<?= site_url(['marca', 'create']) ?>" style="margin-bottom: 1.3em;">
+            <a class="btn btn-success" href="<?= site_url(['proveedor', 'create']) ?>" style="margin-bottom: 1.3em;">
                 <i class="fa fa-fw fa-plus"></i> Agregar
             </a>
         </div>
@@ -36,23 +36,27 @@
                 <thead>
                     <!--<th>Código</th>-->
                     <th>Nombre</th>
-                    <th>Estado</th>
+                    <th>Ruc</th>
+                    <th>Direccion</th>
+                    <th>Telefono</th>
                     <th>Acciones</th>
                 </thead>
                 <tbody>
                     <?php foreach($rows as $row): ?>
                         <tr>
-                            <td><?=$row->mar_nombre?></td>                            
-                            <td> <?=$row->mar_estado == '1' ? '<i class="fa fa-fw fa-check"></i>' : 
-                            '<i class="fa fa-fw fa-remove"></i>'?></td>
-                            
+                            <td><?=$row->prov_razon_social?></td>                            
+                            <td><?=$row->prov_ruc?></td> 
+                            <td><?=$row->prov_direccion?></td> 
+                            <td><?=$row->prov_telefono?></td>                            
                             <td>
                                 <div class="btn-group btn-group-sm">
-                                    <a title="Editar" class="btn btn-primary" href="<?= site_url('marca/edit/'.$row->mar_codigo) ?>">
-                                        <i class="fa fa-fw fa-pencil"></i>
+                                    <a title="Editar" class="btn btn-primary" 
+                                    href="<?= site_url('proveedor/edit/'.$row->prov_cod) ?>">
+                                        <i class="fa fa-edit"></i>
                                     </a>
-                                    <a title="Eliminar" class="btn btn-danger" href="<?= site_url('marca/destroy/'.$row->mar_codigo) ?>">
-                                        <i class="fa fa-fw fa-remove"></i>
+                                    <a title="Eliminar" class="btn btn-danger" 
+                                    href="<?= site_url('proveedor/destroy/'.$row->prov_cod) ?>">
+                                        <i class="fa fa-trash"></i>
                                     </a>
                                     
                                 </div>

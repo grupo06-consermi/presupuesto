@@ -1,50 +1,67 @@
-<div class="row">
-    <div class="col-xs-12 col-md-offset-2 col-md-6">
-        <h3 class="page-header">Editando Marca N°<?= $marca->mar_codigo ?></h3>
+<div class="panel panel-default col-xs-12 col-md-offset-2 col-md-6">
+    <div class="panel-heading-info">
+        <h3 class="page-header">Editando  Proveedor N°<?= $proveedor->prov_cod ?></h3>
     </div>
-    <div class="col-xs-12 col-md-offset-2 col-md-6">
-        <?php if(isset($result)):?>
-            <?php echo html_alert('success', 'Se ha guardao correctamente el registro', 'Guardado', 'check'); ?>
-        <?php endif; ?>
-    </div>
-</div>
+    
+    <div class="panel-body">
+        <div class="col-12">
+            <form enctype="multipart/form-data" class="form-horizontal" action="<?=site_url(array('proveedor', 'update', $proveedor->prov_cod))?>" method="post">                    
+                            <div class="col-xs-12">
+                                <div class="form-group input-group">
+                                    <span class="input-group-addon">Nombre</span>
+                                    <input letters="true" required="required" class="form-control" type="text"
+                                    name="prov_razon_social" value="<?=$proveedor->prov_razon_social?>">
+                                </div>
+                            </div>
 
-<div class="row">
-    <div class="col-xs-12 col-md-offset-2 col-md-6">
-        <form enctype="multipart/form-data" class="form-horizontal" action="<?=site_url(array('marca', 'update', $marca->mar_codigo))?>" method="post">
-             
-            
-            <div class="col-xs-12">
-                <div class="form-group input-group">
-                    <span class="input-group-addon">Nombre</span>
-                    <input letters="true" required="required" class="form-control" type="text" 
-                     name="mar_nombre" value="<?=$marca->mar_nombre?>">
-                </div>
-            </div>
-            
-            <div class="col-xs-12">
-                <div class="form-group input-group">
-                    <span class="input-group-addon">Estado</span>
-                    <select class="form-control" name="mar_estado">
-                        <option value="1">Activo</option>
-                        <option value="0">Inactivo</option>
-                    </select>
-                </div>
-            </div>
+                            <div class="col-xs-12">
+                                <div class="form-group input-group">
+                                    <span class="input-group-addon">Ruc</span>
+                                    <input letters="true" required="required" class="form-control" type="number"
+                                    name="prov_ruc" value="<?=$proveedor->prov_ruc?>">
+                                </div>
+                            </div>
 
-            
-            <div class="col-xs-12">
-                <div class="form-group">
-                    <button class="btn btn-success" type="submit">
-                        <i class="fa fa-fw fa-save"></i> Guardar
-                    </button>
+                            <div class="col-xs-12">
+                                <div class="form-group input-group">
+                                    <span class="input-group-addon">direccion</span>
+                                    <input letters="true" required="required" class="form-control" type="text"
+                                    name="prov_direccion" value="<?=$proveedor->prov_direccion?>">
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12">
+                                <div class="form-group input-group">
+                                    <span class="input-group-addon">Telefono</span>
+                                    <input letters="true" required="required" class="form-control" type="text"
+                                    name="prov_telefono" value="<?=$proveedor->prov_telefono?>">
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12">
+                                <div class="form-group input-group">
+                                    <span class="input-group-addon">Correo</span>
+                                    <input letters="true" required="required" class="form-control" type="text"
+                                    name="prov_email" value="<?=$proveedor->prov_email?>">
+                                </div>
+                            </div>
+                            
+
                     
-                    <a href='<?php echo site_url('marca') ?>' class='btn btn-danger' id='btnCancelar'>Cancelar
-                    <i class="fa fa-mail-reply"></i>
-                </a>
-                </div>
-            </div>
-            
-        </form>
-    </div>
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <button class="btn btn-success" type="submit">
+                                <i class="fa fa-fw fa-save"></i> Guardar
+                            </button>
+                            
+                            <a href='<?php echo site_url('proveedor') ?>' class='btn btn-danger' id='btnCancelar'>Cancelar
+                            <i class="fa fa-mail-reply"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+            </form>
+        </div>
+
+</div>
 </div>

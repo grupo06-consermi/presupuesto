@@ -1,10 +1,50 @@
 
-<div  style='padding: 1.5em;'>
+<div class="container">
     <div class="callout callout-info">
         <h2>Lista de Productos</h2>
     </div>
+            <div class="row">
+            <div class="col-sm-3">
+                <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">Almacen</h3>
+                    <p class="card-text">Agrear/Editar/Eliminar</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">Categorias</h3>
+                    <p class="card-text">Agrear/Editar/Eliminar</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">Marcas</h3>
+                    <p class="card-text">Agrear/Editar/Eliminar</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">Unidad de Medidas </h3>
+                    <p class="card-text">Agregar/Editar/Eliminar</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+                </div>
+            </div>
+           
+            </div>
 
-    <div class="row">
+    <div class="card" style="margin-bottom: 1.3em; margin-top: 1.0em; >        
+
         <div class="col-xs-12">
             <?php if ($this->session->flashdata('correcto')): ?>
             <div class="alert alert-success alert-dismissible fade in" role="alert">
@@ -25,8 +65,9 @@
             <?php endif ?>
         </div>
         
+        
         <div class="col-xs-12">
-            <a class="btn btn-success" href="<?= site_url(['producto', 'create']) ?>" style="margin-bottom: 1.3em;">
+            <a class="btn btn-success" href="<?= site_url(['producto', 'create']) ?>" style="margin-bottom: 1.3em; margin-top: 1.0em;  ">
                 <i class="fa fa-fw fa-plus"></i> Agregar
             </a>
         </div>
@@ -58,10 +99,10 @@
                             <td>
                                 <div class="btn-group btn-group-sm">
                                     <a title="Editar" class="btn btn-primary" href="<?= site_url('producto/edit/'.$row->prod_cod) ?>">
-                                        <i class="fa fa-fw fa-pencil"></i>
+                                        <i class="fa fa-edit"></i>
                                     </a>
                                     <a title="Eliminar" class="btn btn-danger" href="<?= site_url('producto/destroy/'.$row->prod_cod) ?>"">
-                                        <i class="fa fa-fw fa-remove"></i>
+                                        <i class="fa fa-trash"></i>
                                     </a>
                                     
                                 </div>
@@ -69,7 +110,7 @@
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
-         
+                
             </table>
             
         </div>
@@ -87,7 +128,7 @@ $(document).ready(function() {
         },
         dom: 'Bfrtip',
         buttons: [
-            'copy','excel', 'pdf', 'print'
+            'excel', 'pdf', 'print'
         ]
     });
 });
