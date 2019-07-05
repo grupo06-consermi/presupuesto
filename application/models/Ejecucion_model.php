@@ -22,17 +22,24 @@ class Ejecucion_model extends CI_Model {
 
     public function update($id) {
 
-        $nombre = $_POST['alm_nombre'];
-        $direccion =  $_POST['alm_direccion'];
-        $result = $this->db->query("CALL PA_Actualizar_almacen('$id', '$nombre', '$direccion')");
+        $num =  $_POST['ord_num_orden'];
+        $fecha =  $_POST['ord_fecha'];
+        $odm =  $_POST['ord_odm'];
+        $emisor =  $_POST['ord_emisor'];
+        $pres =  $_POST['pres_cod'];
+        $estado =  $_POST['ord_estado'];
+        $result = $this->db->query("CALL PA_Actualizar_almacen('$id','$num', '$fecha', '$odm', '$emisor', '$pres ', '$estado ')");
         return $result ? true : false;
     }
 
     public function insert() {
-        $nombre =  $_POST['alm_nombre'];
-        $direccion =  $_POST['alm_direccion'];
-        
-        $result = $this->db->query("CALL PA_Registrar_almacen('$nombre', '$direccion')");
+        $num =  $_POST['ord_num_orden'];
+        $fecha =  $_POST['ord_fecha'];
+        $odm =  $_POST['ord_odm'];
+        $emisor =  $_POST['ord_emisor'];
+        $pres =  $_POST['pres_cod'];
+        $estado =  $_POST['ord_estado'];
+        $result = $this->db->query("CALL PA_Registrar_almacen('$num', '$fecha', '$odm', '$emisor', '$pres ', '$estado ')");
         return $result ? true : false;
     }
 
