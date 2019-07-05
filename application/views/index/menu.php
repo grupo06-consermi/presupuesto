@@ -21,7 +21,7 @@
                     <ul class="dropdown-menu">
                         <li><a href="<?= site_url(array('presupuesto')) ?>">Presupuestos</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">Orden de Compra</a></li>
+                        <li><a href="<?= site_url(array('ejecucion')) ?>">Orden de Ejecucion</a></li>
                         <li><a href="<?= site_url(array('conformidad')) ?>">Orden de Conformidad</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="#">Compras</a></li>
