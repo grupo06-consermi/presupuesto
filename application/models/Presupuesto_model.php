@@ -55,7 +55,22 @@
                         $d['cantidad'],
                         $d['precio']
                     ]);
+
+
+                // descontar stock e indicar reposicion
+                $rs = $rs && $this->db->query("
+                        UPDATE producto 
+                        SET prod_cant = if(prod_cant - $d[cantidad] >= 0, prod_cant - $d[cantidad], 0),
+                            prod_stock_reponer = if(prod_cant - $d[cantidad] < 0, $d[cantidad] - prod_cant, 0)
+                        WHERE prod_cod = $d[codigo];
+                ");
             }
+
+
+
+
+
+
 
             foreach ($this->emp_list as $d) {
                 $rs = $this->db->query("CALL pa_actividad_empleado_insert(?,?,?,?,?,@aemp_codigo)", [
@@ -66,6 +81,7 @@
                     $act_cod
                 ]);
             }
+
             return $pres_cod;
         }
     }
