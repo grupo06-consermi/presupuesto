@@ -60,7 +60,12 @@
                     <div class="h1 text-muted text-right mb-4">
                         <i class="fa fa-clock-o"></i>
                     </div>
-                    <div class="h4 mb-0">5:34:11</div>
+                    <div class="h4 mb-0">
+                    <?php
+                   $hora = new DateTime("now", new DateTimeZone('America/Bogota'));
+                    echo $hora->format('h:i:s A');
+                    ?>
+                    </div>
                     <small class="text-muted text-uppercase font-weight-bold">Avg. Time</small>
                     <div class="progress progress-xs mt-3 mb-0 bg-flat-color-5" style="width: 40%; height: 5px;"></div>
                 </div>
