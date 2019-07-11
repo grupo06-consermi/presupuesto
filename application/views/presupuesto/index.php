@@ -78,6 +78,7 @@
     </div>
 </section>
 
+
 <script>
     $(document).ready(function () {
         $('.table').DataTable({
