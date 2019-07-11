@@ -7,6 +7,7 @@
         public function fetch_all($buscar = '') {
             $query  = $this->db->query("CALL PA_Listar_producto() ");
             $result = $query->result();
+            $query->next_result();
             $query->free_result();
             return $result;
         }

@@ -24,8 +24,24 @@
             return $result[0];
         }
 
+        public function getDetalles($pres_id = '') {
+            $query = $this->db->query("CALL pa_presupuesto_getDetalles('$pres_id')");
+            $rs    = $query->result();
+            $query->next_result();
+            $query->free_result();
+            return $rs;
+        }
+
+        public function getManoObra($pres_id) {
+            $query = $this->db->query("CALL pa_presupuesto_getManoObra('$pres_id');");
+            $rs    = $query->result();
+            $query->next_result();
+            $query->free_result();
+            return $rs;
+        }
+
         public function listar($buscar = '') {
-            $query = $this->db->query("CALL pa_presupuesto_listar('%$buscar%')");
+            $query = $this->db->query("CALL pa_presupuesto_list('$buscar', 1)");
             $rs    = $query->result();
             $query->next_result();
             $query->free_result();
@@ -52,14 +68,6 @@
                         $d['cantidad'],
                         $d['precio']
                     ]);
-
-                // descontar stock e indicar reposicion
-                $rs = $rs && $this->db->query("
-                        UPDATE producto 
-                        SET prod_stock = if(prod_stock - $d[cantidad] >= 0, prod_stock - $d[cantidad], 0),
-                            prod_stock_reponer = if(prod_stock - $d[cantidad] < 0, $d[cantidad] - prod_stock, 0)
-                        WHERE prod_cod = $d[codigo];
-                ");
             }
 
             $query   = $this->db->query("CALL pa_actividad_insert(?,?,?,?,?,@act_cod)", [
@@ -81,7 +89,70 @@
                     $d['importe'],
                 ]);
             }
-
             return $pres_cod;
+        }
+
+        public function actualizar() {
+
+            $rs = $this->db->query("CALL pa_presupuesto_update(?,?,?,?,?,?,?,?)", [
+                $this->pres_cod,
+                $this->pres_forma_pago,
+                $this->pres_lugar_trabajo,
+                $this->pres_costo_mano_obra,
+                $this->pres_costo_materiales,
+                $this->pres_costo_total,
+                $this->cli_codigo,
+                $this->pres_encargado
+            ]);
+
+            // eliminar detalle
+            $rs = $this->db->query("DELETE FROM detalle_presupuesto WHERE pre_cod = '$this->pres_cod';");
+
+            // volver a crear
+            foreach ($this->prod_list as $d) {
+                $rs = $rs && $this->db->query('CALL pa_detalle_presupuesto_insert(?,?,?,?)', [
+                        $this->pres_cod,
+                        $d['codigo'],
+                        $d['cantidad'],
+                        $d['precio']
+                    ]);
+            }
+
+            $query   = $this->db->query("SELECT act_cod FROM actividad WHERE pres_cod = '$this->pres_cod';");
+            $act_cod = $query->result_array()[0]['act_cod'];
+
+
+            // eliminar detalle
+            $rs = $this->db->query("DELETE FROM actividad_empleado WHERE act_cod = '$act_cod';");
+
+
+            foreach ($this->emp_list as $d) {
+                $rs = $rs && $this->db->query("CALL pa_actividad_empleado_insert(?,?,?,?,?,@aemp_codigo)", [
+                        $act_cod,
+                        $d['emp_codigo'],
+                        $d['pago_dia'],
+                        $d['tiempo'],
+                        $d['importe'],
+                    ]);
+            }
+
+            if ($rs) {
+                return 1;
+            } else {
+                return 0;
+            }
+        }
+
+        function setAsAceptado($pres_id) {
+
+            foreach ($this->prod_list as $d) {
+                // descontar stock e indicar reposicion
+                $rs = $this->db->query("
+                        UPDATE producto 
+                        SET prod_stock = if(prod_stock - $d[cantidad] >= 0, prod_stock - $d[cantidad], 0),
+                            prod_stock_reponer = if(prod_stock - $d[cantidad] < 0, $d[cantidad] - prod_stock, 0)
+                        WHERE prod_cod = $d[codigo];
+                ");
+            }
         }
     }

@@ -1,6 +1,16 @@
 <?php
     // Desde el servidor:
 
+    define('PAGO_CONTADO', 1);
+    define('PAGO_CUOTAS', 2);
+
+    function getFormaPago() {
+        $pagos                 = [];
+        $pagos  [PAGO_CONTADO] = 'Contado';
+        $pagos  [PAGO_CUOTAS]  = 'Cuotas';
+        return $pagos;
+    }
+
     // Entrada: [Y-m-d H:i:s] | Salida: [int]
     function NroMesesEntre($fecha1, $fecha2, $truncate = true) {
         $nro_meses = 0;

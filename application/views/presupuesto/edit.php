@@ -1,3 +1,38 @@
+<script src="<?= base_url(); ?>assets/js/utils.js"></script>
+<?php
+    /** @var object $prod_list */
+    /** @var object $pres_row */
+    /** @var object $clientes */
+?>
+<script>
+    var prod_list = [];
+    var x         = 0;
+    <?php foreach ($prod_list as $item) { ?>
+    prod_list[x++] = {
+        index   : x,
+        codigo  : toInteger('<?php echo $item->prod_cod; ?>'),
+        nombre  : '<?php echo $item->prod_nombre_comercial; ?>',
+        precio  : toFloat('<?php echo $item->dpre_precio; ?>'),
+        cantidad: toFloat('<?php echo $item->dpre_cantidad; ?>'),
+        total   : toFloat('<?php echo $item->dpre_cantidad * $item->dpre_precio; ?>')
+    };
+    <?php } ?>
+</script>
+<?php /** @var object $empl_list */ ?>
+<script>
+    var empl_list = [];
+    var x         = 0;
+    <?php foreach ($empl_list as $item) { ?>
+    empl_list[x++] = {
+        index     : x,
+        emp_codigo: toInteger('<?php echo $item->emp_codigo; ?>'),
+        emp_nombre: '<?php echo $item->emp_nombre; ?>',
+        pago_dia  : toFloat('<?php echo $item->aemp_pago_dia; ?>'),
+        tiempo    : toFloat('<?php echo $item->aemp_cantidad_dias; ?>'),
+        importe   : toFloat('<?php echo $item->aemp_total; ?>')
+    };
+    <?php } ?>
+</script>
 <section style="padding: 1.5em">
     <div class="callout callout-info">
         <h2>Editar Presupuesto</h2>
@@ -11,15 +46,14 @@
                 <div class='row'>
                     <div class="col-xs-12 col-lg-4">
                         <div class="form-group">
+                            <input type='hidden' id='pres_cod' value='<?= $pres_row->pres_cod; ?>'>
                             <label for="cbo_clientes" class="control-label">Cliente</label>
                             <select required="required" name="cbo_clientes" id="cbo_clientes" class="form-control">
-                                <?php /** @var object $clientes */
-                                    foreach ($clientes as $cli) { ?>
-                                        <option value='<?= $cli->cli_codigo ?>'
-                                            <?php /** @var object $pres_row */
-                                                echo $pres_row->cli_codigo == $cli->cli_codigo ? 'selected' : ''; ?>
-                                        ><?= $cli->cli_razon_social ?></option>
-                                    <?php } ?>
+                                <?php foreach ($clientes as $cli) { ?>
+                                    <option value='<?= $cli->cli_codigo ?>'
+                                        <?php echo $pres_row->cli_codigo == $cli->cli_codigo ? 'selected' : ''; ?>
+                                    ><?= $cli->cli_razon_social ?></option>
+                                <?php } ?>
                             </select>
                         </div>
                     </div>
@@ -27,10 +61,10 @@
                         <div class="form-group">
                             <label for="forma_pago" class="control-label">Forma de pago</label>
                             <select required="required" name="forma_pago" id="forma_pago" class="form-control">
-                                <option value="contado" <?php echo $pres_row->pres_forma_pago == 'contado' ? 'selected' : ''; ?>>
+                                <option value="<?= PAGO_CONTADO ?>" <?php echo $pres_row->pres_forma_pago == PAGO_CONTADO ? 'selected' : ''; ?>>
                                     Contado
                                 </option>
-                                <option value="cuotas" <?php echo $pres_row->pres_forma_pago == 'cuotas' ? 'selected' : ''; ?> >
+                                <option value="<?= PAGO_CUOTAS ?>" <?php echo $pres_row->pres_forma_pago == PAGO_CUOTAS ? 'selected' : ''; ?> >
                                     Cuotas
                                 </option>
                             </select>
@@ -126,7 +160,20 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-
+                                <?php $i = 0; ?>
+                                <?php foreach ($prod_list as $item) { ?>
+                                    <tr>
+                                        <td><?php echo $item->prod_nombre_comercial; ?></td>
+                                        <td><?php echo $item->dpre_precio; ?></td>
+                                        <td><?php echo $item->dpre_cantidad; ?></td>
+                                        <td><?php echo nformat($item->dpre_precio * $item->dpre_cantidad, 2); ?></td>
+                                        <td>
+                                            <button type="button" class="btn btn-sm btn-primary"
+                                                    onclick="Presupuesto.edit_producto('<?= $i ?>')"><i
+                                                        class="fa fa-edit_producto"></i></button>
+                                        <td>
+                                    </tr>
+                                <?php } ?>
                                 </tbody>
                             </table>
                         </div>
@@ -157,7 +204,21 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-
+                                <?php $i = 0; ?>
+                                <?php foreach ($empl_list as $item) { ?>
+                                    <tr>
+                                        <td><?php echo $item->emp_nombre; ?></td>
+                                        <td><?php echo $item->aemp_pago_dia; ?></td>
+                                        <td><?php echo $item->aemp_cantidad_dias; ?></td>
+                                        <td>días</td>
+                                        <td><?php echo $item->aemp_total; ?></td>
+                                        <td>
+                                            <button type="button" class="btn btn-sm btn-primary"
+                                                    onclick="Presupuesto.edit_empleado('<?= $i ?>')"><i
+                                                        class="fa fa-edit_producto"></i></button>
+                                        <td>
+                                    </tr>
+                                <?php } ?>
                                 </tbody>
                             </table>
                         </div>
@@ -345,7 +406,6 @@
         </div>
     </div>
 </div>
-
 <script src="<?= base_url(); ?>assets/plugins/jquery-validation/jquery.validate.min.js"></script>
 <script src="<?= base_url(); ?>assets/plugins/jquery-validation/additional-methods.min.js"></script>
 <script src="<?= base_url(); ?>assets/plugins/jquery-validation/localization/messages_es_PE.min.js"></script>
@@ -353,6 +413,7 @@
 <script>
     $(document).ready(function () {
         Presupuesto.init();
+        Presupuesto.loadProductos(prod_list);
 
         $('#costo_mano_obra').change(function (e) {
             Presupuesto.calcularTotal();

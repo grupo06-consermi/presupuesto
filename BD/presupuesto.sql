@@ -30,6 +30,38 @@ BEGIN
 END $$
 
 -- Tabla: presupuesto
+DROP PROCEDURE IF EXISTS pa_presupuesto_getDetalles;
+
+CREATE PROCEDURE pa_presupuesto_getDetalles(
+    IN _pres_cod int(11)
+)
+BEGIN
+    SELECT pres_cod, prod_cod, prod_nombre_comercial, dpre_cantidad, dpre_precio
+    FROM detalle_presupuesto presdet
+             INNER JOIN presupuesto pres ON presdet.pre_cod = pres.pres_cod
+             INNER JOIN producto prod ON presdet.pro_cod = prod.prod_cod
+    WHERE pres.pres_cod = _pres_cod;
+END $$
+
+-- Tabla: presupuesto
+DROP PROCEDURE IF EXISTS pa_presupuesto_getManoObra;
+
+CREATE PROCEDURE pa_presupuesto_getManoObra(
+    IN _pres_cod int(11)
+)
+BEGIN
+    SELECT aemp_codigo, act.act_cod, act_descripcion, emp_codigo, emp_nombre, aemp_pago_dia,
+           aemp_cantidad_dias, aemp_total
+    FROM actividad_empleado aemp
+             INNER JOIN actividad act ON aemp.act_cod = act.act_cod
+             INNER JOIN empleado emp ON aemp.emp_cod = emp.emp_codigo
+             INNER JOIN presupuesto p ON act.pres_cod = p.pres_cod
+    WHERE p.pres_cod = _pres_cod;
+END $$
+
+CALL pa_presupuesto_getManoObra(23);
+
+-- Tabla: presupuesto
 DROP PROCEDURE IF EXISTS pa_presupuesto_listCbo;
 
 CREATE PROCEDURE pa_presupuesto_listCbo(
@@ -49,7 +81,7 @@ DROP PROCEDURE IF EXISTS pa_presupuesto_list;
 
 CREATE PROCEDURE pa_presupuesto_list(
 	IN _buscar varchar(50),
-	IN _pres_estado tinyint unsigned 
+	IN _pres_estado tinyint unsigned
 )
 BEGIN
 	SET @aux = _buscar;
@@ -60,7 +92,8 @@ BEGIN
 		   pres_costo_total, cli.cli_codigo, cli_razon_social, pres_encargado
 	FROM presupuesto pre
 		INNER JOIN cliente cli ON pre.cli_codigo = cli.cli_codigo
-	WHERE pre.pres_estado = _pres_estado;
+	WHERE pre.pres_estado = _pres_estado
+	ORDER BY pres_cod DESC;
 END $$
 
 -- Tabla: presupuesto
@@ -79,6 +112,7 @@ CREATE PROCEDURE pa_presupuesto_insert(
 BEGIN
 	INSERT INTO presupuesto (
 		pres_fecha_emision,
+	    pres_hash_emision,
 		pres_fecha_recepcion,
 		pres_forma_pago,
 		pres_lugar_trabajo,
@@ -91,6 +125,7 @@ BEGIN
 	)
 	VALUES (
 		now(),
+	    '',
 		null,
 		_pres_forma_pago,
 		_pres_lugar_trabajo,
@@ -102,6 +137,7 @@ BEGIN
 		_pres_encargado
 	);
 	SET _pres_cod = LAST_INSERT_ID();
+    UPDATE presupuesto set pres_hash_emision = md5(_pres_cod) where pres_cod = _pres_cod;
 END $$
 
 CALL pa_presupuesto_insert(1, 'santa', '100', '120', '220', 1, 'x',@s);
@@ -111,8 +147,6 @@ DROP PROCEDURE IF EXISTS pa_presupuesto_update;
 
 CREATE PROCEDURE pa_presupuesto_update(
 	IN _pres_cod int(11),
-	IN _pres_fecha_emision date,
-	IN _pres_fecha_recepcion date,
 	IN _pres_forma_pago char(30),
 	IN _pres_lugar_trabajo varchar(45),
 	IN _pres_costo_mano_obra decimal(8, 2),
@@ -123,9 +157,7 @@ CREATE PROCEDURE pa_presupuesto_update(
 )
 BEGIN
 	UPDATE presupuesto
-	SET pres_fecha_emision = _pres_fecha_emision,
-		pres_fecha_recepcion = _pres_fecha_recepcion,
-		pres_forma_pago = _pres_forma_pago,
+	SET pres_forma_pago = _pres_forma_pago,
 		pres_lugar_trabajo = _pres_lugar_trabajo,
 		pres_costo_mano_obra = _pres_costo_mano_obra,
 		pres_costo_materiales = _pres_costo_materiales,
@@ -134,6 +166,8 @@ BEGIN
 		pres_encargado = _pres_encargado
 	WHERE pres_cod = _pres_cod;
 END $$
+
+call pa_presupuesto_update(27, 1,'santa',4,202.48,206.8,3,'');
 
 -- Tabla: presupuesto
 DROP PROCEDURE IF EXISTS pa_presupuesto_activate;

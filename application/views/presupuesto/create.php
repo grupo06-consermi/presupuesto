@@ -1,3 +1,4 @@
+<script src="<?= base_url(); ?>assets/js/utils.js"></script>
 <section style="padding: 1.5em">
     <div class="callout callout-info">
         <h2>Nuevo Presupuesto</h2>
@@ -24,8 +25,8 @@
                         <div class="form-group">
                             <label for="forma_pago" class="control-label">Forma de pago</label>
                             <select required="required" name="forma_pago" id="forma_pago" class="form-control">
-                                <option value="contado">Contado</option>
-                                <option value="cuotas">Cuotas</option>
+                                <option value="<?= PAGO_CONTADO ?>">Contado</option>
+                                <option value="<?= PAGO_CUOTAS ?>">Cuotas</option>
                             </select>
                         </div>
                     </div>
@@ -321,7 +322,6 @@
         </div>
     </div>
 </div>
-
 <script src="<?= base_url(); ?>assets/plugins/jquery-validation/jquery.validate.min.js"></script>
 <script src="<?= base_url(); ?>assets/plugins/jquery-validation/additional-methods.min.js"></script>
 <script src="<?= base_url(); ?>assets/plugins/jquery-validation/localization/messages_es_PE.min.js"></script>

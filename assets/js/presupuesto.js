@@ -41,12 +41,12 @@ var Presupuesto = function () {
         }
     });
 
-    var prod_list = [];
-    var prod_actual;
-    var emp_list  = [];
-    var emp_actual;
-    var options   = {};
-    var defaults  = {
+    var pres_prod_list = [];
+    var pres_prod_actual;
+    var pres_emp_list  = [];
+    var pres_emp_actual;
+    var options        = {};
+    var defaults       = {
         modal_productos: '#modal_productos',
         modal_empleados: '#modal_empleados',
         tbl_productos  : '#tbl_productos',
@@ -66,13 +66,20 @@ var Presupuesto = function () {
         _tbl_empleados   = $(options.tbl_empleados);
     };
 
+    var loadProductos = function (dpre_prod_list) {
+        pres_prod_list = dpre_prod_list;
+    };
+
+    var loadEmpleados = function (dpre_emp_list) {
+        pres_emp_list = dpre_emp_list;
+    };
+
     var reset_producto = function () {
-        prod_actual = {
-            index: prod_list.length,
+        pres_prod_actual = {
+            index: pres_prod_list.length,
         };
 
         var form     = _modal_productos.find('form');
-        var id       = $('#id_detalle', form);
         var producto = $('#cod_prod', form);
         var precio   = $('#precio', form);
         var cantidad = $('#cantidad', form);
@@ -81,7 +88,6 @@ var Presupuesto = function () {
         producto.val('0').trigger('change');
         precio.val('');
         cantidad.val('');
-        id.val(0);
         action.val('new');
     };
 
@@ -97,8 +103,8 @@ var Presupuesto = function () {
         if (form.validate().errorList.length === 0) {
             var trElement;
             if (action.val() === 'new') {
-                prod_actual = {
-                    index   : prod_list.length,
+                pres_prod_actual = {
+                    index   : pres_prod_list.length,
                     id      : id.val(),
                     codigo  : producto.val(),
                     precio  : precio.val(),
@@ -106,15 +112,15 @@ var Presupuesto = function () {
                     total   : parseFloat(precio.val()) * parseFloat(cantidad.val()),
                 };
 
-                prod_list.push(prod_actual);
+                pres_prod_list.push(pres_prod_actual);
 
                 trElement = $('<tr>');
-                trElement.attr('data-index', prod_actual.index);
+                trElement.attr('data-index', pres_prod_actual.index);
                 var tdProducto = $('<td>', {text: producto.find('option:selected').text()});
                 var tdPrecio   = $('<td>', {text: precio.val()});
                 var tdCantidad = $('<td>', {text: cantidad.val()});
                 var tdImporte  = $('<td>', {text: importe});
-                var tdAcciones = $('<td><button type="button" class="btn btn-sm btn-primary" onclick="Presupuesto.edit_producto(' + prod_actual.index + ')"><i class="fa fa-edit_producto"></i></button><td>');
+                var tdAcciones = $('<td><button type="button" class="btn btn-sm btn-primary" onclick="Presupuesto.edit_producto(' + pres_prod_actual.index + ')"><i class="fa fa-edit_producto"></i></button><td>');
 
                 trElement.append(tdProducto);
                 trElement.append(tdPrecio);
@@ -125,8 +131,8 @@ var Presupuesto = function () {
                 _tbl_productos.find('tbody').append(trElement);
 
             } else {
-                var temp              = prod_actual;
-                prod_actual           = {
+                var temp                   = pres_prod_actual;
+                pres_prod_actual           = {
                     index   : temp.index,
                     id      : id.val(),
                     codigo  : producto.val(),
@@ -134,7 +140,7 @@ var Presupuesto = function () {
                     cantidad: cantidad.val(),
                     total   : parseFloat(precio.val()) * parseFloat(cantidad.val()),
                 };
-                prod_list[temp.index] = prod_actual;
+                pres_prod_list[temp.index] = pres_prod_actual;
 
                 trElement = $('tr[data-index="' + temp.index + '"]', _tbl_productos);
                 $('td:nth-child(1)', trElement).text(producto.find('option:selected').text());
@@ -165,24 +171,24 @@ var Presupuesto = function () {
         if (form.validate().errorList.length === 0) {
             var trElement;
             if (action.val() === 'new') {
-                emp_actual = {
-                    index     : emp_list.length,
+                pres_emp_actual = {
+                    index     : pres_emp_list.length,
                     emp_codigo: emp_codigo.val(),
                     pago_dia  : pago_dia.val(),
                     tiempo    : tiempo.val(),
                     importe   : importe
                 };
 
-                emp_list.push(emp_actual);
+                pres_emp_list.push(pres_emp_actual);
 
                 trElement = $('<tr>');
-                trElement.attr('data-index', emp_actual.index);
+                trElement.attr('data-index', pres_emp_actual.index);
                 var tdEmpleado = $('<td>', {text: emp_codigo.find('option:selected').text()});
                 var tdPagoDia  = $('<td>', {text: pago_dia.val()});
                 var tdTiempo   = $('<td>', {text: tiempo.val()});
                 var tdUnidad   = $('<td>', {text: 'días'});
                 var tdImporte  = $('<td>', {text: importe});
-                var tdAcciones = $('<td><button type="button" class="btn btn-sm btn-primary" onclick="Presupuesto.edit_empleado(' + emp_actual.index + ')"><i class="fa fa-edit_producto"></i></button><td>');
+                var tdAcciones = $('<td><button type="button" class="btn btn-sm btn-primary" onclick="Presupuesto.edit_empleado(' + pres_emp_actual.index + ')"><i class="fa fa-edit_producto"></i></button><td>');
 
                 trElement.append(tdEmpleado);
                 trElement.append(tdPagoDia);
@@ -194,15 +200,15 @@ var Presupuesto = function () {
                 _tbl_empleados.find('tbody').append(trElement);
 
             } else {
-                var temp             = emp_actual;
-                emp_actual           = {
-                    index     : emp_list.length,
+                var temp                  = pres_emp_actual;
+                pres_emp_actual           = {
+                    index     : pres_emp_list.length,
                     emp_codigo: emp_codigo.val(),
                     pago_dia  : pago_dia.val(),
                     tiempo    : tiempo.val(),
                     importe   : importe
                 };
-                emp_list[temp.index] = emp_actual;
+                pres_emp_list[temp.index] = pres_emp_actual;
 
                 trElement = $('tr[data-index="' + temp.index + '"]', _tbl_empleados);
 
@@ -228,12 +234,12 @@ var Presupuesto = function () {
         var costo_total;
         var costo_mano_obra  = 0;
 
-        for (var i = 0; i < emp_list.length; i++) {
-            costo_mano_obra += toFloat(emp_list[i].importe);
+        for (var i = 0; i < pres_emp_list.length; i++) {
+            costo_mano_obra += toFloat(pres_emp_list[i].importe);
         }
 
-        for (var i = 0; i < prod_list.length; i++) {
-            costo_materiales += prod_list[i].total;
+        for (var i = 0; i < pres_prod_list.length; i++) {
+            costo_materiales += pres_prod_list[i].total;
         }
 
         costo_total = costo_mano_obra + costo_materiales;
@@ -245,34 +251,34 @@ var Presupuesto = function () {
 
     var edit_producto = function (index) {
         _modal_productos.modal('show');
+        index = toInteger(index);
 
-        prod_actual  = prod_list[index];
+        pres_prod_actual = pres_prod_list[index];
+
         var form     = _modal_productos.find('form');
-        var id       = $('#id_detalle', form);
         var producto = $('#cod_prod', form);
         var precio   = $('#precio', form);
         var cantidad = $('#cantidad', form);
 
-        id.val(prod_actual.id);
-        producto.val(prod_actual.codigo).trigger('change');
-        precio.val(prod_actual.precio);
-        cantidad.val(prod_actual.cantidad);
+        producto.val(pres_prod_actual.codigo).trigger('change');
+        precio.val(pres_prod_actual.precio);
+        cantidad.val(pres_prod_actual.cantidad);
 
         $('#action', form).val('edit');
     };
 
     var edit_empleado = function (index) {
         _modal_empleados.modal('show');
-        emp_actual     = emp_list[index];
-        var form       = _modal_empleados.find('form');
-        var emp_codigo = $('#emp_codigo', form);
-        var pago_dia   = $('#aemp_pago_dia', form);
-        var tiempo     = $('#aemp_cantidad_dias', form);
-        var action     = $('#action', form);
+        pres_emp_actual = pres_emp_list[index];
+        var form        = _modal_empleados.find('form');
+        var emp_codigo  = $('#emp_codigo', form);
+        var pago_dia    = $('#aemp_pago_dia', form);
+        var tiempo      = $('#aemp_cantidad_dias', form);
+        var action      = $('#action', form);
 
-        emp_codigo.val(emp_actual.emp_codigo);
-        pago_dia.val(emp_actual.pago_dia);
-        tiempo.val(emp_actual.tiempo);
+        emp_codigo.val(pres_emp_actual.emp_codigo);
+        pago_dia.val(pres_emp_actual.pago_dia);
+        tiempo.val(pres_emp_actual.tiempo);
 
         $('#action', form).val('edit');
     };
@@ -280,6 +286,7 @@ var Presupuesto = function () {
     var save_presupuesto = function (url) {
 
         var form_data = new FormData();
+        form_data.append('pres_cod', $('#pres_cod').val());
         form_data.append('cli_codigo', $('#cbo_clientes').val());
         form_data.append('fechaEmision', $('#fecha_emision').val());
         form_data.append('fechaRecepcion', $('#fecha_recepcion').val());
@@ -290,8 +297,8 @@ var Presupuesto = function () {
         form_data.append('costoMateriales', $('#costo_materiales').val());
         form_data.append('costoTotal', $('#costo_total').val());
         form_data.append('encargado', $('#encargado').val());
-        form_data.append('prod_list', JSON.stringify(prod_list));
-        form_data.append('emp_list', JSON.stringify(emp_list));
+        form_data.append('prod_list', JSON.stringify(pres_prod_list));
+        form_data.append('emp_list', JSON.stringify(pres_emp_list));
 
         $.ajax({
             url        : url,
@@ -304,10 +311,14 @@ var Presupuesto = function () {
             }
         }).done(function (data) {
             if (data > 0) {
-                alert('Registro correcto');
-                window.location.href = 'index';
+                alert('Guardado correcto');
+                if ($('#pres_cod').val() > 0) {
+                    window.location.href = '../index';
+                } else {
+                    window.location.href = 'index';
+                }
             } else {
-                alert('Error al registrar');
+                alert('Error al registrar' + data);
             }
         });
     };
@@ -320,12 +331,8 @@ var Presupuesto = function () {
         edit_empleado   : edit_empleado,
         reset_producto  : reset_producto,
         save_presupuesto: save_presupuesto,
-        calcularTotal   : calcularTotal
+        calcularTotal   : calcularTotal,
+        loadProductos   : loadProductos,
+        loadEmpleados   : loadEmpleados
     };
-
 }();
-
-function toFloat(valor, def) {
-    def = (def != null) ? def : 0;
-    return $.isNumeric(valor) ? parseFloat(valor) : def;
-}
