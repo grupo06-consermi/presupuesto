@@ -19,9 +19,9 @@
 
         public function getByID($usu_cod) {
             $query  = $this->db->query("CALL pa_presupuesto_getByID(?)", [$usu_cod]);
-            $result = $query->result_array();
+            $result = $query->result();
             $this->db->next_result();
-            return $result;
+            return $result[0];
         }
 
         public function listar($buscar = '') {
