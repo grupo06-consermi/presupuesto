@@ -17,7 +17,14 @@
         var $prod_list;
         var $emp_list;
 
-        public function fetch_all($buscar = '') {
+        public function getByID($usu_cod) {
+            $query  = $this->db->query("CALL pa_presupuesto_getByID(?)", [$usu_cod]);
+            $result = $query->result_array();
+            $this->db->next_result();
+            return $result;
+        }
+
+        public function listar($buscar = '') {
             $query = $this->db->query("CALL pa_presupuesto_listar('%$buscar%')");
             $rs    = $query->result();
             $query->next_result();
@@ -26,9 +33,7 @@
         }
 
         public function insertar() {
-            $rs       = $this->db->query("CALL pa_presupuesto_insert(?,?,?,?,?,?,?,?,?,@pres_cod)", [
-                $this->pres_fecha_emision,
-                $this->pres_fecha_recepcion,
+            $rs       = $this->db->query("CALL pa_presupuesto_insert(?,?,?,?,?,?,?,@pres_cod)", [
                 $this->pres_forma_pago,
                 $this->pres_lugar_trabajo,
                 $this->pres_costo_mano_obra,
@@ -40,14 +45,6 @@
             $query    = $this->db->query("SELECT @pres_cod as pres_cod");
             $pres_cod = $query->result_array()[0]['pres_cod'];
 
-            $query   = $this->db->query("CALL pa_actividad_insert(?,?,?,@act_cod)", [
-                "Mano de obra",
-                $this->pres_costo_mano_obra,
-                $pres_cod
-            ]);
-            $query   = $this->db->query("SELECT @act_cod as act_cod");
-            $act_cod = $query->result_array()[0]['act_cod'];
-
             foreach ($this->prod_list as $d) {
                 $rs = $rs && $this->db->query('CALL pa_detalle_presupuesto_insert(?,?,?,?)', [
                         $pres_cod,
@@ -56,29 +53,32 @@
                         $d['precio']
                     ]);
 
-
                 // descontar stock e indicar reposicion
                 $rs = $rs && $this->db->query("
                         UPDATE producto 
-                        SET prod_cant = if(prod_cant - $d[cantidad] >= 0, prod_cant - $d[cantidad], 0),
-                            prod_stock_reponer = if(prod_cant - $d[cantidad] < 0, $d[cantidad] - prod_cant, 0)
+                        SET prod_stock = if(prod_stock - $d[cantidad] >= 0, prod_stock - $d[cantidad], 0),
+                            prod_stock_reponer = if(prod_stock - $d[cantidad] < 0, $d[cantidad] - prod_stock, 0)
                         WHERE prod_cod = $d[codigo];
                 ");
             }
 
-
-
-
-
-
+            $query   = $this->db->query("CALL pa_actividad_insert(?,?,?,?,?,@act_cod)", [
+                $pres_cod,
+                "Mano de obra",
+                '0000-00-00 00:00:00',
+                '0000-00-00 00:00:00',
+                $this->pres_costo_mano_obra
+            ]);
+            $query   = $this->db->query("SELECT @act_cod as act_cod");
+            $act_cod = $query->result_array()[0]['act_cod'];
 
             foreach ($this->emp_list as $d) {
                 $rs = $this->db->query("CALL pa_actividad_empleado_insert(?,?,?,?,?,@aemp_codigo)", [
-                    $d['tiempo'],
-                    $d['pago_dia'],
-                    $d['importe'],
+                    $act_cod,
                     $d['emp_codigo'],
-                    $act_cod
+                    $d['pago_dia'],
+                    $d['tiempo'],
+                    $d['importe'],
                 ]);
             }
 

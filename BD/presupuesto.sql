@@ -67,8 +67,6 @@ END $$
 DROP PROCEDURE IF EXISTS pa_presupuesto_insert;
 
 CREATE PROCEDURE pa_presupuesto_insert(
-	IN _pres_fecha_emision date,
-	IN _pres_fecha_recepcion date,
 	IN _pres_forma_pago char(30),
 	IN _pres_lugar_trabajo varchar(45),
 	IN _pres_costo_mano_obra decimal(8, 2),
@@ -92,8 +90,8 @@ BEGIN
 		pres_encargado
 	)
 	VALUES (
-		_pres_fecha_emision,
-		_pres_fecha_recepcion,
+		now(),
+		null,
 		_pres_forma_pago,
 		_pres_lugar_trabajo,
 		1,
@@ -105,6 +103,8 @@ BEGIN
 	);
 	SET _pres_cod = LAST_INSERT_ID();
 END $$
+
+CALL pa_presupuesto_insert(1, 'santa', '100', '120', '220', 1, 'x',@s);
 
 -- Tabla: presupuesto
 DROP PROCEDURE IF EXISTS pa_presupuesto_update;

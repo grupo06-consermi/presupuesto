@@ -1,6 +1,7 @@
 <div class="row">
     <div class="col-xs-12 col-md-offset-2 col-md-6">
-        <h3 class="page-header">Editando Tipo de Documento N°<?= $cliente->cli_codigo ?></h3>
+        <h3 class="page-header">Editar cliente N°<?= /** @var object $cliente */
+                $cliente->cli_codigo ?></h3>
     </div>
     <div class="col-xs-12 col-md-offset-2 col-md-6">
         <?php if(isset($result)):?>

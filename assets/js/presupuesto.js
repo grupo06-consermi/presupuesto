@@ -223,11 +223,10 @@ var Presupuesto = function () {
         calcularTotal();
     };
 
-
     var calcularTotal = function () {
         var costo_materiales = 0;
         var costo_total;
-        var costo_mano_obra = 0;
+        var costo_mano_obra  = 0;
 
         for (var i = 0; i < emp_list.length; i++) {
             costo_mano_obra += toFloat(emp_list[i].importe);
@@ -237,7 +236,7 @@ var Presupuesto = function () {
             costo_materiales += prod_list[i].total;
         }
 
-        costo_total     = costo_mano_obra + costo_materiales;
+        costo_total = costo_mano_obra + costo_materiales;
 
         $('#costo_materiales').val(costo_materiales.toFixed(2));
         $('#costo_mano_obra').val(costo_mano_obra.toFixed(2));

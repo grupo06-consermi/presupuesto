@@ -19,21 +19,24 @@
         }
 
         public function index() {
-            $records = $this->presupuesto_model->fetch_all();
             $this->load->view('index/header');
             $this->load->view('index/menu');
+            $records = $this->presupuesto_model->listar();
             $this->load->view('presupuesto/index', compact('records'));
         }
 
         public function edit($id) {
             $this->load->view('index/header');
             $this->load->view('index/menu');
+
         }
 
-        public function show($id) {
+        public function show($pres_id) {
             $this->load->view('index/header');
             $this->load->view('index/menu');
-            $this->load->view('presupuesto/show');
+
+            $pres_row = $this->presupuesto_model->getByID($pres_id);
+            $this->load->view('presupuesto/edit', compact('pres_row'));
         }
 
         public function create() {
@@ -47,8 +50,8 @@
 
         public function guardar($pre_id = 0) {
             $this->presupuesto_model->pres_cod              = 0;
-            $this->presupuesto_model->pres_fecha_emision    = $_POST['fechaEmision'];
-            $this->presupuesto_model->pres_fecha_recepcion  = $_POST['fechaRecepcion'];
+            $this->presupuesto_model->pres_fecha_emision    = ''; // DAL = now() //; $_POST['fechaEmision'];
+            $this->presupuesto_model->pres_fecha_recepcion  = ''; // null $_POST['fechaRecepcion'];
             $this->presupuesto_model->pres_forma_pago       = $_POST['formaPago'];
             $this->presupuesto_model->pres_lugar_trabajo    = $_POST['lugarTrabajo'];
             $this->presupuesto_model->pres_estado           = $_POST['estado'];

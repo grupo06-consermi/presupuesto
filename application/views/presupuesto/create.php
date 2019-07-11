@@ -20,32 +20,6 @@
                             </select>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12 col-md-6 col-lg-4">
-                        <div class="form-group">
-                            <label for="fecha_emision" class="control-label">Fecha Emisión</label>
-                            <div class="input-group">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-calendar"></i>
-                                </div>
-                                <input required id="fecha_emision" name="fecha_emision" type="date"
-                                       class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-md-6 col-lg-4">
-                        <div class="form-group">
-                            <label for="fecha_recepcion" class="control-label">Fecha Recepción</label>
-                            <div class="input-group">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-calendar"></i>
-                                </div>
-                                <input required id="fecha_recepcion" name="fecha_recepcion" type="date"
-                                       class="form-control">
-                            </div>
-                        </div>
-                    </div>
                     <div class="col-xs-12 col-lg-4">
                         <div class="form-group">
                             <label for="forma_pago" class="control-label">Forma de pago</label>
@@ -69,7 +43,33 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xs-12 col-md-4">
+                </div>
+                <div class="row">
+                    <div hidden class="col-xs-12 col-md-6 col-lg-4">
+                        <div class="form-group">
+                            <label for="fecha_emision" class="control-label">Fecha Emisión</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                <input required id="fecha_emision" name="fecha_emision" type="date"
+                                       class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div hidden class="col-xs-12 col-md-6 col-lg-4">
+                        <div class="form-group">
+                            <label for="fecha_recepcion" class="control-label">Fecha Recepción</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                <input required id="fecha_recepcion" name="fecha_recepcion" type="date"
+                                       class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div hidden class="col-xs-12 col-md-4">
                         <div class="form-group">
                             <label for="estado" class="control-label">Estado</label>
                             <select required="required" name="estado" id="estado" class="form-control">
@@ -112,7 +112,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="btn-group" style="margin-bottom: 1.3em;">
@@ -144,7 +143,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="row">
                     <div class="col-xs-12 col-md-4">
                         <div class="form-group">
@@ -153,7 +151,8 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-money"></i>
                                 </div>
-                                <input readonly required='required' name="costo_mano_obra" id="costo_mano_obra" type="text"
+                                <input readonly required='required' name="costo_mano_obra" id="costo_mano_obra"
+                                       type="text"
                                        class="form-control">
                             </div>
                         </div>
