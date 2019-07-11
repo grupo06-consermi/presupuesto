@@ -1,5 +1,3 @@
-
-
 <script src="<?= base_url(); ?>assets/js/utils.js"></script>
 <?php
     /** @var object $prod_list */

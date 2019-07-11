@@ -63,9 +63,9 @@
                                 <td><?= $row->pres_estado ?></td>
                                 <td>
                                     <div class="btn-group btn-group-sm">
-                                        <a title="Visualizar"
-                                           href="<?= site_url(array('presupuesto', 'show', $row->pres_cod)) ?>"
-                                           class="btn btn-default btn-sm"><i class="fa fa-eye"></i></a>
+                                        <a title="Aceptar"
+                                           href="<?= site_url(array('presupuesto', 'set_acepted', $row->pres_cod)) ?>"
+                                           class="btn btn-default btn-sm"><i class="fa fa-check"></i></a>
                                         <a title="Editar"
                                            href="<?= site_url(array('presupuesto', 'edit', $row->pres_cod)) ?>"
                                            class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>

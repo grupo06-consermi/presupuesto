@@ -12,6 +12,9 @@
         public function __construct() {
             parent::__construct();
             verificarLogin();
+            $this->load->view('index/header');
+            $this->load->view('index/menu');
+
             $this->load->model('presupuesto_model');
             $this->load->model('producto_model');
             $this->load->model('cliente_model');
@@ -19,37 +22,34 @@
         }
 
         public function index() {
-            $this->load->view('index/header');
-            $this->load->view('index/menu');
             $records = $this->presupuesto_model->listar();
             $this->load->view('presupuesto/index', compact('records'));
         }
 
-        public function edit($id) {
-            $this->load->view('index/header');
-            $this->load->view('index/menu');
-        }
-
-        public function show($pres_id) {
-            $this->load->view('index/header');
-            $this->load->view('index/menu');
-
+        public function edit($pres_id) {
             $pres_row  = $this->presupuesto_model->getByID($pres_id);
             $prod_list = $this->presupuesto_model->getDetalles($pres_id);
             $empl_list = $this->presupuesto_model->getManoObra($pres_id);
             $clientes  = $this->cliente_model->fetch_all();
             $products  = $this->producto_model->fetch_all();
             $empleados = $this->empleado_model->fetch_all();
-
             $this->load->view('presupuesto/edit', compact('pres_row', 'clientes', 'prod_list', 'empl_list', 'products', 'empleados'));
+        }
+
+        public function show($pres_id) {
+            $pres_row  = $this->presupuesto_model->getByID($pres_id);
+            $prod_list = $this->presupuesto_model->getDetalles($pres_id);
+            $empl_list = $this->presupuesto_model->getManoObra($pres_id);
+            $clientes  = $this->cliente_model->fetch_all();
+            $products  = $this->producto_model->fetch_all();
+            $empleados = $this->empleado_model->fetch_all();
+            $this->load->view('presupuesto/show', compact('pres_row', 'clientes', 'prod_list', 'empl_list', 'products', 'empleados'));
         }
 
         public function create() {
             $products  = $this->producto_model->fetch_all_state();
             $clientes  = $this->cliente_model->fetch_all();
             $empleados = $this->empleado_model->fetch_all();
-            $this->load->view('index/header');
-            $this->load->view('index/menu');
             $this->load->view('presupuesto/create', compact('products', 'clientes', 'empleados'));
         }
 
@@ -75,7 +75,9 @@
             }
         }
 
-        public function destroy($id) {
-
+        public function set_acepted($pres_id) {
+            $this->presupuesto_model->setAsAceptado($pres_id);
+            $records = $this->presupuesto_model->listar();
+            $this->load->view('presupuesto/index', compact('records'));
         }
     }

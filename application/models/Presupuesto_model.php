@@ -121,10 +121,8 @@
             $query   = $this->db->query("SELECT act_cod FROM actividad WHERE pres_cod = '$this->pres_cod';");
             $act_cod = $query->result_array()[0]['act_cod'];
 
-
             // eliminar detalle
             $rs = $this->db->query("DELETE FROM actividad_empleado WHERE act_cod = '$act_cod';");
-
 
             foreach ($this->emp_list as $d) {
                 $rs = $rs && $this->db->query("CALL pa_actividad_empleado_insert(?,?,?,?,?,@aemp_codigo)", [
@@ -144,8 +142,8 @@
         }
 
         function setAsAceptado($pres_id) {
-
-            foreach ($this->prod_list as $d) {
+            $rs = $this->db->query("UPDATE presupuesto  SET pres_situacion = 2, pres_fecha_recepcion = now() WHERE pres_cod = $pres_id;");
+            /*foreach ($this->prod_list as $d) {
                 // descontar stock e indicar reposicion
                 $rs = $this->db->query("
                         UPDATE producto 
@@ -153,6 +151,7 @@
                             prod_stock_reponer = if(prod_stock - $d[cantidad] < 0, $d[cantidad] - prod_stock, 0)
                         WHERE prod_cod = $d[codigo];
                 ");
-            }
+            }*/
+            return $rs ? 1 : 0;
         }
     }
