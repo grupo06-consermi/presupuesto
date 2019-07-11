@@ -77,3 +77,17 @@
         </div>
     </div>
 </section>
+
+<script>
+    $(document).ready(function () {
+        $('.table').DataTable({
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json'
+            },
+            dom     : 'Bfrtip',
+            buttons : [
+                'excel', 'pdf', 'print'
+            ]
+        });
+    });
+</script>
