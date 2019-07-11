@@ -27,8 +27,12 @@
                         <div class="form-group">
                             <label for="forma_pago" class="control-label">Forma de pago</label>
                             <select required="required" name="forma_pago" id="forma_pago" class="form-control">
-                                <option value="contado">Contado</option>
-                                <option value="cuotas">Cuotas</option>
+                                <option value="contado" <?php echo $pres_row->pres_forma_pago == 'contado' ? 'selected' : ''; ?>>
+                                    Contado
+                                </option>
+                                <option value="cuotas" <?php echo $pres_row->pres_forma_pago == 'cuotas' ? 'selected' : ''; ?> >
+                                    Cuotas
+                                </option>
                             </select>
                         </div>
                     </div>
@@ -42,6 +46,7 @@
                                     <i class="fa fa-map-marker"></i>
                                 </div>
                                 <input name="lugar_trabajo" id="lugar_trabajo" type="text"
+                                       value='<?php echo $pres_row->pres_lugar_trabajo; ?>'
                                        class="form-control">
                             </div>
                         </div>
@@ -56,6 +61,7 @@
                                     <i class="fa fa-calendar"></i>
                                 </div>
                                 <input required id="fecha_emision" name="fecha_emision" type="date"
+                                       value='<?php echo $pres_row->pres_fecha_emision; ?>'
                                        class="form-control">
                             </div>
                         </div>
@@ -68,6 +74,7 @@
                                     <i class="fa fa-calendar"></i>
                                 </div>
                                 <input required id="fecha_recepcion" name="fecha_recepcion" type="date"
+                                       value='<?php echo $pres_row->pres_fecha_recepcion; ?>'
                                        class="form-control">
                             </div>
                         </div>
@@ -76,11 +83,21 @@
                         <div class="form-group">
                             <label for="estado" class="control-label">Estado</label>
                             <select required="required" name="estado" id="estado" class="form-control">
-                                <option value="1">Enviado</option>
-                                <option value="2">Aceptado</option>
-                                <option value="3">Por cancelar</option>
-                                <option value="4">Cancelado</option>
-                                <option value="5">Anulado</option>
+                                <option value="1" <?php echo $pres_row->pres_forma_pago == '1' ? 'selected' : ''; ?>>
+                                    Enviado
+                                </option>
+                                <option value="2" <?php echo $pres_row->pres_forma_pago == '2' ? 'selected' : ''; ?>>
+                                    Aceptado
+                                </option>
+                                <option value="3" <?php echo $pres_row->pres_forma_pago == '3' ? 'selected' : ''; ?>>Por
+                                    cancelar
+                                </option>
+                                <option value="4" <?php echo $pres_row->pres_forma_pago == '4' ? 'selected' : ''; ?>>
+                                    Cancelado
+                                </option>
+                                <option value="5" <?php echo $pres_row->pres_forma_pago == '5' ? 'selected' : ''; ?>>
+                                    Anulado
+                                </option>
                             </select>
                         </div>
                     </div>
@@ -155,8 +172,8 @@
                                     <i class="fa fa-money"></i>
                                 </div>
                                 <input readonly required='required' name="costo_mano_obra" id="costo_mano_obra"
-                                       type="text"
-                                       class="form-control">
+                                       value='<?php echo $pres_row->pres_costo_mano_obra; ?>'
+                                       type="text" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -168,6 +185,7 @@
                                     <i class="fa fa-money"></i>
                                 </div>
                                 <input readonly="readonly" name="costo_materiales" id="costo_materiales" type="text"
+                                       value='<?php echo $pres_row->pres_costo_materiales; ?>'
                                        class="form-control">
                             </div>
                         </div>
@@ -180,6 +198,7 @@
                                     <i class="fa fa-money"></i>
                                 </div>
                                 <input disabled name="costo_total" id="costo_total" type="text"
+                                       value='<?php echo $pres_row->pres_costo_total; ?>'
                                        style='font-weight: bold' class="form-control">
                             </div>
                         </div>
@@ -189,7 +208,9 @@
                     <div class="col-xs-12">
                         <div class="form-group">
                             <label for="encargado" class="control-label">Encargado</label>
-                            <input name="encargado" id="encargado" type="text" class="form-control">
+                            <input name="encargado" id="encargado" type="text"
+                                   value='<?php echo $pres_row->pres_encargado; ?>'
+                                   class="form-control">
                         </div>
                     </div>
                 </div>

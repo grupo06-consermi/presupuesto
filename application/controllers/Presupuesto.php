@@ -28,7 +28,6 @@
         public function edit($id) {
             $this->load->view('index/header');
             $this->load->view('index/menu');
-
         }
 
         public function show($pres_id) {
@@ -36,7 +35,9 @@
             $this->load->view('index/menu');
 
             $pres_row = $this->presupuesto_model->getByID($pres_id);
-            $this->load->view('presupuesto/edit', compact('pres_row'));
+            $clientes = $this->cliente_model->fetch_all();
+
+            $this->load->view('presupuesto/edit', compact('pres_row', 'clientes'));
         }
 
         public function create() {
