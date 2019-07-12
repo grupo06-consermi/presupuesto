@@ -42,15 +42,16 @@
                                    $pres_row->cli_razon_social; ?>'>
                     </div>
                 </div>
+
                 <div class="col-xs-6">
                     <div class="form-group input-group">
-                        <span class="input-group-addon"># Orden:</span>
+                        <span class="input-group-addon"># Orden</span>
                         <input letters="true" required="required" class="form-control" type="text"
                                name="ord_num_orden">
                     </div>
                 </div>
                 <div class="col-xs-6">
-                    <div hidden class="form-group input-group">
+                    <div class="form-group input-group">
                         <span class="input-group-addon">Fecha</span>
                         <input letters="true" class="form-control" type="date"
                                name="ord_fecha">
