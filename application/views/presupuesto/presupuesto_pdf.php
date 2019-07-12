@@ -52,6 +52,6 @@
     $pdf->Cell(15, 0, "Presupuesto Nº: $pres->pres_cod", 0, false, $LEFT);
 
 
-    $pdf->Output("comprobante$pres->pres_cod.pdf", 'I');
+    $pdf->Output(APPPATH."documentos/presupuesto_$pres->pres_cod.pdf", 'FI');
 
 

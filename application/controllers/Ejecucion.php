@@ -4,6 +4,7 @@
      * @property  presupuesto_model $presupuesto_model
      * @property  ejecucion_model $ejecucion_model
      * @property  almacen_model $almacen_model
+     * @property  phpmailer_lib phpmailer_lib
      */
     class Ejecucion extends CI_Controller
     {
@@ -12,6 +13,8 @@
             verificarLogin();
             $this->load->view('index/header');
             $this->load->view('index/menu');
+
+            $this->load->helper('pdf_helper');
             $this->load->model('ejecucion_model');
             $this->load->model('presupuesto_model');
         }
@@ -72,6 +75,55 @@
             $rows = $this->almacen_model->fetch_all_state();
             $this->load->view('ejecuciones/index', compact('rows', 'result'));
 
+        }
+
+        public function create_pdf($pres_id) {
+            $pres = $this->presupuesto_model->getByID($pres_id);
+            $this->load->view('presupuesto/presupuesto_pdf', compact('pres'));
+        }
+
+        public function send_pdf($pres_id) {
+            $pres      = $this->presupuesto_model->getByID($pres_id);
+            $titulo    = "Presupuesto No. $pres_id - CONSERMI";
+            $contenido = "<h2 style='color: #985430;'>Presupuesto</h2>
+                         <p>Estimado cliente, en el presente mensaje le presentamos su presupuesto en formato PDF.</p>";
+
+            $rpta = $this->SendEmail($pres->cli_email, $titulo, $contenido, APPPATH."documentos/presupuesto_{$pres->pres_cod}.pdf");
+
+            $pres_row     = $this->presupuesto_model->getByID($pres_id);
+            $presdet_list = $this->presupuesto_model->getDetalles($pres_id);
+            $this->load->view('ejecuciones/create', compact('pres_id', 'page', 'pres_row', 'presdet_list', 'rpta'));
+        }
+
+        function SendEmail($email, $titulo, $contenido, $archivo) {
+            date_default_timezone_set('Etc/UTC');
+
+            $this->load->library('phpmailer_lib');
+            $mail = $this->phpmailer_lib->load();
+            $mail->isSMTP();
+            $mail->CharSet = 'UTF-8';
+
+            $mail->Debugoutput = 'html';
+            $mail->Host        = 'smtp.live.com';
+            $mail->Port        = 587;
+            $mail->SMTPSecure  = 'tls';
+            $mail->SMTPAuth    = true;
+
+            $mail->Username = "syscontrolpro@hotmail.com";
+            $mail->Password = "******44A";
+            $mail->setFrom($mail->Username);
+            $mail->addReplyTo($mail->Username);
+            $mail->addAddress($email);
+
+            $mail->Subject = $titulo;
+            $mail->msgHTML($contenido);
+            $mail->addAttachment($archivo);
+
+            if (!$mail->send()) {
+                return "Mailer error: ".$mail->ErrorInfo;
+            } else {
+                return "Mensaje enviado";
+            }
         }
 
     }

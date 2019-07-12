@@ -6,6 +6,7 @@
      * @property   presupuesto_model presupuesto_model
      * @property   Cliente_model cliente_model
      * @property  empleado_model empleado_model
+     * @property  phpmailer_lib phpmailer_lib
      */
     class Presupuesto extends CI_Controller
     {
@@ -83,10 +84,5 @@
             $this->presupuesto_model->setAsAceptado($pres_id);
             $records = $this->presupuesto_model->listar();
             $this->load->view('presupuesto/index', compact('records'));
-        }
-
-        public function create_pdf($pres_id) {
-            $pres = $this->presupuesto_model->getByID($pres_id);
-            $this->load->view('presupuesto/presupuesto_pdf', compact('pres'));
         }
     }

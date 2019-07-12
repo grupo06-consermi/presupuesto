@@ -3,6 +3,7 @@
 
     /**
      * @property  UsuarioModel UsuarioModel
+     * @property  phpmailer_lib phpmailer_lib
      */
     class Inicio extends CI_Controller
     {
