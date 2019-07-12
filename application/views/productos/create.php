@@ -79,18 +79,21 @@
                     <div class="form-group input-group">
                         <span class="input-group-addon">Stock minimo:</span>
                         <input required="required" class="form-control" type="number" name="prod_stock_min">
+
                     </div>
                 </div>
                 <div class="col-xs-12">
                     <div class="form-group input-group">
                         <span class="input-group-addon">Precio Venta</span>
-                        <input required="required" class="form-control" type="number" name="prod_precio_venta">
+                        <input required="required" class="form-control" type="number"
+                               step="0.01" name="prod_precio_venta">
                     </div>
                 </div>
                 <div class="col-xs-12">
                     <div class="form-group input-group">
                         <span class="input-group-addon">Precio Compra</span>
-                        <input required="required" class="form-control" type="number" name="prod_precio_compra">
+                        <input required="required" class="form-control" type="number"
+                               step="0.01" name="prod_precio_compra">
                     </div>
                 </div>
                 <div class="col-xs-12">

@@ -18,7 +18,7 @@
 
     // set default header data
     $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 001', PDF_HEADER_STRING, array(0, 64, 255), array(0, 64, 128));
-    $pdf->setFooterData(array(0, 64, 0), array(0, 64, 128));
+
 
     //editado
     //$pdf->SetAutoPageBreak(false);
@@ -40,16 +40,26 @@
 
     $pdf->SetCreator(PDF_CREATOR);
 
-    $pdf->SetAuthor('Nicola Asuni');
-
     $pdf->SetTitle("Presupuesto CSM-$pres->pres_cod");
 
-    $pdf->SetFont('times', 'BI', 20);
+    $pdf->SetFont('times', 'BI', 12);
 
-    $pdf->Cell(105, 5, "Fecha:$pres->pres_fecha_emision", 0, false, $RIGHT);
+    $pdf->Cell(15, 20, "Fecha:$pres->pres_fecha_emision", 0, true, $LEFT);
 
-    $pdf->Cell(15, 0, "Presupuesto Nº: $pres->pres_cod", 0, false, $LEFT);
+
+    $pdf->Cell(15, 5, "Presupuesto Nº: $pres->pres_cod", 0, true, $LEFT);
+
+    $pdf->Cell(15, 5, "Cliente: $pres->cli_razon_social", 0, true, $LEFT);
+
+
+
+    $pdf->SetFont($ARIAL, '', 8.5);
+    $pdf->Cell(35, 0, "¡Gracias por su compra!", 0, false, $CENTER);
+
 
     $pdf->Output(APPPATH."documentos/presupuesto_$pres->pres_cod.pdf", 'FI');
+
+
+
 
 

@@ -30,7 +30,7 @@
                     <div class="form-group input-group">
                         <span class="input-group-addon">Direccion</span>
                         <input letters="true" required="required" class="form-control" type="text"
-                               name="alm_direccion">
+                        name="alm_direccion">
                     </div>
                 </div>
 

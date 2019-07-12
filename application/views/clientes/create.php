@@ -30,7 +30,8 @@
             <div class="col-xs-12">
                 <div class="form-group input-group">
                     <span class="input-group-addon">R.U.C</span>
-                    <input letters="true" required="required" class="form-control" type="text"
+                    <input letters="true" required="required" class="form-control" type="number"
+                     min="7" max="11" pattern="[z0-9]{7,9}"
                      name="cli_ruc">
                 </div>
             </div>
