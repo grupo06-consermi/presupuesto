@@ -7,7 +7,8 @@
         var $act_cod;
         var $prod_cod;
         var $actpro_precio;
-        var $actpro_cantidad;
+        var $actpro_cant_presup;
+        var $actpro_cant_usado;
         var $actpro_total;
 
         function getRow($actpro_cod) {
@@ -41,11 +42,12 @@
         }
 
         function insert() {
-            $query = $this->db->query("CALL pa_actividad_productos_insert(?,?,?,?,?)", [
+            $query = $this->db->query("CALL pa_actividad_productos_insert(?,?,?,?,?,?,@actpro_cod)", [
                 $this->act_cod,
                 $this->prod_cod,
                 $this->actpro_precio,
-                $this->actpro_cantidad,
+                $this->actpro_cant_presup,
+                $this->actpro_cant_usado,
                 $this->actpro_total
             ]);
 
@@ -59,12 +61,13 @@
         }
 
         function update() {
-            $query = $this->db->query("CALL pa_actividad_productos_update(?,?,?,?,?,?)", [
+            $query = $this->db->query("CALL pa_actividad_productos_update(?,?,?,?,?,?,?)", [
                 $this->actpro_cod,
                 $this->act_cod,
                 $this->prod_cod,
                 $this->actpro_precio,
-                $this->actpro_cantidad,
+                $this->actpro_cant_presup,
+                $this->actpro_cant_usado,
                 $this->actpro_total
             ]);
             return $query;
