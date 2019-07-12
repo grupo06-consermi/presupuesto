@@ -1,5 +1,4 @@
-
-<div  style='padding: 1.5em;'>
+<div style='padding: 1.5em;'>
     <div class="callout callout-info">
         <h2>Lista de Ejecuciones</h2>
     </div>
@@ -7,29 +6,27 @@
     <div class="row">
         <div class="col-xs-12">
             <?php if ($this->session->flashdata('correcto')): ?>
-            <div class="alert alert-success alert-dismissible fade in" role="alert">
-                <strong>Correcto : </strong>&nbsp;<?php echo $this->session->flashdata('correcto'); ?>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+                <div class="alert alert-success alert-dismissible fade in" role="alert">
+                    <strong>Correcto : </strong>&nbsp;<?php echo $this->session->flashdata('correcto'); ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
             <?php endif ?>
 
             <?php if ($this->session->flashdata('error')): ?>
-            <div class="alert alert-danger alert-dismissible fade in" role="alert">
-            <strong>Error : </strong>&nbsp;<?php echo $this->session->flashdata('error'); ?>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            </div>
+                <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                    <strong>Error : </strong>&nbsp;<?php echo $this->session->flashdata('error'); ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
             <?php endif ?>
         </div>
-        
-        
-
         <div class="col-xs-12">
-            <table  class="table table-striped table-bordered">
+            <table class="table table-striped table-bordered">
                 <thead>
+                <tr>
                     <!--<th>Código</th>-->
                     <th># Ejecucion</th>
                     <th>Fecha de Recepcion</th>
@@ -38,37 +35,40 @@
                     <th># Presupuesto</th>
                     <th>Estado</th>
                     <th>Acciones</th>
+                </tr>
                 </thead>
                 <tbody>
-                    <?php foreach($rows as $row): ?>
-                        <tr>
-                            <td><?=$row->ord_num_orden?></td> 
-                            <td><?=$row->ord_fecha?></td> 
-                            <td><?=$row->ord_odm?></td> 
-                            <td><?=$row->ord_emisor?></td> 
-                            <td><?=$row->pres_cod?></td>                            
-                            <td> <?=$row->ord_estado == '1' ? '<i class="fa fa-fw fa-check"></i>' : 
-                            '<i class="fa fa-fw fa-remove"></i>'?></td>
+                <?php /** @var object $rows */
+                    foreach ($rows as $row): ?>
+                    <tr>
+                        <td><?= $row->ord_num_orden ?></td>
+                        <td><?= $row->ord_fecha ?></td>
+                        <td><?= $row->ord_odm ?></td>
+                        <td><?= $row->ord_emisor ?></td>
+                        <td><?= $row->pres_cod ?></td>
+                        <td> <?= $row->ord_estado == '1' ? '<i class="fa fa-fw fa-check"></i>' :
+                                '<i class="fa fa-fw fa-remove"></i>' ?></td>
 
-                            
-                            <td>
-                                <div class="btn-group btn-group-sm">
-                                    <a title="Editar" class="btn btn-primary" href="<?= site_url('ejecucion/edit/'.$row->ord_cod) ?>">
-                                        <i class="fa fa-fw fa-pencil"></i>
-                                    </a>
-                                    
-                                    
-                                </div>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
+
+                        <td>
+                            <div class="btn-group btn-group-sm">
+                                <a title="Editar" class="btn btn-primary"
+                                   href="<?= site_url('ejecucion/edit/'.$row->ord_cod) ?>">
+                                    <i class="fa fa-fw fa-pencil"></i>
+                                </a>
+
+
+                            </div>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
                 </tbody>
-         
+
             </table>
-            
+
         </div>
 
     </div>
-    
+
 </div>
 

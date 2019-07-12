@@ -71,6 +71,15 @@
                                name="ord_emisor">
                     </div>
                 </div>
+                <div class="col-xs-6">
+                    <div hidden class="form-group input-group">
+                        <span class="input-group-addon">Estado</span>
+                        <select class="form-control" name="ord_estado">
+                            <option value="1" selected>Activo</option>
+                            <option value="0">Inactivo</option>
+                        </select>
+                    </div>
+                </div>
                 <?php if (isset($presdet_list)) { ?>
                     <div class="col-sm-12">
                         <table class='table'>
@@ -98,18 +107,12 @@
                             </tbody>
                         </table>
                     </div>
-                    Los siguientes productos se utilizarán para realizar esta orden de ejecucion
-                <?php } ?>
-                <div class="col-xs-6">
-                    <div hidden class="form-group input-group">
-                        <span class="input-group-addon">Estado</span>
-                        <select class="form-control" name="ord_estado">
-                            <option value="1" selected>Activo</option>
-                            <option value="0">Inactivo</option>
-                        </select>
+                    <div class="col-xs-12">
+                        Los siguientes productos se utilizarán para realizar esta orden de ejecucion
                     </div>
-                </div>
-                <div class="col-xs-6">
+                    <br>
+                <?php } ?>
+                <div class="col-xs-12">
                     <div class="form-group">
                         <button class="btn btn-success" type="submit">
                             <i class="fa fa-fw fa-save"></i> Guardar

@@ -120,14 +120,15 @@ var Presupuesto = function () {
                 var tdPrecio   = $('<td>', {text: precio.val()});
                 var tdCantidad = $('<td>', {text: cantidad.val()});
                 var tdImporte  = $('<td>', {text: importe});
-                var tdAcciones = $('<td><button type="button" class="btn btn-sm btn-primary" onclick="Presupuesto.edit_producto(' + pres_prod_actual.index + ')"><i class="fa fa-edit_producto"></i></button><td>');
+                var btnEdit    = '<button type="button" class="btn btn-sm btn-primary" onclick="Presupuesto.edit_producto(' + pres_prod_actual.index + ')"><i class="fa fa-edit"></i></button>';
+                var btnDelete  = '<button type="button" class="btn btn-sm btn-danger" onclick="Presupuesto.remove_producto(' + pres_prod_actual.index + ')"><i class="fa fa-close"></i></button>';
+                var tdAcciones = $('<td>' + btnEdit + btnDelete + '</td>');
 
                 trElement.append(tdProducto);
                 trElement.append(tdPrecio);
                 trElement.append(tdCantidad);
                 trElement.append(tdImporte);
                 trElement.append(tdAcciones);
-
                 _tbl_productos.find('tbody').append(trElement);
 
             } else {
@@ -154,10 +155,13 @@ var Presupuesto = function () {
             cantidad.focus();
             id.val(0);
             action.val('new');
-            // _modal_productos.modal('hide');
         }
-
         calcularTotal();
+    };
+
+    var remove_producto = function (index) {
+        pres_prod_list.splice(index, 1);
+        $('tr[data-index="' + index + '"]', _tbl_productos).remove();
     };
 
     var add_empleado = function () {
@@ -188,7 +192,9 @@ var Presupuesto = function () {
                 var tdTiempo   = $('<td>', {text: tiempo.val()});
                 var tdUnidad   = $('<td>', {text: 'días'});
                 var tdImporte  = $('<td>', {text: importe});
-                var tdAcciones = $('<td><button type="button" class="btn btn-sm btn-primary" onclick="Presupuesto.edit_empleado(' + pres_emp_actual.index + ')"><i class="fa fa-edit producto"></i></button><td>');
+                var btnEdit    = '<button type="button" class="btn btn-sm btn-primary" onclick="Presupuesto.edit_empleado(' + pres_emp_actual.index + ')"><i class="fa fa-edit"></i></button>';
+                var btnCancel  = '<button type="button" class="btn btn-sm btn-danger" onclick="Presupuesto.remove_empleado(' + pres_emp_actual.index + ')"><i class="fa fa-close"></i></button>';
+                var tdAcciones = $('<td>' + btnEdit + btnCancel + '<td>');
 
                 trElement.append(tdEmpleado);
                 trElement.append(tdPagoDia);
@@ -229,6 +235,11 @@ var Presupuesto = function () {
         calcularTotal();
     };
 
+    var remove_empleado = function (index) {
+        pres_emp_list.splice(index, 1);
+        $('tr[data-index="' + index + '"]', _tbl_empleados).remove();
+    };
+
     var calcularTotal = function () {
         var costo_materiales = 0;
         var costo_total;
@@ -237,11 +248,9 @@ var Presupuesto = function () {
         for (var i = 0; i < pres_emp_list.length; i++) {
             costo_mano_obra += toFloat(pres_emp_list[i].importe);
         }
-
         for (var i = 0; i < pres_prod_list.length; i++) {
             costo_materiales += pres_prod_list[i].total;
         }
-
         costo_total = costo_mano_obra + costo_materiales;
 
         $('#costo_materiales').val(costo_materiales.toFixed(2));
@@ -333,6 +342,9 @@ var Presupuesto = function () {
         save_presupuesto: save_presupuesto,
         calcularTotal   : calcularTotal,
         loadProductos   : loadProductos,
-        loadEmpleados   : loadEmpleados
+        loadEmpleados   : loadEmpleados,
+        remove_producto : remove_producto,
+        remove_empleado : remove_empleado,
+        pres_prod_list  : pres_prod_list
     };
 }();
