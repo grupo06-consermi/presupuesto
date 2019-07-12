@@ -33,13 +33,23 @@
         }
 
         public function insert() {
+            $pres_cod = $_POST['pres_cod'];
+
             $rs = $this->db->query("CALL pa_orden_ejecucion_insert(?,?,?,?,?,@ord_cod)", [
                 $_POST['ord_num_orden'],
                 "0000-00-00 00:00:00",
                 $_POST['ord_odm'],
                 $_POST['ord_emisor'],
-                $_POST['pres_cod']
+                $pres_cod
             ]);
+
+
+            $this->db->query("
+                INSERT INTO 
+            
+            ");
+
+
             if ($rs) {
                 $query   = $this->db->query("SELECT @ord_cod as ord_cod");
                 $ord_cod = $query->result_array()[0]['ord_cod'];
@@ -47,6 +57,8 @@
             } else {
                 return 0;
             }
+
+
 
             /*foreach ($this->prod_list as $d) {
                // descontar stock e indicar reposicion

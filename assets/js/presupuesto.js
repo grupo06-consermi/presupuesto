@@ -181,6 +181,7 @@ var Presupuesto = function () {
                     pago_dia  : pago_dia.val(),
                     tiempo    : tiempo.val(),
                     importe   : importe
+
                 };
 
                 pres_emp_list.push(pres_emp_actual);

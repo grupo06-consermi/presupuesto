@@ -98,19 +98,18 @@
                                 <tr>
                                     <td><?= $presdet->prod_cod; ?></td>
                                     <td><?= $presdet->prod_nombre_comercial; ?></td>
-                                    <td><?= $presdet->dpre_precio; ?></td>
-                                    <td><?= $presdet->dpre_cantidad; ?></td>
-                                    <td><?= $presdet->prod_stock; ?></td>
-                                    <td><?= ($presdet->dpre_cantidad > $presdet->prod_stock) ? ($presdet->dpre_cantidad - $presdet->prod_stock) : 0; ?></td>
+                                    <td style='text-align: right;'><?= $presdet->dpre_precio; ?></td>
+                                    <td style='text-align: right;'><?= $presdet->dpre_cantidad; ?></td>
+                                    <td style='text-align: right;'><?= $presdet->prod_stock; ?></td>
+                                    <td style='text-align: right;'><?= ($presdet->dpre_cantidad > $presdet->prod_stock) ? ($presdet->dpre_cantidad - $presdet->prod_stock) : 0; ?></td>
                                 </tr>
                             <?php } ?>
                             </tbody>
                         </table>
                     </div>
-                    <div class="col-xs-12">
-                        Los siguientes productos se utilizarán para realizar esta orden de ejecucion
+                    <div class="col-xs-12" style='margin-bottom: 15px;'>
+                        Estos productos se utilizarán para realizar esta orden de ejecucion.
                     </div>
-                    <br>
                 <?php } ?>
                 <div class="col-xs-12">
                     <div class="form-group">

@@ -11,7 +11,6 @@
         var $actpro_total;
 
         function getRow($actpro_cod) {
-
             $query  = $this->db->query("CALL pa_actividad_productos_getRow(?)", [$actpro_cod]);
             $result = $query->result();
             $this->db->next_result();
@@ -20,7 +19,6 @@
         }
 
         function getByID($actpro_cod) {
-
             $query  = $this->db->query("CALL pa_actividad_productos_getByID(?)", [$actpro_cod]);
             $result = $query->result();
             $this->db->next_result();
@@ -29,7 +27,6 @@
         }
 
         function listCbo($actpro_cod = 0) {
-
             $query  = $this->db->query("CALL pa_actividad_productos_listCbo(?)", [$actpro_cod]);
             $result = $query->result();
             $this->db->next_result();
@@ -37,7 +34,6 @@
         }
 
         function listar($buscar = '') {
-
             $query  = $this->db->query("CALL pa_actividad_productos_list(?)", [$buscar]);
             $result = $query->result();
             $this->db->next_result();
@@ -45,7 +41,6 @@
         }
 
         function insert() {
-
             $query = $this->db->query("CALL pa_actividad_productos_insert(?,?,?,?,?)", [
                 $this->act_cod,
                 $this->prod_cod,
@@ -64,7 +59,6 @@
         }
 
         function update() {
-
             $query = $this->db->query("CALL pa_actividad_productos_update(?,?,?,?,?,?)", [
                 $this->actpro_cod,
                 $this->act_cod,
@@ -77,19 +71,16 @@
         }
 
         function activar($actpro_cod) {
-
             $query = $this->db->query("CALL pa_actividad_productos_activate(?)", [$actpro_cod]);
             return $query;
         }
 
         function desactivar($actpro_cod) {
-
             $query = $this->db->query("CALL pa_actividad_productos_deactivate(?)", [$actpro_cod]);
             return $query;
         }
 
         function borrar($actpro_cod) {
-
             $query = $this->db->query("CALL pa_actividad_productos_delete(?)", [$actpro_cod]);
             return $query;
         }
