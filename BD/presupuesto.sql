@@ -1,6 +1,6 @@
 DELIMITER $$
 -- Tabla: presupuesto
-DROP PROCEDURE IF EXISTS pa_presupuesto_getRow;
+-- DROP PROCEDURE IF EXISTS pa_presupuesto_getRow;
 
 CREATE PROCEDURE pa_presupuesto_getRow(
 	IN _pres_cod int(11)
@@ -15,7 +15,7 @@ BEGIN
 END $$
 
 -- Tabla: presupuesto
-DROP PROCEDURE IF EXISTS pa_presupuesto_getByID;
+-- DROP PROCEDURE IF EXISTS pa_presupuesto_getByID;
 
 CREATE PROCEDURE pa_presupuesto_getByID(
 	IN _pres_cod int(11)
@@ -30,13 +30,14 @@ BEGIN
 END $$
 
 -- Tabla: presupuesto
-DROP PROCEDURE IF EXISTS pa_presupuesto_getDetalles;
+-- DROP PROCEDURE IF EXISTS pa_presupuesto_getDetalles;
 
 CREATE PROCEDURE pa_presupuesto_getDetalles(
     IN _pres_cod int(11)
 )
 BEGIN
-    SELECT pres_cod, prod_cod, prod_nombre_comercial, dpre_cantidad, dpre_precio
+    SELECT pres_cod, prod_cod, prod_nombre_comercial, prod_stock,
+           dpre_cantidad, dpre_precio
     FROM detalle_presupuesto presdet
              INNER JOIN presupuesto pres ON presdet.pre_cod = pres.pres_cod
              INNER JOIN producto prod ON presdet.pro_cod = prod.prod_cod
@@ -44,7 +45,7 @@ BEGIN
 END $$
 
 -- Tabla: presupuesto
-DROP PROCEDURE IF EXISTS pa_presupuesto_getManoObra;
+-- DROP PROCEDURE IF EXISTS pa_presupuesto_getManoObra;
 
 CREATE PROCEDURE pa_presupuesto_getManoObra(
     IN _pres_cod int(11)
@@ -62,7 +63,7 @@ END $$
 CALL pa_presupuesto_getManoObra(23);
 
 -- Tabla: presupuesto
-DROP PROCEDURE IF EXISTS pa_presupuesto_listCbo;
+-- DROP PROCEDURE IF EXISTS pa_presupuesto_listCbo;
 
 CREATE PROCEDURE pa_presupuesto_listCbo(
 	IN _pres_cod int(11)
@@ -77,7 +78,7 @@ BEGIN
 END $$
 
 -- Tabla: presupuesto
-DROP PROCEDURE IF EXISTS pa_presupuesto_list;
+-- DROP PROCEDURE IF EXISTS pa_presupuesto_list;
 
 CREATE PROCEDURE pa_presupuesto_list(
 	IN _buscar varchar(50),
@@ -97,7 +98,7 @@ BEGIN
 END $$
 
 -- Tabla: presupuesto
-DROP PROCEDURE IF EXISTS pa_presupuesto_insert;
+-- DROP PROCEDURE IF EXISTS pa_presupuesto_insert;
 
 CREATE PROCEDURE pa_presupuesto_insert(
 	IN _pres_forma_pago char(30),
@@ -143,7 +144,7 @@ END $$
 CALL pa_presupuesto_insert(1, 'santa', '100', '120', '220', 1, 'x',@s);
 
 -- Tabla: presupuesto
-DROP PROCEDURE IF EXISTS pa_presupuesto_update;
+-- DROP PROCEDURE IF EXISTS pa_presupuesto_update;
 
 CREATE PROCEDURE pa_presupuesto_update(
 	IN _pres_cod int(11),
@@ -170,7 +171,7 @@ END $$
 call pa_presupuesto_update(27, 1,'santa',4,202.48,206.8,3,'');
 
 -- Tabla: presupuesto
-DROP PROCEDURE IF EXISTS pa_presupuesto_activate;
+-- DROP PROCEDURE IF EXISTS pa_presupuesto_activate;
 
 CREATE PROCEDURE pa_presupuesto_activate(
 	IN _pres_cod int(11)
@@ -182,7 +183,7 @@ BEGIN
 END $$
 
 -- Tabla: presupuesto
-DROP PROCEDURE IF EXISTS pa_presupuesto_deactivate;
+-- DROP PROCEDURE IF EXISTS pa_presupuesto_deactivate;
 
 CREATE PROCEDURE pa_presupuesto_deactivate(
 	IN _pres_cod int(11)
@@ -194,7 +195,7 @@ BEGIN
 END $$
 
 -- Tabla: presupuesto
-DROP PROCEDURE IF EXISTS pa_presupuesto_delete;
+-- DROP PROCEDURE IF EXISTS pa_presupuesto_delete;
 
 CREATE PROCEDURE pa_presupuesto_delete(
 	IN _pres_cod int(11)

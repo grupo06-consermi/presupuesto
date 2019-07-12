@@ -28,15 +28,15 @@
         }
 
         public function createOn($pres_id, $page) {
-            $pres_row = $this->presupuesto_model->getByID($pres_id);
-            $this->load->view('ejecuciones/create', compact('pres_id', 'page', 'pres_row'));
+            $pres_row     = $this->presupuesto_model->getByID($pres_id);
+            $presdet_list = $this->presupuesto_model->getDetalles($pres_id);
+            $this->load->view('ejecuciones/create', compact('pres_id', 'page', 'pres_row', 'presdet_list'));
         }
 
         public function edit($id) {
             $ejecucion    = $this->ejecucion_model->getId($id);
             $presupuestos = $this->presupuesto_model->listar();
             $this->load->view('ejecuciones/edit', compact('ejecucion', 'presupuestos'));
-
         }
 
         public function update($id) {

@@ -47,6 +47,16 @@
             } else {
                 return 0;
             }
+
+            /*foreach ($this->prod_list as $d) {
+               // descontar stock e indicar reposicion
+               $rs = $this->db->query("
+                       UPDATE producto
+                       SET prod_stock = if(prod_stock - $d[cantidad] >= 0, prod_stock - $d[cantidad], 0),
+                           prod_stock_reponer = if(prod_stock - $d[cantidad] < 0, $d[cantidad] - prod_stock, 0)
+                       WHERE prod_cod = $d[codigo];
+               ");
+           }*/
         }
 
         public function destroy($id) {
