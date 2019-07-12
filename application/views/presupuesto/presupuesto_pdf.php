@@ -17,14 +17,14 @@
     $pdf->setPrintFooter(false);
 
     // set default header data
-    $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 001', PDF_HEADER_STRING, array(0,64,255), array(0,64,128));
-    $pdf->setFooterData(array(0,64,0), array(0,64,128));
+    $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 001', PDF_HEADER_STRING, array(0, 64, 255), array(0, 64, 128));
+    $pdf->setFooterData(array(0, 64, 0), array(0, 64, 128));
 
     //editado
     //$pdf->SetAutoPageBreak(false);
     $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
-     // set auto page breaks
-    $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+    // set auto page breaks
+    $pdf->SetAutoPageBreak(true, PDF_MARGIN_BOTTOM);
 
     $pdf->AddPage();
 
@@ -46,11 +46,9 @@
 
     $pdf->SetFont('times', 'BI', 20);
 
-
     $pdf->Cell(105, 5, "Fecha:$pres->pres_fecha_emision", 0, false, $RIGHT);
 
     $pdf->Cell(15, 0, "Presupuesto Nº: $pres->pres_cod", 0, false, $LEFT);
-
 
     $pdf->Output(APPPATH."documentos/presupuesto_$pres->pres_cod.pdf", 'FI');
 

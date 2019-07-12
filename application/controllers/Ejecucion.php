@@ -11,8 +11,10 @@
         public function __construct() {
             parent::__construct();
             verificarLogin();
-            $this->load->view('index/header');
-            $this->load->view('index/menu');
+            if ($this->router->method != 'create_pdf') {
+                $this->load->view('index/header');
+                $this->load->view('index/menu');
+            }
 
             $this->load->helper('pdf_helper');
             $this->load->model('ejecucion_model');
