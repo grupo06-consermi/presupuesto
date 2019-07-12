@@ -162,7 +162,7 @@
                                 <tbody>
                                 <?php $i = 0; ?>
                                 <?php foreach ($prod_list as $item) { ?>
-                                    <tr>
+                                    <tr data-index='<?= $i ?>'>
                                         <td><?php echo $item->prod_nombre_comercial; ?></td>
                                         <td><?php echo $item->dpre_precio; ?></td>
                                         <td><?php echo $item->dpre_cantidad; ?></td>
