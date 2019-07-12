@@ -171,9 +171,9 @@
                                             <button type="button" class="btn btn-sm btn-primary"
                                                     onclick="Presupuesto.edit_producto('<?= $i ?>')"><i
                                                         class="fa fa-edit "></i></button>
-                                            <button type="button" class="btn btn-sm btn-primary"
+                                            <button type="button" class="btn btn-sm btn-danger"
                                                     onclick="Presupuesto.remove_producto('<?= $i ?>')"><i
-                                                        class="fa fa-edit"></i></button>
+                                                        class="fa fa-close"></i></button>
                                         <td>
                                     </tr>
                                 <?php } ?>
