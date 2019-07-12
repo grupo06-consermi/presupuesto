@@ -162,7 +162,7 @@
                                 <tbody>
                                 <?php $i = 0; ?>
                                 <?php foreach ($prod_list as $item) { ?>
-                                    <tr data-index='<?= $i ?>'>
+                                    <tr data-index='<?= $i++ ?>'>
                                         <td><?php echo $item->prod_nombre_comercial; ?></td>
                                         <td><?php echo $item->dpre_precio; ?></td>
                                         <td><?php echo $item->dpre_cantidad; ?></td>
@@ -209,7 +209,7 @@
                                 <tbody>
                                 <?php $i = 0; ?>
                                 <?php foreach ($empl_list as $item) { ?>
-                                    <tr>
+                                    <tr data-index='<?= $i++ ?>'>
                                         <td><?php echo $item->emp_nombre; ?></td>
                                         <td><?php echo $item->aemp_pago_dia; ?></td>
                                         <td><?php echo $item->aemp_cantidad_dias; ?></td>
