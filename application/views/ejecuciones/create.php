@@ -1,3 +1,7 @@
+<?php
+    $pres_id = IssetOr($pres_id, 0);
+    $page    = IssetOr($page, 'ejecucion');
+?>
 <div style='padding: 30px;'>
 
     <div class="row">
@@ -17,8 +21,9 @@
                 <div class="col-xs-12">
                     <div class="form-group input-group">
                         <span class="input-group-addon"># Orden</span>
-                        <input letters="true" required="required" class="form-control" type="text"
-                               name="ord_num_orden">
+                        <input <?= $pres_id > 0 ? 'disabled' : ''; ?>
+                                letters="true" required="required" class="form-control" type="text"
+                                value='<?= $pres_id ?>' name="ord_num_orden">
                     </div>
                 </div>
                 <div class="col-xs-12">
@@ -72,13 +77,10 @@
                         <button class="btn btn-success" type="submit">
                             <i class="fa fa-fw fa-save"></i> Guardar
                         </button>
-                        <a href='<?php echo site_url('ejecucion') ?>' class='btn btn-danger id='
+                        <a href='<?php echo site_url($page) ?>' class='btn btn-danger id='
                            btnCancelar'>Cancelar</a>
                     </div>
                 </div>
-
             </form>
         </div>
-
-
     </div>
