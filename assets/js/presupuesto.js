@@ -188,7 +188,7 @@ var Presupuesto = function () {
                 var tdTiempo   = $('<td>', {text: tiempo.val()});
                 var tdUnidad   = $('<td>', {text: 'días'});
                 var tdImporte  = $('<td>', {text: importe});
-                var tdAcciones = $('<td><button type="button" class="btn btn-sm btn-primary" onclick="Presupuesto.edit_empleado(' + pres_emp_actual.index + ')"><i class="fa fa-edit_producto"></i></button><td>');
+                var tdAcciones = $('<td><button type="button" class="btn btn-sm btn-primary" onclick="Presupuesto.edit_empleado(' + pres_emp_actual.index + ')"><i class="fa fa-edit producto"></i></button><td>');
 
                 trElement.append(tdEmpleado);
                 trElement.append(tdPagoDia);

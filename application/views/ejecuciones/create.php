@@ -50,7 +50,7 @@
                     </div>
                 </div>
                 <div class="col-xs-6">
-                    <div hidden class="form-group input-group">
+                    <div class="form-group input-group">
                         <span class="input-group-addon">Fecha</span>
                         <input letters="true" class="form-control" type="date"
                                name="ord_fecha">
