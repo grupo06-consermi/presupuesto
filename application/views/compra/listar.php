@@ -59,7 +59,7 @@
                                 <td><?= $row->comp_costo_total ?></td>
                                 <td>
                                     <div class="btn-group btn-group-sm">
-                                        <a title="Editar"
+                                        <a hidden title="Editar"
                                            href="<?= site_url(array('compra', 'registrar', $row->comp_cod)) ?>"
                                            class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
                                         <a title="Eliminar"
