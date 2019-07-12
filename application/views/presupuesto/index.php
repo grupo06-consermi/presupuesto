@@ -41,43 +41,50 @@
                         <th>Forma Pago</th>
                         <th>Lugar Trabajo</th>
                         <th>Estado</th>
+                        <th>Presupuesto</th>
                         <th>Acciones</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <?php if (count($records) == 0) : ?>
-                        <tr>
-                            <td colspan="7">No se han encontrado resultados</td>
-                        </tr>
-                    <?php
-                    else:
-                        foreach ($records as $row):
-                            ?>
+                    <?php /** @var object $records */
+                        if (count($records) == 0) : ?>
                             <tr>
-                                <td><?= $row->pres_cod ?></td>
-                                <td><?= $row->cli_razon_social ?></td>
-                                <td><?= $row->pres_fecha_emision ?></td>
-                                <td><?= $row->pres_fecha_recepcion ?></td>
-                                <td><?= getFormaPago()[$row->pres_forma_pago] ?></td>
-                                <td><?= $row->pres_lugar_trabajo ?></td>
-                                <td><?= $row->pres_estado ?></td>
-                                <td>
-                                    <div class="btn-group btn-group-sm">
+                                <td colspan="7">No se han encontrado resultados</td>
+                            </tr>
+                        <?php
+                        else:
+                            foreach ($records as $row):
+                                ?>
+                                <tr>
+                                    <td><?= $row->pres_cod ?></td>
+                                    <td><?= $row->cli_razon_social ?></td>
+                                    <td><?= $row->pres_fecha_emision ?></td>
+                                    <td><?= $row->pres_fecha_recepcion ?></td>
+                                    <td><?= getFormaPago()[$row->pres_forma_pago] ?></td>
+                                    <td><?= $row->pres_lugar_trabajo ?></td>
+                                    <td><?= getSituacionPresupuesto()[$row->pres_situacion] ?></td>
+                                    <td>
                                         <a title="Aceptar"
                                            href="<?= site_url(array('presupuesto', 'set_acepted', $row->pres_cod)) ?>"
                                            class="btn btn-default btn-sm"><i class="fa fa-check"></i></a>
-                                        <a title="Editar"
-                                           href="<?= site_url(array('presupuesto', 'edit', $row->pres_cod)) ?>"
-                                           class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
-                                        <a title="Eliminar"
-                                           href="<?= site_url(array('presupuesto', 'destroy', $row->pres_cod)) ?>"
-                                           class="btn btn-danger btn-sm"><i class="fa fa-remove"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                        <?php
-                        endforeach;
-                    endif;
+                                        <a title="Rechazar"
+                                           href="<?= site_url(array('presupuesto', 'set_rechazado', $row->pres_cod)) ?>"
+                                           class="btn btn-default btn-sm"><i class="fa fa-close"></i></a>
+                                    </td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm">
+                                            <a title="Editar"
+                                               href="<?= site_url(array('presupuesto', 'edit', $row->pres_cod)) ?>"
+                                               class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
+                                            <a title="Eliminar"
+                                               href="<?= site_url(array('presupuesto', 'destroy', $row->pres_cod)) ?>"
+                                               class="btn btn-danger btn-sm"><i class="fa fa-remove"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <?php
+                            endforeach;
+                        endif;
                     ?>
                     </tbody>
                 </table>

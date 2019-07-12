@@ -89,7 +89,7 @@ BEGIN
 
 	SELECT pres_cod, pres_fecha_emision, pres_fecha_recepcion, pres_forma_pago,
 		   pres_lugar_trabajo, pres_estado, pres_costo_mano_obra, pres_costo_materiales,
-		   pres_costo_total, cli.cli_codigo, cli_razon_social, pres_encargado
+		   pres_costo_total, cli.cli_codigo, cli_razon_social, pres_encargado, pres_situacion
 	FROM presupuesto pre
 		INNER JOIN cliente cli ON pre.cli_codigo = cli.cli_codigo
 	WHERE pre.pres_estado = _pres_estado

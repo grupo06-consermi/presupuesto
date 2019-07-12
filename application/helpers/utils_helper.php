@@ -11,6 +11,24 @@
         return $pagos;
     }
 
+    // Desde el servidor:
+
+    define('PRES_ENVIADO', 1);
+    define('PRES_ACEPTADO', 2);
+    define('PRES_POR_CANCELAR', 3);
+    define('PRES_CANCELADO', 4);
+    define('PRES_ANULADO', 5);
+
+    function getSituacionPresupuesto() {
+        $situacion                      = [];
+        $situacion  [PRES_ENVIADO]      = 'Enviado';
+        $situacion  [PRES_ACEPTADO]     = 'Aceptado';
+        $situacion  [PRES_POR_CANCELAR] = 'Por cancelar';
+        $situacion  [PRES_CANCELADO]    = 'Cancelado';
+        $situacion  [PRES_ANULADO]      = 'Anulado';
+        return $situacion;
+    }
+
     // Entrada: [Y-m-d H:i:s] | Salida: [int]
     function NroMesesEntre($fecha1, $fecha2, $truncate = true) {
         $nro_meses = 0;

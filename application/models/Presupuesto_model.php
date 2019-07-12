@@ -142,7 +142,14 @@
         }
 
         function setAsAceptado($pres_id) {
-            $rs = $this->db->query("UPDATE presupuesto  SET pres_situacion = 2, pres_fecha_recepcion = now() WHERE pres_cod = $pres_id;");
+            $PRES_ACEPTADO = PRES_ACEPTADO;
+
+            $rs = $this->db->query("
+                UPDATE presupuesto 
+                SET pres_situacion = '$PRES_ACEPTADO', 
+                    pres_fecha_recepcion = now() 
+                WHERE pres_cod = '$pres_id';
+            ");
             /*foreach ($this->prod_list as $d) {
                 // descontar stock e indicar reposicion
                 $rs = $this->db->query("
