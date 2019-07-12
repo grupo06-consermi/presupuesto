@@ -25,11 +25,7 @@
             <?php endif ?>
         </div>
         
-        <div class="col-xs-12">
-            <a class="btn btn-success" href="<?= site_url(['ejecucion', 'create']) ?>" style="margin-bottom: 1.3em;">
-                <i class="fa fa-fw fa-plus"></i> Agregar
-            </a>
-        </div>
+        
 
         <div class="col-xs-12">
             <table  class="table table-striped table-bordered">
@@ -60,9 +56,7 @@
                                     <a title="Editar" class="btn btn-primary" href="<?= site_url('ejecucion/edit/'.$row->ord_cod) ?>">
                                         <i class="fa fa-fw fa-pencil"></i>
                                     </a>
-                                    <a title="Eliminar" class="btn btn-danger" href="<?= site_url('ejecucion/destroy/'.$row->ord_cod) ?>">
-                                        <i class="fa fa-fw fa-remove"></i>
-                                    </a>
+                                    
                                     
                                 </div>
                             </td>
