@@ -28,7 +28,8 @@
         }
 
         public function createOn($pres_id, $page) {
-            $this->load->view('ejecuciones/create', compact('pres_id', 'page'));
+            $pres_row = $this->presupuesto_model->getByID($pres_id);
+            $this->load->view('ejecuciones/create', compact('pres_id', 'page', 'pres_row'));
         }
 
         public function edit($id) {

@@ -18,12 +18,27 @@
         <div class="col-xs-12 col-md-offset-2 col-md-6">
             <form enctype="multipart/form-data" class="form-horizontal"
                   action="<?= site_url(array('ejecucion', 'store')) ?>" method="post">
+                <div hidden class="col-xs-12">
+                    <div class="form-group input-group">
+                        <span class="input-group-addon"># Orden:</span>
+                        <input letters="true" required="required" class="form-control" type="text"
+                               name="ord_num_orden">
+                    </div>
+                </div>
                 <div class="col-xs-12">
                     <div class="form-group input-group">
-                        <span class="input-group-addon"># Orden</span>
+                        <span class="input-group-addon">Presupuesto Nº</span>
                         <input <?= $pres_id > 0 ? 'disabled' : ''; ?>
                                 letters="true" required="required" class="form-control" type="text"
-                                value='<?= $pres_id ?>' name="ord_num_orden">
+                                value='<?= PadZero($pres_id, 3) ?>'>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">Cliente</span>
+                        <input disabled letters="true" required="required" class="form-control" type="text"
+                               value='<?= /** @var object $pres_row */
+                                   $pres_row->cli_razon_social; ?>' name="ord_num_orden">
                     </div>
                 </div>
                 <div class="col-xs-12">
