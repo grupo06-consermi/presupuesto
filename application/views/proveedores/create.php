@@ -28,6 +28,7 @@
                         <div class="form-group input-group">
                             <span class="input-group-addon">Ruc</span>
                             <input letters="true" required="required" class="form-control" type="number"
+
                             name="prov_ruc">
                         </div>
                     </div>

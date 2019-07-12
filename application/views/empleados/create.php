@@ -23,7 +23,8 @@
                 <div class="form-group input-group">
                     <span class="input-group-addon">Nombres</span>
                     <input letters="true" required="required" class="form-control" type="text"
-                    minlength="3" maxlength="20" required pattern="[A-Za-z\s]+"
+                           minlength="3" maxlength="30" pattern="[A-Za]{7,20}" title="Solo letras"
+                           style="text-transform: uppercase;"
                      name="emp_nombre">
                 </div>
             </div>
@@ -32,6 +33,8 @@
                 <div class="form-group input-group">
                     <span class="input-group-addon">Apellido Paterno</span>
                     <input letters="true" required="required" class="form-control" type="text"
+                           minlength="3" maxlength="50" pattern="[A-Za]{7,20}" title="Solo letras"
+                           style="text-transform: uppercase;"
                      name="emp_ape_pat">
                 </div>
             </div>
@@ -39,6 +42,8 @@
                 <div class="form-group input-group">
                     <span class="input-group-addon">Apellido Materno</span>
                     <input letters="true" required="required" class="form-control" type="text"
+                           minlength="3" maxlength="50" pattern="[A-Za]{7,20}" title="Solo letras"
+                           style="text-transform: uppercase;"
                      name="emp_ape_mat">
                 </div>
             </div>
@@ -46,6 +51,8 @@
                 <div class="form-group input-group">
                     <span class="input-group-addon">Direccion</span>
                     <input letters="true" required="required" class="form-control" type="text"
+                    minlength="7" maxlength="20" pattern="[A-Za-z0-9]{7,20}" title="Solo letras y Numeros"
+                     style="text-transform: uppercase;"
                      name="emp_direccion">
                 </div>
             </div>
