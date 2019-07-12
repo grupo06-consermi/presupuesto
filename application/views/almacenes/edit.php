@@ -18,6 +18,9 @@
                 <div class="form-group input-group">
                     <span class="input-group-addon">Nombre</span>
                     <input letters="true" required="required" class="form-control" type="text" 
+                    minlength="7" maxlength="9" pattern="[A-Za-z0-9]{7,9}"  title="Solo letras y Numeros"
+                    style="text-transform: uppercase;"
+                    onkeyup="this.value=NumText(this.value)"
                      name="alm_nombre" value="<?=$almacen->alm_nombre?>">
                 </div>
             </div>
@@ -25,6 +28,8 @@
                 <div class="form-group input-group">
                     <span class="input-group-addon">Direccion</span>
                     <input letters="true" required="required" class="form-control" type="text" 
+                    minlength="3" maxlength="50" title="Escriba su direccion min 10 caracteres"
+                    onkeyup="this.value=NumText(this.value)"
                      name="alm_direccion" value="<?=$almacen->alm_direccion?>">
                 </div>
             </div>
@@ -46,3 +51,17 @@
         </form>
     </div>
 </div>
+
+<script>
+function NumText(string){//solo letras y numeros
+    var out = '';
+    //Se añaden las letras validas
+    var filtro = 'abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ1234567890/';//Caracteres validos
+	
+    for (var i=0; i<string.length; i++)
+       if (filtro.indexOf(string.charAt(i)) != -1) 
+	     out += string.charAt(i);
+    return out;
+}
+</script>
+

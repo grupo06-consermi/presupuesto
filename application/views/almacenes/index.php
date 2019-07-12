@@ -29,6 +29,9 @@
             <a class="btn btn-success" href="<?= site_url(['almacen', 'create']) ?>" style="margin-bottom: 1.3em;">
                 <i class="fa fa-fw fa-plus"></i> Agregar
             </a>
+            <a href='<?php echo site_url('producto') ?>' style="margin-bottom: 1.3em;" class='btn btn-danger' id='btnCancelar'>Regresar 
+            <i class="fa fa-mail-reply"></i>
+            </a>
         </div>
 
         <div class="col-xs-12">

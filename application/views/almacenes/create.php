@@ -22,8 +22,10 @@
              <div class="col-xs-12">
                 <div class="form-group input-group">
                     <span class="input-group-addon">Nombre</span>
-                    <input letters="true" required="required" class="form-control" type="text"
-                     name="alm_nombre">
+                    <input letters="true" required="required" class="form-control" type="text" 
+                    minlength="7" maxlength="9" pattern="[A-Za-z0-9]{7,9}"  title="Solo letras y Numeros"
+                    style="text-transform: uppercase;"
+                    name="alm_nombre">
                 </div>
             </div>
 
