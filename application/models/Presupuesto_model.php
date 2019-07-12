@@ -17,8 +17,8 @@
         var $prod_list;
         var $emp_list;
 
-        public function getByID($usu_cod) {
-            $query  = $this->db->query("CALL pa_presupuesto_getByID(?)", [$usu_cod]);
+        public function getByID($pres_cod) {
+            $query  = $this->db->query("CALL pa_presupuesto_getByID(?)", [$pres_cod]);
             $result = $query->result();
             $this->db->next_result();
             return $result[0];

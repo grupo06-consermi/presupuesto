@@ -117,6 +117,8 @@
                             <i class="fa fa-fw fa-save"></i> Guardar
                         </button>
                         <a href='<?php echo site_url($page) ?>' class='btn btn-danger' id='btnCancelar'>Cancelar</a>
+                        <a href='<?php echo site_url(['presupuesto', 'create_pdf', $pres_id]) ?>' class='btn btn-danger'
+                           id='btnCancelar'>Enviar PDF</a>
                     </div>
                 </div>
             </form>

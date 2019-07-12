@@ -12,9 +12,13 @@
         public function __construct() {
             parent::__construct();
             verificarLogin();
-            $this->load->view('index/header');
-            $this->load->view('index/menu');
 
+            if ($this->router->method != 'create_pdf') {
+                $this->load->view('index/header');
+                $this->load->view('index/menu');
+            }
+
+            $this->load->helper('pdf_helper');
             $this->load->model('presupuesto_model');
             $this->load->model('producto_model');
             $this->load->model('cliente_model');
@@ -79,5 +83,10 @@
             $this->presupuesto_model->setAsAceptado($pres_id);
             $records = $this->presupuesto_model->listar();
             $this->load->view('presupuesto/index', compact('records'));
+        }
+
+        public function create_pdf($pres_id) {
+            $pres = $this->presupuesto_model->getByID($pres_id);
+            $this->load->view('presupuesto/presupuesto_pdf', compact('pres'));
         }
     }

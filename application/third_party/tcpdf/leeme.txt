@@ -1,0 +1,4 @@
+libreria TCPDF (min)
+- tcpdf_min 6.2.12 (version peso mínimo, sin fonts adicionales)
+- descargado de: https://sourceforge.net/projects/tcpdf/files/
+- modificado con correcciones (11:14 p.m. 07/03/2016)
