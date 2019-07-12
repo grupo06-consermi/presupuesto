@@ -2,7 +2,6 @@
     <div class="callout callout-info">
         <h2>Presupuestos</h2>
     </div>
-
     <div class="row">
         <div class="col-xs-12">
             <a href="<?= site_url(['presupuesto', 'create']) ?>" class="btn btn-success" style="margin-bottom:1.3em;">

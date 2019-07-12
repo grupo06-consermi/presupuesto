@@ -320,6 +320,8 @@ var Presupuesto = function () {
                 console.log("Error: " + XMLHttpRequest + ' ' + textStatus + ' ' + errorThrown);
             }
         }).done(function (data) {
+            console.log(data);
+
             if (data > 0) {
                 alert('Guardado correcto');
                 if ($('#pres_cod').val() > 0) {

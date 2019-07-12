@@ -14,7 +14,7 @@
             parent::__construct();
             verificarLogin();
 
-            if ($this->router->method != 'create_pdf') {
+            if ($this->router->method != 'create_pdf' && $this->router->method != 'guardar') {
                 $this->load->view('index/header');
                 $this->load->view('index/menu');
             }

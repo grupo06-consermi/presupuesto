@@ -36,7 +36,7 @@
                             <li><a href="<?= site_url(array('ejecucion')) ?>">Orden de Ejecucion</a></li>
                             <li><a href="<?= site_url(array('conformidad')) ?>">Orden de Conformidad</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#">Compras</a></li>
+                            <li><a href="<?= site_url(array('compra', 'listar')) ?>">Compras</a></li>
 
                         </ul>
                     </li>
