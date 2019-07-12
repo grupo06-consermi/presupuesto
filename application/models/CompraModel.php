@@ -50,12 +50,12 @@
                 ]);
             }
 
-            $query    = $this->db->query("
+         /*   $query    = $this->db->query("
                 UPDATE producto
                     
                 SET prod_stock = prod_stock+1;
             
-            ");
+            ");*/
 
 
             return $comp_cod;
