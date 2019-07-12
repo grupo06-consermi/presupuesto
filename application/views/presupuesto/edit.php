@@ -170,7 +170,10 @@
                                         <td>
                                             <button type="button" class="btn btn-sm btn-primary"
                                                     onclick="Presupuesto.edit_producto('<?= $i ?>')"><i
-                                                        class="fa fa-edit_producto"></i></button>
+                                                        class="fa fa-edit "></i></button>
+                                            <button type="button" class="btn btn-sm btn-primary"
+                                                    onclick="Presupuesto.remove_producto('<?= $i ?>')"><i
+                                                        class="fa fa-edit"></i></button>
                                         <td>
                                     </tr>
                                 <?php } ?>
@@ -215,7 +218,10 @@
                                         <td>
                                             <button type="button" class="btn btn-sm btn-primary"
                                                     onclick="Presupuesto.edit_empleado('<?= $i ?>')"><i
-                                                        class="fa fa-edit_producto"></i></button>
+                                                        class="fa fa-edit"></i></button>
+                                            <button type="button" class="btn btn-sm btn-danger"
+                                                    onclick="Presupuesto.remove_empleado('<?= $i ?>')"><i
+                                                        class="fa fa-edit"></i></button>
                                         <td>
                                     </tr>
                                 <?php } ?>
