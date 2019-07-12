@@ -1,4 +1,5 @@
 <?php
+    /** @var object $presupuestos */
     $pres_id = IssetOr($pres_id, 0);
     $page    = IssetOr($page, 'ejecucion');
 ?>
@@ -18,13 +19,6 @@
         <div class="col-xs-12 col-md-offset-2 col-md-6">
             <form enctype="multipart/form-data" class="form-horizontal"
                   action="<?= site_url(array('ejecucion', 'store')) ?>" method="post">
-                <div hidden class="col-xs-12">
-                    <div class="form-group input-group">
-                        <span class="input-group-addon"># Orden:</span>
-                        <input letters="true" required="required" class="form-control" type="text"
-                               name="ord_num_orden">
-                    </div>
-                </div>
                 <div class="col-xs-12">
                     <div class="form-group input-group">
                         <span class="input-group-addon">Presupuesto Nº</span>
@@ -35,16 +29,30 @@
                 </div>
                 <div class="col-xs-12">
                     <div class="form-group input-group">
-                        <span class="input-group-addon">Cliente</span>
-                        <input disabled letters="true" required="required" class="form-control" type="text"
-                               value='<?= /** @var object $pres_row */
-                                   $pres_row->cli_razon_social; ?>' name="ord_num_orden">
+                        <span class="input-group-addon">Presupuesto cod</span>
+                        <input letters="true" required class="form-control" type="text"
+                               value='<?= $pres_id ?>' name="pres_cod">
                     </div>
                 </div>
                 <div class="col-xs-12">
                     <div class="form-group input-group">
+                        <span class="input-group-addon">Cliente</span>
+                        <input disabled letters="true" required="required" class="form-control" type="text"
+                               value='<?= /** @var object $pres_row */
+                                   $pres_row->cli_razon_social; ?>'>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="form-group input-group">
+                        <span class="input-group-addon"># Orden:</span>
+                        <input letters="true" required="required" class="form-control" type="text"
+                               name="ord_num_orden">
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div hidden class="form-group input-group">
                         <span class="input-group-addon">Fecha</span>
-                        <input letters="true" required="required" class="form-control" type="date"
+                        <input letters="true" class="form-control" type="date"
                                name="ord_fecha">
                     </div>
                 </div>
@@ -55,7 +63,6 @@
                                name="ord_odm">
                     </div>
                 </div>
-
                 <div class="col-xs-12">
                     <div class="form-group input-group">
                         <span class="input-group-addon">Emisor</span>
@@ -63,37 +70,21 @@
                                name="ord_emisor">
                     </div>
                 </div>
-
                 <div class="col-xs-12">
-                    <div class="form-group input-group">
-                        <span class="input-group-addon">Presupuesto</span>
-                        <select name="pres_cod" class="form-control">
-                            <option>-- SELECCIONE --</option>
-                            <?php foreach ($presupuestos as $presupuesto): ?>
-                                <option value="<?= $presupuesto->pres_cod ?>"><?= $presupuesto->pres_cod ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="col-xs-12">
-                    <div class="form-group input-group">
+                    <div hidden class="form-group input-group">
                         <span class="input-group-addon">Estado</span>
                         <select class="form-control" name="ord_estado">
-                            <option value="1">Activo</option>
+                            <option value="1" selected>Activo</option>
                             <option value="0">Inactivo</option>
                         </select>
                     </div>
                 </div>
-
-
                 <div class="col-xs-12">
                     <div class="form-group">
                         <button class="btn btn-success" type="submit">
                             <i class="fa fa-fw fa-save"></i> Guardar
                         </button>
-                        <a href='<?php echo site_url($page) ?>' class='btn btn-danger id='
-                           btnCancelar'>Cancelar</a>
+                        <a href='<?php echo site_url($page) ?>' class='btn btn-danger' id='btnCancelar'>Cancelar</a>
                     </div>
                 </div>
             </form>
