@@ -97,7 +97,7 @@ var Presupuesto = function () {
         var producto = $('#cod_prod', form);
         var precio   = $('#precio', form);
         var cantidad = $('#cantidad', form);
-        var importe  = toFloat(precio.val()) * toFloat(cantidad.val());
+        var importe  = (toFloat(precio.val()) * toFloat(cantidad.val())).toFixed(2);
         var action   = $('#action');
 
         if (form.validate().errorList.length === 0) {
@@ -169,7 +169,7 @@ var Presupuesto = function () {
         var emp_codigo = $('#emp_codigo', form);
         var pago_dia   = $('#aemp_pago_dia', form);
         var tiempo     = $('#aemp_cantidad_dias', form);
-        var importe    = toFloat(pago_dia.val()) * toFloat(tiempo.val());
+        var importe    = (toFloat(pago_dia.val()) * toFloat(tiempo.val())).toFixed(2);
         var action     = $('#action', form);
 
         if (form.validate().errorList.length === 0) {

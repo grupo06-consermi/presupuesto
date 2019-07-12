@@ -18,7 +18,7 @@
 
         public function getDetalles($comp_cod) {
             $query  = $this->db->query("CALL pa_compra_getDetalle($comp_cod)", ["$comp_cod"]);
-            $result = $query->result_array();
+            $result = $query->result();
             $this->db->next_result();
             return $result;
         }
@@ -41,22 +41,21 @@
             $comp_cod = $query->result_array()[0]['comp_cod'];
 
             foreach ($this->detalles as $cdet) {
-                $result = $this->db->query('pa_compra_detalle_insert', [
+                $result = $this->db->query('CALL pa_compra_detalle_insert(?,?,?,?,?)', [
                     $comp_cod,
-                    $cdet['prod_cod'],
-                    $cdet['cdet_cantidad'],
-                    $cdet['cdet_total'],
-                    $cdet['cdet_importe']
+                    $cdet['codigo'],
+                    $cdet['cantidad'],
+                    $cdet['precio'],
+                    $cdet['total']
                 ]);
             }
 
-         /*   $query    = $this->db->query("
-                UPDATE producto
-                    
-                SET prod_stock = prod_stock+1;
-            
-            ");*/
+            /* $query = $this->db->query("
+                 UPDATE producto
 
+                 SET prod_stock = prod_stock+1;
+
+             ");*/
 
             return $comp_cod;
         }

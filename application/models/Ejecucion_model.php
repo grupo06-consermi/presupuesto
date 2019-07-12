@@ -43,8 +43,8 @@
                 $pres_cod
             ]);
 
-            $query = $this->db->query("SELECT * FROM actividad WHERE pres_cod = '$pres_cod'");
-            $result = $query->result()[0];
+            $query   = $this->db->query("SELECT * FROM actividad WHERE pres_cod = '$pres_cod'");
+            $result  = $query->result()[0];
             $act_cod = $result->act_cod;
 
             $this->db->query("

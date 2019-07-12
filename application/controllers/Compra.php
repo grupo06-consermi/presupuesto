@@ -31,12 +31,18 @@
             $this->CompraModel->prov_cod         = $this->input->post('prov_cod');
             $this->CompraModel->comp_fecha       = $this->input->post('comp_fecha');
             $this->CompraModel->comp_costo_total = $this->input->post('comp_costo_total');
+            $this->CompraModel->detalles         = json_decode($_POST['prod_list'], true);
 
             if ($this->CompraModel->comp_cod == 0) {
                 echo $this->CompraModel->insertar();
             } else {
                 echo $this->CompraModel->update();
             }
+        }
+
+        public function detalles($comp_id) {
+            $compdet_list = $this->CompraModel->getDetalles($comp_id);
+            $this->load->view('compra/detalles', compact('compdet_list', 'comp_id'));
         }
 
         public function Listar() {

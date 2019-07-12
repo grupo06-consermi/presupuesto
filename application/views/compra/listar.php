@@ -37,8 +37,8 @@
                         <th>Cód</th>
                         <th>Proveedor</th>
                         <th>Fecha</th>
+                        <th>Detalles</th>
                         <th>Total</th>
-                        <th hidden>Detalles</th>
                         <th>Acciones</th>
                     </tr>
                     </thead>
@@ -53,13 +53,13 @@
                                 <td><?= $row->comp_cod ?></td>
                                 <td><?= $row->prov_razon_social ?></td>
                                 <td><?= $row->comp_fecha ?></td>
-                                <td hidden><a title="Ver detalles"
+                                <td><a title="Ver detalles"
                                        href="<?= site_url(array('compra', 'detalles', $row->comp_cod)) ?>"
                                        class="btn btn-primary btn-sm"><i class="fa fa-eye"></i>Detalles</a></td>
                                 <td><?= $row->comp_costo_total ?></td>
                                 <td>
                                     <div class="btn-group btn-group-sm">
-                                        <a hidden title="Editar"
+                                        <a title="Editar"
                                            href="<?= site_url(array('compra', 'registrar', $row->comp_cod)) ?>"
                                            class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
                                         <a title="Eliminar"

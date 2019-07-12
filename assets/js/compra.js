@@ -186,6 +186,9 @@ var Compra = function () {
         form_data.append('comp_costo_total', $('#comp_costo_total').val());
         form_data.append('prod_list', JSON.stringify(comp_prod_list));
 
+        console.log(comp_prod_list);
+
+
         $.ajax({
             url        : url,
             type       : 'POST',
@@ -196,6 +199,8 @@ var Compra = function () {
                 console.log("Error: " + XMLHttpRequest + ' ' + textStatus + ' ' + errorThrown);
             }
         }).done(function (data) {
+
+            console.log(data);
             if (data > 0) {
                 alert('Guardado correcto');
                 if ($('#comp_cod').val() > 0) {

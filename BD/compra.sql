@@ -32,7 +32,8 @@ CREATE PROCEDURE pa_compra_getDetalle(
     IN _comp_cod int(11)
 )
 BEGIN
-    SELECT com.comp_cod, pro.prod_cod, cdet_cantidad, cdet_total, cdet_importe
+    SELECT com.comp_cod, pro.prod_cod, pro.prod_nombre_comercial,
+           cdet_cantidad, cdet_total, cdet_importe
     FROM compra_detalle cdet
              INNER JOIN compra com ON cdet.comp_cod = com.comp_cod
              INNER JOIN producto pro ON cdet.prod_cod = pro.prod_cod
