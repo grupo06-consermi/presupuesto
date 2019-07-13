@@ -30,6 +30,8 @@
                     <div class="form-group input-group">
                         <span class="input-group-addon">Nombre:</span>
                         <input letters="true" required="required" class="form-control" type="text"
+                               minlength="4" maxlength="50" onkeyup="this.value=NumText(this.value)"  title="Solo letras minimo 7 letras"
+                               style="text-transform: uppercase;"
                                name="prod_descripcion">
                     </div>
                 </div>
@@ -72,13 +74,17 @@
                 <div class="col-xs-12">
                     <div class="form-group input-group">
                         <span class="input-group-addon">Stock:</span>
-                        <input required="required" class="form-control" type="number" name="prod_stock">
+                        <input required="required" class="form-control" type="number"
+                               min="1" pattern="^[0-9]+"
+                               name="prod_stock">
                     </div>
                 </div>
                 <div class="col-xs-12">
                     <div class="form-group input-group">
                         <span class="input-group-addon">Stock minimo:</span>
-                        <input required="required" class="form-control" type="number" name="prod_stock_min">
+                        <input required="required" class="form-control" type="number"
+                               min="1" pattern="^[0-9]+"
+                               name="prod_stock_min">
 
                     </div>
                 </div>
@@ -122,3 +128,16 @@
             </form>
         </div>
     </div>
+
+    <script>
+        function NumText(string){//solo letras y numeros
+            var out = '';
+            //Se añaden las letras validas
+            var filtro = 'abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ';//Caracteres validos
+
+            for (var i=0; i<string.length; i++)
+                if (filtro.indexOf(string.charAt(i)) != -1)
+                    out += string.charAt(i);
+            return out;
+        }
+    </script>

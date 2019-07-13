@@ -39,6 +39,7 @@
                     <div class="form-group input-group">
                         <span class="input-group-addon">Fecha Inicio</span>
                         <input letters="true" required="required" class="form-control" type="date"
+                               min="2019-06-26" max="2020-06-26"
                                name="conf_fecha_inicio">
                     </div>
                 </div>
@@ -46,6 +47,7 @@
                     <div class="form-group input-group">
                         <span class="input-group-addon">Fecha Fin</span>
                         <input letters="true" required="required" class="form-control" type="date"
+                               min="2019-06-26" max="2020-06-26"
                                name="conf_fecha_fin">
                     </div>
                 </div>

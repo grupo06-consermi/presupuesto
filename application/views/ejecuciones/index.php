@@ -34,7 +34,6 @@
                     <th>Emisor</th>
                     <th># Presupuesto</th>
                     <th>Estado</th>
-                    <th>Acciones</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -50,16 +49,7 @@
                                 '<i class="fa fa-fw fa-remove"></i>' ?></td>
 
 
-                        <td>
-                            <div class="btn-group btn-group-sm">
-                                <a title="Editar" class="btn btn-primary"
-                                   href="<?= site_url('ejecucion/edit/'.$row->ord_cod) ?>">
-                                    <i class="fa fa-fw fa-pencil"></i>
-                                </a>
 
-
-                            </div>
-                        </td>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>
@@ -71,4 +61,18 @@
     </div>
 
 </div>
+
+<script>
+    $(document).ready(function () {
+        $('.table').DataTable({
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json'
+            },
+            dom     : 'Bfrtip',
+            buttons : [
+                'excel', 'pdf', 'print'
+            ]
+        });
+    });
+</script>
 

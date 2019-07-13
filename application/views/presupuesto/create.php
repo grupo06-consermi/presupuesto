@@ -54,6 +54,7 @@
                                     <i class="fa fa-calendar"></i>
                                 </div>
                                 <input required id="fecha_emision" name="fecha_emision" type="date"
+                                       min="2019-06-26" max="2020-06-26"
                                        class="form-control">
                             </div>
                         </div>
@@ -66,6 +67,7 @@
                                     <i class="fa fa-calendar"></i>
                                 </div>
                                 <input required id="fecha_recepcion" name="fecha_recepcion" type="date"
+                                       min="2019-06-26" max="2020-06-26"
                                        class="form-control">
                             </div>
                         </div>

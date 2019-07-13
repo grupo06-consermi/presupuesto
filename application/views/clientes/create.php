@@ -20,6 +20,7 @@
                     <div class="form-group input-group">
                         <span class="input-group-addon">Razon Social</span>
                         <input letters="true" required="required" class="form-control" type="text"
+                               onkeyup="this.value=NumText(this.value)"
                                name="cli_razon_social">
                     </div>
                 </div>
@@ -28,7 +29,7 @@
                     <div class="form-group input-group">
                         <span class="input-group-addon">R.U.C</span>
                         <input letters="true" required="required" class="form-control" type="number"
-                               min="7" max="11" pattern="[z0-9]{7,9}"
+                               min="11" max="11" pattern="[z0-9]{7,9}"
                                name="cli_ruc">
                     </div>
                 </div>
@@ -43,6 +44,7 @@
                     <div class="form-group input-group">
                         <span class="input-group-addon">Telefono</span>
                         <input letters="true" required="required" class="form-control" type="text"
+                               minlength="9" maxlength="9" min="900000000" max="999999999" pattern="^[0-9]+"
                                name="cli_telefono">
                     </div>
                 </div>
@@ -69,3 +71,16 @@
 
 
     </div>
+
+    <script>
+        function NumText(string){//solo letras y numeros
+            var out = '';
+            //Se añaden las letras validas
+            var filtro = 'abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ';//Caracteres validos
+
+            for (var i=0; i<string.length; i++)
+                if (filtro.indexOf(string.charAt(i)) != -1)
+                    out += string.charAt(i);
+            return out;
+        }
+    </script>

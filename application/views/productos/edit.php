@@ -75,28 +75,36 @@
             <div class="col-xs-12">
                 <div class="form-group input-group">
                     <span class="input-group-addon">Stock</span>
-                    <input required="required" class="form-control" type="number" name="prod_stock"
+                    <input required="required" class="form-control" type="number"
+                           min="1" pattern="^[0-9]+"
+                           name="prod_stock"
                            value="<?= $producto->prod_stock ?>">
                 </div>
             </div>
             <div class="col-xs-12">
                 <div class="form-group input-group">
                     <span class="input-group-addon">Stock minimo:</span>
-                    <input required="required" class="form-control" type="number" name="prod_stock_min"
+                    <input required="required" class="form-control" type="number"
+                           min="1" pattern="^[0-9]+"
+                           name="prod_stock_min"
                            value="<?= $producto->prod_stock_min ?>">
                 </div>
             </div>
             <div class="col-xs-12">
                 <div class="form-group input-group">
                     <span class="input-group-addon">Precio Venta</span>
-                    <input required="required" class="form-control" type="number" name="prod_precio_venta"
+                    <input required="required" class="form-control" type="number"
+                           min="1" pattern="^[0-9]+" step="0.01"
+                           name="prod_precio_venta"
                            value="<?= $producto->prod_precio_venta ?>">
                 </div>
             </div>
             <div class="col-xs-12">
                 <div class="form-group input-group">
                     <span class="input-group-addon">Precio Compra</span>
-                    <input required="required" class="form-control" type="number" name="prod_precio_compra"
+                    <input required="required" class="form-control" type="number"
+                           min="1" pattern="^[0-9]+" step="0.01"
+                           name="prod_precio_compra"
                            value="<?= $producto->prod_precio_compra ?>">
                 </div>
             </div>

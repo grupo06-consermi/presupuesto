@@ -54,6 +54,7 @@
                     <div class="form-group input-group">
                         <span class="input-group-addon">Fecha</span>
                         <input letters="true" class="form-control" type="date"
+                        min="2019-06-26" max="2020-06-26"
                                name="ord_fecha">
                     </div>
                 </div>

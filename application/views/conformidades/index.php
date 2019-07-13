@@ -25,11 +25,7 @@
             <?php endif ?>
         </div>
         
-        <div class="col-xs-12">
-            <a class="btn btn-success" href="<?= site_url(['conformidad', 'create']) ?>" style="margin-bottom: 1.3em;">
-                <i class="fa fa-fw fa-plus"></i> Agregar
-            </a>
-        </div>
+
 
         <div class="col-xs-12">
             <table  class="table table-striped table-bordered">
@@ -74,3 +70,16 @@
     
 </div>
 
+<script>
+    $(document).ready(function () {
+        $('.table').DataTable({
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json'
+            },
+            dom     : 'Bfrtip',
+            buttons : [
+                'excel', 'pdf', 'print'
+            ]
+        });
+    });
+</script>
