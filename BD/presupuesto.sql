@@ -190,7 +190,7 @@ BEGIN
                      pres_costo_materiales,
                      pres_costo_total,
                      cli_codigo,
-                     pres_encargado)
+                     pres_encargado, pres_situacion)
     VALUES
     (now(),
      '',
@@ -202,7 +202,8 @@ BEGIN
      _pres_costo_materiales,
      _pres_costo_total,
      _cli_codigo,
-     _pres_encargado);
+     _pres_encargado, 0);
+    -- 0: situacion: nuevo
     SET _pres_cod = LAST_INSERT_ID();
     UPDATE presupuesto SET pres_hash_emision = md5(_pres_cod) WHERE pres_cod = _pres_cod;
 END $$

@@ -6,7 +6,7 @@
         <div class="col-xs-12">
             <a href="<?= site_url(['presupuesto', 'create']) ?>" class="btn btn-success" style="margin-bottom:1.3em;">
                 <i class="fa fa-plus"></i>
-                <span>Agregar</span>
+                <span>Crear presupuesto</span>
             </a>
         </div>
         <div class="col-xs-12">
@@ -63,18 +63,29 @@
                                     <td><?= $row->pres_lugar_trabajo ?></td>
                                     <td><?= getSituacionPresupuesto()[$row->pres_situacion] ?></td>
                                     <td>
-                                        <a title="Aceptar"
-                                           href="<?= site_url(array('presupuesto', 'set_acepted', $row->pres_cod)) ?>"
-                                           class="btn btn-default btn-sm"><i class="fa fa-check"></i> Aceptar</a>
-                                        <a title="Ejecutar"
-                                           href="<?= site_url(array('ejecucion', 'createOn', $row->pres_cod, 'presupuesto')) ?>"
-                                           class="btn btn-default btn-sm"><i class="fa fa-play"></i> Ejecutar</a>
-                                        <a title="Ejecutar"
-                                           href="<?= site_url(array('conformidad', 'createOn', $row->pres_cod, 'presupuesto')) ?>"
-                                           class="btn btn-default btn-sm"><i class="fa fa-sticky-note"></i> Conformidad</a>
-                                        <a title="Rechazar"
-                                           href="<?= site_url(array('presupuesto', 'set_rechazado', $row->pres_cod)) ?>"
-                                           class="btn btn-default btn-sm"><i class="fa fa-close"></i> Rechazar</a>
+                                        <?php if ($row->pres_situacion == PRES_NUEVO) { ?>
+
+                                            <a title="Aceptar"
+                                               href="<?= site_url(array('presupuesto', 'set_acepted', $row->pres_cod)) ?>"
+                                               class="btn btn-default btn-sm"><i class="fa fa-check"></i> Aceptar</a>
+                                        <?php } elseif ($row->pres_situacion == PRES_ACEPTADO) { ?>
+                                            <a title="Ejecutar"
+                                               href="<?= site_url(array('ejecucion', 'createOn', $row->pres_cod, 'presupuesto')) ?>"
+                                               class="btn btn-default btn-sm"><i class="fa fa-play"></i> Ejecutar</a>
+                                        <?php } elseif ($row->pres_situacion == PRES_EN_EJECUCION) { ?>
+                                            <a title="Ejecutar"
+                                               href="<?= site_url(array('conformidad', 'createOn', $row->pres_cod, 'presupuesto')) ?>"
+                                               class="btn btn-default btn-sm"><i class="fa fa-sticky-note"></i>
+                                                Conformidad</a>
+                                        <?php } ?>
+
+
+                                        <?php if ($row->pres_situacion != PRES_ANULADO) { ?>
+                                            <a title="Rechazar"
+                                               href="<?= site_url(array('presupuesto', 'set_rechazado', $row->pres_cod)) ?>"
+                                               class="btn btn-default btn-sm"><i class="fa fa-close"></i> Rechazar</a>
+                                        <?php } ?>
+
                                     </td>
                                     <td>
                                         <div class="btn-group btn-group-sm">

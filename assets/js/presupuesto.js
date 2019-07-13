@@ -100,6 +100,10 @@ var Presupuesto = function () {
         var importe  = (toFloat(precio.val()) * toFloat(cantidad.val())).toFixed(2);
         var action   = $('#action');
 
+        if (toInteger(producto.val()) === 0) {
+            return;
+        }
+
         if (form.validate().errorList.length === 0) {
             var trElement;
             if (action.val() === 'new') {
@@ -171,6 +175,10 @@ var Presupuesto = function () {
         var tiempo     = $('#aemp_cantidad_dias', form);
         var importe    = (toFloat(pago_dia.val()) * toFloat(tiempo.val())).toFixed(2);
         var action     = $('#action', form);
+
+        if (toInteger(emp_codigo.val()) === 0) {
+            return;
+        }
 
         if (form.validate().errorList.length === 0) {
             var trElement;
