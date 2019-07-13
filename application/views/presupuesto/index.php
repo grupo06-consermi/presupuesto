@@ -63,7 +63,6 @@
                                     <td><?= $row->pres_lugar_trabajo ?></td>
                                     <td><?= getSituacionPresupuesto()[$row->pres_situacion] ?></td>
                                     <td>
-
                                         <a title="Aceptar"
                                            href="<?= site_url(array('presupuesto', 'set_acepted', $row->pres_cod)) ?>"
                                            class="btn btn-default btn-sm"><i class="fa fa-check"></i> Aceptar</a>

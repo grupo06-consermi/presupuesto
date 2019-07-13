@@ -1,10 +1,13 @@
-
 <div  style='padding: 1.5em;'>
     <div class="callout callout-info">
         <h2>Lista de Conformidades</h2>
     </div>
-
     <div class="row">
+        <div class="col-xs-12">
+            <a class="btn btn-success" href="<?= site_url(['conformidad', 'create']) ?>" style="margin-bottom: 1.3em;">
+                <i class="fa fa-fw fa-plus"></i> Agregar
+            </a>
+        </div>
         <div class="col-xs-12">
             <?php if ($this->session->flashdata('correcto')): ?>
             <div class="alert alert-success alert-dismissible fade in" role="alert">
@@ -24,13 +27,6 @@
             </div>
             <?php endif ?>
         </div>
-        
-        <div class="col-xs-12">
-            <a class="btn btn-success" href="<?= site_url(['conformidad', 'create']) ?>" style="margin-bottom: 1.3em;">
-                <i class="fa fa-fw fa-plus"></i> Agregar
-            </a>
-        </div>
-
         <div class="col-xs-12">
             <table  class="table table-striped table-bordered">
                 <thead>
