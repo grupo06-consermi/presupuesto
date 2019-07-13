@@ -1,5 +1,3 @@
-
-
 <script src="<?= base_url(); ?>assets/js/utils.js"></script>
 <?php
     /** @var object $prod_list */
@@ -270,19 +268,29 @@
                 <hr>
 
             </form>
-            <div>Al aceptar, está expresando su conformidad con el presupuesto. En caso Ud. acepte nos comunicaremos
+            <div hidden>
+                Al aceptar, está expresando su conformidad con el presupuesto. En caso Ud. acepte nos comunicaremos
                 con Ud. para proseguir con la ejecución de este presupuesto.
             </div>
         </div>
         <div class="panel-footer" style='text-align: center;'>
-            <button data-callback="Presupuesto.save_presupuesto('<?= site_url('presupuesto/guardar'); ?>')"
+            <button hidden data-callback="Presupuesto.save_presupuesto('<?= site_url('presupuesto/guardar'); ?>')"
                     data-target="#frm-presupuesto" role="submit" class="btn btn-primary">
                 <i class="fa fa-check"></i>
                 <span>Aceptar el presupuesto</span>
             </button>
+            <a href='<?php echo site_url(['ejecucion', 'create_pdf', $pres_row->pres_cod]) ?>' class='btn btn-primary'
+               id='btnCancelar'>Generar PDF</a>
+
+            <?php if (file_exists(APPPATH."documentos/presupuesto_$pres_row->pres_cod.pdf")) { ?>
+                <a href='<?php echo site_url(['ejecucion', 'send_pdf', $pres_row->pres_cod]) ?>'
+                   class='btn btn-primary'
+                   id='btnCancelar'>Enviar PDF</a>
+                <span> <?= isset($rpta) ? $rpta : ''; ?> </span>
+            <?php } ?>
             <a href="<?= site_url('presupuesto') ?>" class="btn btn-default">
-                <i class="fa fa-close"></i>
-                <span>Rechazar el presupuesto</span>
+                <i class="fa fa-backward"></i>
+                <span>Atras</span>
             </a>
         </div>
     </div>

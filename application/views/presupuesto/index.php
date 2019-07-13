@@ -85,12 +85,18 @@
                                     </td>
                                     <td>
                                         <div class="btn-group btn-group-sm">
-                                            <a title="Editar"
-                                               href="<?= site_url(array('presupuesto', 'edit', $row->pres_cod)) ?>"
-                                               class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
-                                            <a title="Eliminar"
-                                               href="<?= site_url(array('presupuesto', 'destroy', $row->pres_cod)) ?>"
-                                               class="btn btn-danger btn-sm"><i class="fa fa-remove"></i></a>
+                                            <?php if ($row->pres_situacion == PRES_NUEVO) { ?>
+                                                <a title="Editar"
+                                                   href="<?= site_url(array('presupuesto', 'edit', $row->pres_cod)) ?>"
+                                                   class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
+                                                <a title="Eliminar"
+                                                   href="<?= site_url(array('presupuesto', 'destroy', $row->pres_cod)) ?>"
+                                                   class="btn btn-danger btn-sm"><i class="fa fa-remove"></i></a>
+                                            <?php } else { ?>
+                                                <a title="Ver"
+                                                   href="<?= site_url(array('presupuesto', 'show', $row->pres_cod)) ?>"
+                                                   class="btn btn-warning btn-sm"><i class="fa fa-eye"></i></a>
+                                            <?php } ?>
                                         </div>
                                     </td>
                                 </tr>
