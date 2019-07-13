@@ -62,6 +62,14 @@
                 WHERE pre_cod = $pres_cod;
             ");
 
+            $PRES_EN_EJECUCION = PRES_EN_EJECUCION;
+
+            $this->db->query("
+                UPDATE presupuesto
+                SET pres_situacion = '$PRES_EN_EJECUCION'
+                WHERE pres_cod = '$pres_cod';            
+            ");
+
             /*foreach ($this->prod_list as $d) {
              // descontar stock e indicar reposicion
              $rs = $this->db->query("

@@ -64,7 +64,6 @@
                                     <td><?= getSituacionPresupuesto()[$row->pres_situacion] ?></td>
                                     <td>
                                         <?php if ($row->pres_situacion == PRES_NUEVO) { ?>
-
                                             <a title="Aceptar"
                                                href="<?= site_url(array('presupuesto', 'set_acepted', $row->pres_cod)) ?>"
                                                class="btn btn-default btn-sm"><i class="fa fa-check"></i> Aceptar</a>
@@ -78,8 +77,7 @@
                                                class="btn btn-default btn-sm"><i class="fa fa-sticky-note"></i>
                                                 Conformidad</a>
                                         <?php } ?>
-
-                                        <?php if ($row->pres_situacion != PRES_ANULADO) { ?>
+                                        <?php if ($row->pres_situacion == PRES_NUEVO) { ?>
                                             <a title="Rechazar"
                                                href="<?= site_url(array('presupuesto', 'set_rechazado', $row->pres_cod)) ?>"
                                                class="btn btn-default btn-sm"><i class="fa fa-close"></i> Rechazar</a>

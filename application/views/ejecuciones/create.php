@@ -54,7 +54,7 @@
                     <div class="form-group input-group">
                         <span class="input-group-addon">Fecha</span>
                         <input letters="true" class="form-control" type="date"
-                        min="2019-06-26" max="2020-06-26"
+                               min="2019-06-26" max="2020-06-26"
                                name="ord_fecha">
                     </div>
                 </div>
@@ -118,13 +118,13 @@
                             <i class="fa fa-fw fa-save"></i> Guardar
                         </button>
                         <a href='<?php echo site_url($page) ?>' class='btn btn-danger' id='btnCancelar'>Cancelar</a>
-
-                        <a href='<?php echo site_url(['ejecucion', 'create_pdf', $pres_id]) ?>' class='btn btn-danger'
+                        &nbsp;&nbsp;
+                        <a href='<?php echo site_url(['ejecucion', 'create_pdf', $pres_id]) ?>' class='btn btn-primary'
                            id='btnCancelar'>Generar PDF</a>
 
                         <?php if (file_exists(APPPATH."documentos/presupuesto_$pres_id.pdf")) { ?>
                             <a href='<?php echo site_url(['ejecucion', 'send_pdf', $pres_id]) ?>'
-                               class='btn btn-danger'
+                               class='btn btn-primary'
                                id='btnCancelar'>Enviar PDF</a>
                             <span> <?= isset($rpta) ? $rpta : ''; ?> </span>
                         <?php } ?>
