@@ -11,6 +11,22 @@
             return $rs;
         }
 
+        public function listar($buscar = '') {
+            $query = $this->db->query("CALL pa_cliente_list('$buscar', 1)");
+            $rs    = $query->result();
+            $query->next_result();
+            $query->free_result();
+            return $rs;
+        }
+
+        public function getByID($cli_id) {
+            $query = $this->db->query("CALL pa_cliente_getByID('$cli_id')");
+            $rs    = $query->result();
+            $query->next_result();
+            $query->free_result();
+            return $rs ? $rs[0] : null;
+        }
+
         public function getId($id) {
             $query  = $this->db->query("CALL PA_cliente_x_Cod($id)");
             $result = $query->row();

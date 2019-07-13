@@ -44,7 +44,10 @@
                         <a href="#" data-toggle="dropdown" role="button"
                            aria-haspopup="true" aria-expanded="false">Reportes <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Presupuestos</a></li>
+                            <li><a href="<?= site_url(array('Reportes', 'PresupBySituacion')) ?>">Situacion
+                                    presupuestos</a></li>
+                            <li><a href="<?= site_url(array('Reportes', 'CostosByMes')) ?>">Costos de
+                                    presupuestos</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">

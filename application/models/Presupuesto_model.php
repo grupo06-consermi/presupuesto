@@ -48,6 +48,22 @@
             return $rs;
         }
 
+        public function reporteBySituacion($anio, $cliente) {
+            $query = $this->db->query("CALL pa_presupuesto_reportbySituacion('$anio', '$cliente')");
+            $rs    = $query->result();
+            $query->next_result();
+            $query->free_result();
+            return $rs;
+        }
+
+        public function reportCostoByMes($anio, $cliente) {
+            $query = $this->db->query("CALL pa_presupuesto_CostoByMes('$anio', '$cliente')");
+            $rs    = $query->result();
+            $query->next_result();
+            $query->free_result();
+            return $rs;
+        }
+
         public function insertar() {
             $rs       = $this->db->query("CALL pa_presupuesto_insert(?,?,?,?,?,?,?,@pres_cod)", [
                 $this->pres_forma_pago,
