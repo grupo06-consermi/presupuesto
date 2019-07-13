@@ -19,6 +19,9 @@
             $this->load->helper('pdf_helper');
             $this->load->model('ejecucion_model');
             $this->load->model('presupuesto_model');
+            $this->load->model('producto_model');
+            $this->load->model('cliente_model');
+            $this->load->model('empleado_model');
         }
 
         public function index() {
@@ -84,7 +87,7 @@
             $this->load->view('presupuesto/presupuesto_pdf', compact('pres'));
         }
 
-        public function send_pdf($pres_id) {
+        public function send_pdf($pres_id, $page = '') {
             $pres      = $this->presupuesto_model->getByID($pres_id);
             $titulo    = "Presupuesto No. $pres_id - CONSERMI";
             $contenido = "<h2 style='color: #985430;'>Presupuesto</h2>
@@ -94,7 +97,18 @@
 
             $pres_row     = $this->presupuesto_model->getByID($pres_id);
             $presdet_list = $this->presupuesto_model->getDetalles($pres_id);
-            $this->load->view('ejecuciones/create', compact('pres_id', 'page', 'pres_row', 'presdet_list', 'rpta'));
+
+            if ($page) {
+                $pres_row  = $this->presupuesto_model->getByID($pres_id);
+                $prod_list = $this->presupuesto_model->getDetalles($pres_id);
+                $empl_list = $this->presupuesto_model->getManoObra($pres_id);
+                $clientes  = $this->cliente_model->fetch_all();
+                $products  = $this->producto_model->fetch_all();
+                $empleados = $this->empleado_model->fetch_all();
+                $this->load->view('presupuesto/show', compact('pres_row', 'clientes', 'prod_list', 'empl_list', 'products', 'empleados', 'rpta'));
+            } else {
+                $this->load->view('ejecuciones/create', compact('pres_id', 'page', 'pres_row', 'presdet_list', 'rpta'));
+            }
         }
 
         function SendEmail($email, $titulo, $contenido, $archivo) {
