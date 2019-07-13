@@ -72,13 +72,15 @@ CREATE PROCEDURE pa_presupuesto_reportbySituacion(
 )
 BEGIN
     SELECT * from (
-      SELECT 1 AS sit_id, 'Enviado' as sit_nombre
+      SELECT 0 AS sit_id, 'Nuevo' as sit_nombre
+      UNION
+      SELECT 1, 'Enviado'
       UNION
       SELECT 2, 'Aceptado'
       UNION
-      SELECT 3, 'Por cancelar'
+      SELECT 3, 'En ejecucion'
       UNION
-      SELECT 4, 'Cancelado'
+      SELECT 4, 'Terminado'
       UNION
       SELECT 5, 'Anulado'
     ) sit left JOIN (

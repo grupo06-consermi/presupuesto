@@ -13,18 +13,20 @@
 
     // Desde el servidor:
 
+    define('PRES_NUEVO', 0);
     define('PRES_ENVIADO', 1);
     define('PRES_ACEPTADO', 2);
-    define('PRES_POR_CANCELAR', 3);
-    define('PRES_CANCELADO', 4);
+    define('PRES_EN_EJECUCION', 3);
+    define('PRES_TERMINADO', 4);
     define('PRES_ANULADO', 5);
 
     function getSituacionPresupuesto() {
         $situacion                      = [];
+        $situacion  [PRES_NUEVO]        = 'Nuevo';
         $situacion  [PRES_ENVIADO]      = 'Enviado';
         $situacion  [PRES_ACEPTADO]     = 'Aceptado';
-        $situacion  [PRES_POR_CANCELAR] = 'Por cancelar';
-        $situacion  [PRES_CANCELADO]    = 'Cancelado';
+        $situacion  [PRES_EN_EJECUCION] = 'En ejecucion';
+        $situacion  [PRES_TERMINADO]    = 'Terminado';
         $situacion  [PRES_ANULADO]      = 'Anulado';
         return $situacion;
     }
