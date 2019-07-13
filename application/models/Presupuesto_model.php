@@ -169,4 +169,17 @@
 
             return $rs ? 1 : 0;
         }
+
+        function setAsRechazado($pres_id) {
+
+            $PRES_ANULADO = PRES_ANULADO;
+
+            $rs = $this->db->query("
+                UPDATE presupuesto 
+                SET pres_situacion = '$PRES_ANULADO'
+                WHERE pres_cod = '$pres_id';
+            ");
+
+            return $rs ? 1 : 0;
+        }
     }

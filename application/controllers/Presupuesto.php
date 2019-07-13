@@ -85,4 +85,10 @@
             $records = $this->presupuesto_model->listar();
             $this->load->view('presupuesto/index', compact('records'));
         }
+
+        public function set_rechazado($pres_id) {
+            $this->presupuesto_model->setAsRechazado($pres_id);
+            $records = $this->presupuesto_model->listar();
+            $this->load->view('presupuesto/index', compact('records'));
+        }
     }
