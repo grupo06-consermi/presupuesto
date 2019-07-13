@@ -30,7 +30,7 @@
 
         public function createOn($pres_id) {
             $pres_row = $this->presupuesto_model->getByID($pres_id);
-            $this->load->view('conformidades/create', compact('presupuestos'));
+            $this->load->view('conformidades/create', compact('pres_row'));
         }
 
         public function edit($id) {
