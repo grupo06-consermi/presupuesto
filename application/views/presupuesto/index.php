@@ -63,12 +63,19 @@
                                     <td><?= $row->pres_lugar_trabajo ?></td>
                                     <td><?= getSituacionPresupuesto()[$row->pres_situacion] ?></td>
                                     <td>
+
                                         <a title="Aceptar"
+                                           href="<?= site_url(array('presupuesto', 'set_acepted', $row->pres_cod)) ?>"
+                                           class="btn btn-default btn-sm"><i class="fa fa-check"></i> Aceptar</a>
+                                        <a title="Ejecutar"
                                            href="<?= site_url(array('ejecucion', 'createOn', $row->pres_cod, 'presupuesto')) ?>"
-                                           class="btn btn-default btn-sm"><i class="fa fa-check"></i></a>
+                                           class="btn btn-default btn-sm"><i class="fa fa-play"></i> Ejecutar</a>
+                                        <a title="Ejecutar"
+                                           href="<?= site_url(array('conformidad', 'createOn', $row->pres_cod, 'presupuesto')) ?>"
+                                           class="btn btn-default btn-sm"><i class="fa fa-sticky-note"></i> Conformidad</a>
                                         <a title="Rechazar"
                                            href="<?= site_url(array('presupuesto', 'set_rechazado', $row->pres_cod)) ?>"
-                                           class="btn btn-default btn-sm"><i class="fa fa-close"></i></a>
+                                           class="btn btn-default btn-sm"><i class="fa fa-close"></i> Rechazar</a>
                                     </td>
                                     <td>
                                         <div class="btn-group btn-group-sm">
