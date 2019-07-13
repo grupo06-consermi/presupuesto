@@ -25,11 +25,7 @@
             <?php endif ?>
         </div>
         
-        <div class="col-xs-12">
-            <a class="btn btn-success" href="<?= site_url(['conformidad', 'create']) ?>" style="margin-bottom: 1.3em;">
-                <i class="fa fa-fw fa-plus"></i> Agregar
-            </a>
-        </div>
+
 
         <div class="col-xs-12">
             <table  class="table table-striped table-bordered">
