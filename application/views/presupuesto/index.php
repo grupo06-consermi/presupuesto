@@ -79,13 +79,11 @@
                                                 Conformidad</a>
                                         <?php } ?>
 
-
                                         <?php if ($row->pres_situacion != PRES_ANULADO) { ?>
                                             <a title="Rechazar"
                                                href="<?= site_url(array('presupuesto', 'set_rechazado', $row->pres_cod)) ?>"
                                                class="btn btn-default btn-sm"><i class="fa fa-close"></i> Rechazar</a>
                                         <?php } ?>
-
                                     </td>
                                     <td>
                                         <div class="btn-group btn-group-sm">

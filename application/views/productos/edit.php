@@ -21,9 +21,9 @@
                         <option>-- SELECCIONE --</option>
                         <?php /** @var object $categorias */
                             foreach ($categorias as $category): ?>
-                            <option <?= $category->cat_cod == $producto->cat_cod ? "selected" : "" ?>
-                                    value="<?= $category->cat_cod ?>"><?= $category->cat_nombre ?></option>
-                        <?php endforeach; ?>
+                                <option <?= $category->cat_cod == $producto->cat_cod ? "selected" : "" ?>
+                                        value="<?= $category->cat_cod ?>"><?= $category->cat_nombre ?></option>
+                            <?php endforeach; ?>
                     </select>
                 </div>
             </div>
