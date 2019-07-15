@@ -58,6 +58,7 @@
             $this->load->view('presupuesto/create', compact('products', 'clientes', 'empleados'));
         }
 
+
         public function guardar($pres_id = 0) {
             $this->presupuesto_model->pres_cod              = IssetOr($_POST['pres_cod'], 0);
             $this->presupuesto_model->pres_descripcion      = $_POST['pres_descripcion'];
@@ -80,6 +81,8 @@
                 echo $this->presupuesto_model->actualizar();
             }
         }
+
+
 
         public function set_acepted($pres_id) {
             $this->presupuesto_model->setAsAceptado($pres_id);
