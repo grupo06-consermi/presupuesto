@@ -153,7 +153,7 @@
             $rs = $this->db->query("DELETE FROM actividad_empleado WHERE act_cod = '$act_cod';");
 
             foreach ($this->emp_list as $d) {
-                $rs = $rs && $this->db->query("CALL pa_actividad_empleado_insert(?,?,?,?,?,@aemp_codigo)", [
+                $rs = $rs && $this->db->query("CALL pa_actividad_empleado_insert(?,?,?,?,?)", [
                         $act_cod,
                         $d['emp_codigo'],
                         $d['pago_dia'],
