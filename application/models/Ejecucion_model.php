@@ -47,6 +47,8 @@
             $result  = $query->result()[0];
             $act_cod = $result->act_cod;
 
+            // (20 > 12) -> 12
+            // (5 > 12) -> 5
             $this->db->query("
                  INSERT INTO actividad_productos (
                     act_cod,
@@ -56,13 +58,24 @@
                     actpro_cant_usado,
                     actpro_total
                 ) 
-                SELECT $act_cod, pro_cod, dpre_precio, dpre_cantidad, if(prod_stock > dpre_cantidad, dpre_cantidad, dpre_cantidad - prod_stock), dpre_precio * dpre_cantidad
+                SELECT $act_cod, pro_cod, dpre_precio, dpre_cantidad, if(prod_stock > dpre_cantidad, dpre_cantidad, prod_stock), dpre_precio * dpre_cantidad
                 FROM detalle_presupuesto
                     INNER JOIN producto p ON detalle_presupuesto.pro_cod = p.prod_cod
                 WHERE pre_cod = $pres_cod;
             ");
 
             $this->db->query("
+                UPDATE producto prod,
+                    (SELECT pres_cod, prod_cod, actpro_cant_usado, actpro_cant_presup
+                     FROM actividad_productos actpro
+                        INNER JOIN actividad act ON actpro.act_cod = act.act_cod
+                     WHERE act.pres_cod = '$pres_cod') actpro                
+                SET prod.prod_stock_reponer = prod.prod_stock_reponer + (actpro.actpro_cant_presup - actpro.actpro_cant_usado),
+                    prod.prod_stock = prod.prod_stock - actpro.actpro_cant_usado                    
+                WHERE prod.prod_cod = actpro.prod_cod; 
+            ");
+
+            /*$this->db->query("
                  UPDATE producto prod, 
                     (SELECT prod_cod, SUM(actpro_cant_presup - actpro_cant_usado) AS stock_reponer
                     FROM actividad_productos 
@@ -71,7 +84,7 @@
                     GROUP BY prod_cod) AS act
                  SET prod.prod_stock_reponer = prod.prod_stock_reponer + act.stock_reponer
                  WHERE prod.prod_cod = act.prod_cod;
-            ");
+            ");*/
 
             $PRES_EN_EJECUCION = PRES_EN_EJECUCION;
 
