@@ -1,5 +1,5 @@
 
-<div  style='padding: 1.5em;'>
+<div  style='padding: 0em;'>
     <div class="callout callout-info">
         <h2>Lista de Empleados</h2>
     </div>

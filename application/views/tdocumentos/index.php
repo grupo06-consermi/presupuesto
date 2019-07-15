@@ -1,5 +1,5 @@
 
-<div  style='padding: 1.5em;'>
+<div  style='padding: 0em;'>
     <div class="callout callout-info">
         <h2>Lista de Tipos de Documentos</h2>
     </div>

@@ -1,4 +1,8 @@
 <?php
+    define('ROL_ADMIN', 1);
+    define('ROL_GERENTE', 2);
+    define('ROL_COMPRAS', 3);
+
     // Desde el servidor:
 
     define('PAGO_CONTADO', 1);

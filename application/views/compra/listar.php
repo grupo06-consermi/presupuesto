@@ -1,5 +1,5 @@
 <?php /** @var object $comp_list */ ?>
-<section style="padding: 1.5em;">
+<section style="padding: 0em;">
     <div class="callout callout-info">
         <h2>Compras</h2>
     </div>

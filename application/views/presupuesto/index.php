@@ -1,4 +1,4 @@
-<section style="padding: 1.5em;">
+<section style="padding: 0em;">
     <div class="callout callout-info">
         <h2>Presupuestos</h2>
     </div>
@@ -110,8 +110,6 @@
         </div>
     </div>
 </section>
-
-
 <script>
     $(document).ready(function () {
         $('.table').DataTable({
