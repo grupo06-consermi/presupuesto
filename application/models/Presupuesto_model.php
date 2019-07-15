@@ -107,6 +107,15 @@
                     $d['importe'],
                 ]);
             }
+            $query = $this->db->query("
+                UPDATE presupuesto p, (                      
+                    SELECT count(pres_cod) as conteo 
+                    FROM presupuesto
+                    WHERE year(pres_fecha_emision) = year(now())
+                ) as p2                   
+                SET pres_numero = CONCAT(YEAR(NOW()), '-', lpad( conteo, 5, '0') )
+                WHERE pres_cod = '$pres_cod';
+            ");
             return $pres_cod;
         }
 
@@ -160,7 +169,6 @@
             }
         }
 
-
         function borrar($pres_id) {
 
             $rs = $this->db->query("
@@ -171,7 +179,6 @@
 
             return $rs ? 1 : 0;
         }
-
 
         function setAsAceptado($pres_id) {
             $PRES_ACEPTADO = PRES_ACEPTADO;
