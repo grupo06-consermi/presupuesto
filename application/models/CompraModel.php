@@ -49,13 +49,24 @@
                     $cdet['total']
                 ]);
             }
+
+            // actualizar stock de producto
+            $result = $this->db->query("
+                UPDATE producto prod,
+                    (SELECT * FROM compra_detalle cd 
+                     WHERE cd.comp_cod = '$comp_cod') cd
+                SET prod.prod_stock = prod.prod_stock + cd.cdet_cantidad
+                WHERE prod.prod_cod = cd.prod_cod;
+
+             ");
+
             return $comp_cod;
         }
 
         public function getProductosFaltantes() {
             $query  = $this->db->query("
                 SELECT prod.prod_cod, prod_nombre_comercial,
-                       avg(prod.prod_precio_compra) as prod_precio_compra,                       
+                       avg(prod.prod_precio_compra) AS prod_precio_compra,                       
                        sum(actpro_cant_presup) AS actpro_cant_presup,               
                        sum(actpro_cant_usado) AS actpro_cant_usado,             
                        sum(actpro_cant_presup - actpro_cant_usado) - prod_stock_reponer AS cant_pedir                
