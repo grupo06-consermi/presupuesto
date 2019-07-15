@@ -109,7 +109,7 @@
             }
             $query = $this->db->query("
                 UPDATE presupuesto p, (                      
-                    SELECT count(pres_cod) as conteo 
+                    SELECT ifnull(count(pres_cod), 1) as conteo 
                     FROM presupuesto
                     WHERE year(pres_fecha_emision) = year(now())
                 ) as p2                   

@@ -68,8 +68,7 @@ CREATE PROCEDURE pa_actividad_empleado_insert(
     IN _emp_cod int(11),
     IN _aemp_pago_dia decimal(8, 2),
     IN _aemp_cantidad_dias tinyint(4),
-    IN _aemp_total decimal(8, 2),
-    OUT _aemp_codigo int(11)
+    IN _aemp_total decimal(8, 2)
 )
 BEGIN
     INSERT INTO actividad_empleado (
@@ -80,13 +79,12 @@ BEGIN
         aemp_total
     )
     VALUES (
-               _act_cod,
-               _emp_cod,
-               _aemp_pago_dia,
-               _aemp_cantidad_dias,
-               _aemp_total
-           );
-    SET _aemp_codigo = LAST_INSERT_ID();
+           _act_cod,
+           _emp_cod,
+           _aemp_pago_dia,
+           _aemp_cantidad_dias,
+           _aemp_total
+       );
 END $$
 
 -- Tabla: actividad_empleado

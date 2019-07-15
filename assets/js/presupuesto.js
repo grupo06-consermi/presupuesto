@@ -189,7 +189,6 @@ var Presupuesto = function () {
                     pago_dia  : pago_dia.val(),
                     tiempo    : tiempo.val(),
                     importe   : importe
-
                 };
 
                 pres_emp_list.push(pres_emp_actual);
@@ -330,7 +329,6 @@ var Presupuesto = function () {
             }
         }).done(function (data) {
             console.log(data);
-
             if (data > 0) {
                 alert('Guardado correcto');
                 if ($('#pres_cod').val() > 0) {
@@ -357,6 +355,7 @@ var Presupuesto = function () {
         loadEmpleados   : loadEmpleados,
         remove_producto : remove_producto,
         remove_empleado : remove_empleado,
-        pres_prod_list  : pres_prod_list
+        pres_prod_list  : pres_prod_list,
+        pres_emp_list   : pres_emp_list
     };
 }();

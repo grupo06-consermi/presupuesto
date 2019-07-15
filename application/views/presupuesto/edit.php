@@ -445,6 +445,7 @@
     $(document).ready(function () {
         Presupuesto.init();
         Presupuesto.loadProductos(prod_list);
+        Presupuesto.loadEmpleados(empl_list);
 
         $('#costo_mano_obra').change(function (e) {
             Presupuesto.calcularTotal();
