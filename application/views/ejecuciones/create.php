@@ -46,7 +46,7 @@
                 <div class="col-xs-6">
                     <div class="form-group input-group">
                         <span class="input-group-addon"># Orden</span>
-                        <input letters="true" required="required" class="form-control" type="text"
+                        <input letters="true" required="required" class="form-control" type="number"
                                name="ord_num_orden">
                     </div>
                 </div>
@@ -69,6 +69,8 @@
                     <div class="form-group input-group">
                         <span class="input-group-addon">Emisor</span>
                         <input letters="true" required="required" class="form-control" type="text"
+                               onkeyup="this.value=NumText(this.value)"
+                               minlength="3" maxlength="50" title="Escriba su emisor min 3 caracteres"
                                name="ord_emisor">
                     </div>
                 </div>
@@ -133,3 +135,17 @@
             </form>
         </div>
     </div>
+
+
+    <script>
+        function NumText(string){//solo letras y numeros
+            var out = '';
+            //Se añaden las letras validas
+            var filtro = 'abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ ';//Caracteres validos
+
+            for (var i=0; i<string.length; i++)
+                if (filtro.indexOf(string.charAt(i)) != -1)
+                    out += string.charAt(i);
+            return out;
+        }
+    </script>

@@ -90,7 +90,7 @@
                                                    href="<?= site_url(array('presupuesto', 'edit', $row->pres_cod)) ?>"
                                                    class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
                                                 <a title="Eliminar"
-                                                   href="<?= site_url(array('presupuesto', 'borrar', $row->pres_cod)) ?>"
+                                                   href="<?= site_url(array('presupuesto', 'destroy', $row->pres_cod)) ?>"
                                                    class="btn btn-danger btn-sm"><i class="fa fa-remove"></i></a>
                                             <?php } else { ?>
                                                 <a title="Ver"
