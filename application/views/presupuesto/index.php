@@ -90,7 +90,7 @@
                                                    href="<?= site_url(array('presupuesto', 'show', $row->pres_cod)) ?>"
                                                    class="btn btn-warning btn-sm"><i class="fa fa-eye"></i></a>
                                             <?php } ?>
-                                            <?php if ($row->pres_situacion == PRES_NUEVO || $row->pres_situacion == PRES_ENVIADO ) { ?>
+                                            <?php if ($row->pres_situacion == PRES_NUEVO || $row->pres_situacion == PRES_ENVIADO || $row->pres_situacion == PRES_ACEPTADO) { ?>
                                                 <a title="Editar"
                                                    href="<?= site_url(array('presupuesto', 'edit', $row->pres_cod)) ?>"
                                                    class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
