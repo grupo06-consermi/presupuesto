@@ -58,6 +58,7 @@
             $this->load->view('presupuesto/create', compact('products', 'clientes', 'empleados'));
         }
 
+
         public function guardar($pres_id = 0) {
             $this->presupuesto_model->pres_cod              = IssetOr($_POST['pres_cod'], 0);
             $this->presupuesto_model->pres_descripcion      = $_POST['pres_descripcion'];
