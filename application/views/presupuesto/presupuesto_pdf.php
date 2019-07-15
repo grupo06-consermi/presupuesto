@@ -44,6 +44,9 @@
     $pdf->SetFont($ARIAL, 'B', 10);
     $pdf->Cell(15, 5, "Presupuesto Nº: $pres->pres_cod", 0, true, $LEFT);
 
+    $pdf->SetFont($ARIAL, 'B', 10);
+    $pdf->Cell(15, 5, "Presupuesto Nº: $pres->pres_numero", 0, true, $LEFT);
+
     $pdf->SetFont($ARIAL, '', 10);
     $pdf->Cell(15, 5, "Fecha", 0, false, $LEFT);
     $pdf->Cell(15, 5, ": $pres->pres_fecha_emision", 0, true, $LEFT);
