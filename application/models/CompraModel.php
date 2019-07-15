@@ -59,7 +59,7 @@
                        avg(p.prod_precio_compra) as prod_precio_compra,                       
                        sum(actpro_cant_presup) AS actpro_cant_presup,               
                        sum(actpro_cant_usado) AS actpro_cant_usado,             
-                       sum(actpro_cant_presup - actpro_cant_usado) AS cant_pedir                
+                       sum(actpro_cant_presup - actpro_cant_usado) - prod_stock_reponer AS cant_pedir                
                 FROM actividad_productos 
                     INNER JOIN producto p ON actividad_productos.prod_cod = p.prod_cod
                 WHERE actpro_cant_presup - actpro_cant_usado > 0

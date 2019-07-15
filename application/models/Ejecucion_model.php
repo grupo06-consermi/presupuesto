@@ -62,6 +62,17 @@
                 WHERE pre_cod = $pres_cod;
             ");
 
+            $this->db->query("
+                 UPDATE producto prod, 
+                    (SELECT prod_cod, SUM(actpro_cant_presup - actpro_cant_usado) AS stock_reponer
+                    FROM actividad_productos 
+                        INNER JOIN actividad ON actividad_productos.act_cod = actividad.act_cod
+                    WHERE actividad.pres_cod = '$pres_cod'
+                    GROUP BY prod_cod) AS act
+                 SET prod.prod_stock_reponer = prod.prod_stock_reponer + act.stock_reponer
+                 WHERE prod.prod_cod = act.prod_cod;
+            ");
+
             $PRES_EN_EJECUCION = PRES_EN_EJECUCION;
 
             $this->db->query("
