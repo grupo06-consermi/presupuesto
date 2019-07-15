@@ -87,6 +87,15 @@
                         $d['precio']
                     ]);
             }
+            $query = $this->db->query("
+                UPDATE presupuesto p, (                      
+                    SELECT ifnull(count(pres_cod), 1) as conteo 
+                    FROM presupuesto
+                    WHERE year(pres_fecha_emision) = year(now())
+                ) as p2                   
+                SET pres_numero = CONCAT(YEAR(NOW()), '-', lpad( conteo, 5, '0') )
+                WHERE pres_cod = '$pres_cod';
+            ");
 
             $query   = $this->db->query("CALL pa_actividad_insert(?,?,?,?,?,@act_cod)", [
                 $pres_cod,
@@ -99,7 +108,7 @@
             $act_cod = $query->result_array()[0]['act_cod'];
 
             foreach ($this->emp_list as $d) {
-                $rs = $this->db->query("CALL pa_actividad_empleado_insert(?,?,?,?,?,@aemp_codigo)", [
+                $rs = $this->db->query("CALL pa_actividad_empleado_insert(?,?,?,?,?)", [
                     $act_cod,
                     $d['emp_codigo'],
                     $d['pago_dia'],
@@ -107,15 +116,6 @@
                     $d['importe'],
                 ]);
             }
-            $query = $this->db->query("
-                UPDATE presupuesto p, (                      
-                    SELECT ifnull(count(pres_cod), 1) as conteo 
-                    FROM presupuesto
-                    WHERE year(pres_fecha_emision) = year(now())
-                ) as p2                   
-                SET pres_numero = CONCAT(YEAR(NOW()), '-', lpad( conteo, 5, '0') )
-                WHERE pres_cod = '$pres_cod';
-            ");
             return $pres_cod;
         }
 
