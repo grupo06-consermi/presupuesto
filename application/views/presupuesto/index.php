@@ -97,7 +97,7 @@
                                             <?php } ?>
                                             <?php if ($row->pres_situacion == PRES_NUEVO || $row->pres_situacion == PRES_ENVIADO || $row->pres_situacion == PRES_ANULADO) { ?>
                                                 <a title="Eliminar"
-                                                   href="<?= site_url(array('presupuesto', 'destroy', $row->pres_cod)) ?>"
+                                                   href="<?= site_url(array('presupuesto', 'borrar', $row->pres_cod)) ?>"
                                                    class="btn btn-danger btn-sm"><i class="fa fa-remove"></i></a>
                                             <?php } ?>
                                         </div>

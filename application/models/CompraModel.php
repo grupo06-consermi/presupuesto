@@ -49,21 +49,21 @@
                     $cdet['total']
                 ]);
             }
-
             return $comp_cod;
         }
 
         public function getProductosFaltantes() {
             $query  = $this->db->query("
-                SELECT p.prod_cod, prod_nombre_comercial,
-                       avg(p.prod_precio_compra) as prod_precio_compra,                       
+                SELECT prod.prod_cod, prod_nombre_comercial,
+                       avg(prod.prod_precio_compra) as prod_precio_compra,                       
                        sum(actpro_cant_presup) AS actpro_cant_presup,               
                        sum(actpro_cant_usado) AS actpro_cant_usado,             
                        sum(actpro_cant_presup - actpro_cant_usado) - prod_stock_reponer AS cant_pedir                
-                FROM actividad_productos 
-                    INNER JOIN producto p ON actividad_productos.prod_cod = p.prod_cod
+                FROM actividad_productos actpro
+                    INNER JOIN producto prod ON actpro.prod_cod = prod.prod_cod
+                    INNER JOIN actividad act ON actpro.act_cod = act.act_cod
                 WHERE actpro_cant_presup - actpro_cant_usado > 0
-                GROUP BY p.prod_cod, prod_nombre_comercial ;   
+                GROUP BY prod.prod_cod, prod_nombre_comercial ;   
             ");
             $result = $query->result();
             // $this->db->next_result();
