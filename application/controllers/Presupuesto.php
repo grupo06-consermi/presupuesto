@@ -58,7 +58,6 @@
             $this->load->view('presupuesto/create', compact('products', 'clientes', 'empleados'));
         }
 
-
         public function guardar($pres_id = 0) {
             $this->presupuesto_model->pres_cod              = IssetOr($_POST['pres_cod'], 0);
             $this->presupuesto_model->pres_descripcion      = $_POST['pres_descripcion'];
@@ -82,8 +81,6 @@
             }
         }
 
-
-
         public function set_acepted($pres_id) {
             $this->presupuesto_model->setAsAceptado($pres_id);
             $records = $this->presupuesto_model->listar();
@@ -96,7 +93,7 @@
             $this->load->view('presupuesto/index', compact('records'));
         }
 
-        public  function borrar($pres_id){
+        public function borrar($pres_id) {
             $this->presupuesto_model->borrar($pres_id);
             $records = $this->presupuesto_model->listar();
             $this->load->view('presupuesto/index', compact('records'));
