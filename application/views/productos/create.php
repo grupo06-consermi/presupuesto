@@ -75,7 +75,7 @@
                     <div class="form-group input-group">
                         <span class="input-group-addon">Stock:</span>
                         <input required="required" class="form-control" type="number"
-                               min="1" pattern="^[0-9]+"
+                               min="1" pattern="^[0-9]+" max="100"
                                name="prod_stock">
                     </div>
                 </div>
@@ -83,7 +83,7 @@
                     <div class="form-group input-group">
                         <span class="input-group-addon">Stock minimo:</span>
                         <input required="required" class="form-control" type="number"
-                               min="1" pattern="^[0-9]+"
+                               min="1" pattern="^[0-9]+" max="100"
                                name="prod_stock_min">
 
                     </div>
@@ -92,14 +92,14 @@
                     <div class="form-group input-group">
                         <span class="input-group-addon">Precio Venta</span>
                         <input required="required" class="form-control" type="number" min="0"
-                               step="0.01" name="prod_precio_venta">
+                               step="0.01" max="2000" name="prod_precio_venta">
                     </div>
                 </div>
                 <div class="col-xs-12">
                     <div class="form-group input-group">
                         <span class="input-group-addon">Precio Compra</span>
                         <input required="required" class="form-control" type="number" min="0"
-                               step="0.01" name="prod_precio_compra">
+                               step="0.01" max="2000" name="prod_precio_compra">
                     </div>
                 </div>
                 <div class="col-xs-12">

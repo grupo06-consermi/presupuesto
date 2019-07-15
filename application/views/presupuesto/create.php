@@ -257,7 +257,7 @@
                                 <label for="precio" class="control-label">Precio</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-money"></i></div>
-                                    <input id="precio" name="precio" type="number" min="0.01" class="form-control">
+                                    <input id="precio" name="precio" type="number" min="0.01" max="1000" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -266,7 +266,7 @@
                                 <label for="cantidad" class="control-label">Cantidad</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i></div>
-                                    <input required="required" min="1" id="cantidad" name="cantidad" type="number"
+                                    <input required="required" min="1"  max="1000"  id="cantidad" name="cantidad" type="number"
                                            class="form-control">
                                 </div>
                             </div>
@@ -312,7 +312,7 @@
                                 <label for="aemp_pago_dia" class="control-label">Pago día</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-money"></i></div>
-                                    <input id="aemp_pago_dia" name="aemp_pago_dia" min="1" step="1" type="number" class="form-control">
+                                    <input id="aemp_pago_dia" name="aemp_pago_dia" min="1" max="100" step="1" type="number" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -321,7 +321,7 @@
                                 <label for="cantidad" class="control-label">Tiempo:</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i></div>
-                                    <input required="required" min="1" step="1" id="aemp_cantidad_dias" name="aemp_cantidad_dias"
+                                    <input required="required" min="1" max="100" step="1" id="aemp_cantidad_dias" name="aemp_cantidad_dias"
                                            type="number" class="form-control">
                                     <span> días</span>
                                 </div>
