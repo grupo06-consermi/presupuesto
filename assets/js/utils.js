@@ -8,3 +8,16 @@ function toInteger(valor, def) {
     def = (typeof def !== 'undefined') ? def : 0;
     return $.isNumeric(valor) ? parseInt(valor) : def;
 }
+
+
+function jsonParse(str) {
+    try {
+        if (str !== 'null') {
+            return JSON.parse(str);
+        } else {
+            return '';
+        }
+    } catch (e) {
+        return '';
+    }
+}
