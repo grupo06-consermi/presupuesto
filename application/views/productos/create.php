@@ -91,14 +91,14 @@
                 <div class="col-xs-12">
                     <div class="form-group input-group">
                         <span class="input-group-addon">Precio Venta</span>
-                        <input required="required" class="form-control" type="number"
+                        <input required="required" class="form-control" type="number" min="0"
                                step="0.01" name="prod_precio_venta">
                     </div>
                 </div>
                 <div class="col-xs-12">
                     <div class="form-group input-group">
                         <span class="input-group-addon">Precio Compra</span>
-                        <input required="required" class="form-control" type="number"
+                        <input required="required" class="form-control" type="number" min="0"
                                step="0.01" name="prod_precio_compra">
                     </div>
                 </div>
