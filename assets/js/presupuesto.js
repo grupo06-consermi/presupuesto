@@ -305,6 +305,7 @@ var Presupuesto = function () {
 
         var form_data = new FormData();
         form_data.append('pres_cod', $('#pres_cod').val());
+        form_data.append('pres_descripcion', $('#pres_descripcion').val());
         form_data.append('cli_codigo', $('#cbo_clientes').val());
         form_data.append('fechaEmision', $('#fecha_emision').val());
         form_data.append('fechaRecepcion', $('#fecha_recepcion').val());

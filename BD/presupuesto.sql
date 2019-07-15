@@ -6,7 +6,7 @@ CREATE PROCEDURE pa_presupuesto_getRow(
     IN _pres_cod int(11)
 )
 BEGIN
-    SELECT pres_cod, pres_fecha_emision, pres_fecha_recepcion, pres_forma_pago,
+    SELECT pres_cod, pres_descripcion, pres_fecha_emision, pres_fecha_recepcion, pres_forma_pago,
            pres_lugar_trabajo, pres_estado, pres_costo_mano_obra, pres_costo_materiales,
            pres_costo_total, cli.cli_codigo, cli_razon_social, pres_encargado
     FROM presupuesto pre
@@ -21,7 +21,7 @@ CREATE PROCEDURE pa_presupuesto_getByID(
     IN _pres_cod int(11)
 )
 BEGIN
-    SELECT pres_cod, pres_fecha_emision, pres_fecha_recepcion, pres_forma_pago,
+    SELECT pres_cod, pres_descripcion, pres_fecha_emision, pres_fecha_recepcion, pres_forma_pago,
            pres_lugar_trabajo, pres_estado, pres_costo_mano_obra, pres_costo_materiales,
            pres_costo_total, cli.cli_codigo, cli_razon_social, cli_email, pres_encargado, pres_situacion
     FROM presupuesto pre
@@ -68,29 +68,30 @@ CALL pa_presupuesto_getManoObra(23);
 
 CREATE PROCEDURE pa_presupuesto_reportbySituacion(
     IN _anio int,
-    IN _cli_cod int
-)
+    IN _cli_cod int)
 BEGIN
-    SELECT * from (
-      SELECT 0 AS sit_id, 'Nuevo' as sit_nombre
-      UNION
-      SELECT 1, 'Enviado'
-      UNION
-      SELECT 2, 'Aceptado'
-      UNION
-      SELECT 3, 'En ejecucion'
-      UNION
-      SELECT 4, 'Terminado'
-      UNION
-      SELECT 5, 'Anulado'
-    ) sit left JOIN (
+    SELECT *
+    FROM (
+             SELECT 0 AS sit_id, 'Nuevo' AS sit_nombre
+             UNION
+             SELECT 1, 'Enviado'
+             UNION
+             SELECT 2, 'Aceptado'
+             UNION
+             SELECT 3, 'En ejecucion'
+             UNION
+             SELECT 4, 'Terminado'
+             UNION
+             SELECT 5, 'Anulado'
+         ) sit
+             LEFT JOIN (
         SELECT pres_situacion, count(pres_cod) AS conteo
         FROM presupuesto pre
         WHERE pre.pres_estado = 1
           AND year(pre.pres_fecha_emision) = _anio
           AND (_cli_cod = 0 OR pre.cli_codigo = _cli_cod)
         GROUP BY pres_situacion
-    ) pres on sit.sit_id = pres.pres_situacion;
+    ) pres ON sit.sit_id = pres.pres_situacion;
 END $$
 
 CALL pa_presupuesto_reportbySituacion(2019, 0);
@@ -100,38 +101,48 @@ CALL pa_presupuesto_reportbySituacion(2019, 0);
 
 CREATE PROCEDURE pa_presupuesto_CostoByMes(
     IN _anio int,
-    IN _cli_cod int
-)
+    IN _cli_cod int)
 BEGIN
-    select * from (
-          SELECT 1 AS mes_nro, 'Enero' as mes_nombre UNION
-          SELECT 2, 'Febrero' UNION
-          SELECT 3, 'Marzo' UNION
-          SELECT 4, 'Abril' UNION
-          SELECT 5, 'Mayo' UNION
-          SELECT 6, 'Junio' UNION
-          SELECT 7, 'Julio' UNION
-          SELECT 8, 'Agosto' UNION
-          SELECT 9, 'Setiembre' UNION
-          SELECT 10, 'Octubre' UNION
-          SELECT 11, 'Noviembre' UNION
-          SELECT 12, 'Diciembre'
-        ) mes LEFT JOIN (
-            SELECT month(pres_fecha_emision) as mes, count(pres_cod) as conteo,
-                sum(pres_costo_mano_obra) as pres_costo_mano_obra,
-                sum(pres_costo_materiales) as pres_costo_materiales,
-                sum(pres_costo_total) as pres_costo_total
-            FROM presupuesto pre
-            WHERE pre.pres_estado = 1
-                AND year(pre.pres_fecha_emision) = _anio
-                AND (_cli_cod = 0 OR pre.cli_codigo = _cli_cod)
-            GROUP BY month(pres_fecha_emision)
-        ) monto ON mes.mes_nro = monto.mes;
+    SELECT *
+    FROM (
+             SELECT 1 AS mes_nro, 'Enero' AS mes_nombre
+             UNION
+             SELECT 2, 'Febrero'
+             UNION
+             SELECT 3, 'Marzo'
+             UNION
+             SELECT 4, 'Abril'
+             UNION
+             SELECT 5, 'Mayo'
+             UNION
+             SELECT 6, 'Junio'
+             UNION
+             SELECT 7, 'Julio'
+             UNION
+             SELECT 8, 'Agosto'
+             UNION
+             SELECT 9, 'Setiembre'
+             UNION
+             SELECT 10, 'Octubre'
+             UNION
+             SELECT 11, 'Noviembre'
+             UNION
+             SELECT 12, 'Diciembre'
+         ) mes
+             LEFT JOIN (
+        SELECT month(pres_fecha_emision) AS mes, count(pres_cod) AS conteo,
+               sum(pres_costo_mano_obra) AS pres_costo_mano_obra,
+               sum(pres_costo_materiales) AS pres_costo_materiales,
+               sum(pres_costo_total) AS pres_costo_total
+        FROM presupuesto pre
+        WHERE pre.pres_estado = 1
+          AND year(pre.pres_fecha_emision) = _anio
+          AND (_cli_cod = 0 OR pre.cli_codigo = _cli_cod)
+        GROUP BY month(pres_fecha_emision)
+    ) monto ON mes.mes_nro = monto.mes;
 END $$
 
-call pa_presupuesto_CostoByMes(2019, 0);
-
-
+CALL pa_presupuesto_CostoByMes(2019, 0);
 
 -- Tabla: presupuesto
 -- DROP PROCEDURE IF EXISTS pa_presupuesto_listCbo;
@@ -152,8 +163,9 @@ END $$
 -- Tabla: presupuesto
 -- DROP PROCEDURE IF EXISTS pa_presupuesto_list;
 
-CREATE PROCEDURE pa_presupuesto_list(IN _buscar varchar(50),
-                                     IN _pres_estado tinyint UNSIGNED)
+CREATE PROCEDURE pa_presupuesto_list(
+    IN _buscar varchar(50),
+    IN _pres_estado tinyint UNSIGNED)
 BEGIN
     SET @aux = _buscar;
     SET _buscar = IF(_buscar <> '', concat('%', replace(_buscar, ' ', '%'), '%'), '%');
@@ -170,70 +182,80 @@ END $$
 -- Tabla: presupuesto
 -- DROP PROCEDURE IF EXISTS pa_presupuesto_insert;
 
-CREATE PROCEDURE pa_presupuesto_insert(IN _pres_forma_pago char(30),
-                                       IN _pres_lugar_trabajo varchar(45),
-                                       IN _pres_costo_mano_obra decimal(8, 2),
-                                       IN _pres_costo_materiales decimal(8, 2),
-                                       IN _pres_costo_total decimal(8, 2),
-                                       IN _cli_codigo int(11),
-                                       IN _pres_encargado varchar(100),
-                                       OUT _pres_cod int(11))
+CREATE PROCEDURE pa_presupuesto_insert(
+    IN _cli_codigo int(11),
+    IN _pres_descripcion varchar(255),
+    IN _pres_lugar_trabajo varchar(45),
+    IN _pres_costo_mano_obra decimal(8, 2),
+    IN _pres_costo_materiales decimal(8, 2),
+    IN _pres_costo_total decimal(8, 2),
+    IN _pres_forma_pago char(30),
+    IN _pres_encargado varchar(100),
+    OUT _pres_cod int(11))
 BEGIN
-    INSERT INTO
-        presupuesto (pres_fecha_emision,
-                     pres_hash_emision,
-                     pres_fecha_recepcion,
-                     pres_forma_pago,
-                     pres_lugar_trabajo,
-                     pres_estado,
-                     pres_costo_mano_obra,
-                     pres_costo_materiales,
-                     pres_costo_total,
-                     cli_codigo,
-                     pres_encargado, pres_situacion)
+    INSERT INTO presupuesto (
+        cli_codigo,
+        pres_descripcion,
+        pres_lugar_trabajo,
+        pres_fecha_emision,
+        pres_hash_emision,
+        pres_fecha_recepcion,
+        pres_costo_mano_obra,
+        pres_costo_materiales,
+        pres_costo_total,
+        pres_forma_pago,
+        pres_encargado,
+        pres_situacion,
+        pres_estado)
     VALUES
-    (now(),
-     '',
-     NULL,
-     _pres_forma_pago,
-     _pres_lugar_trabajo,
-     1,
-     _pres_costo_mano_obra,
-     _pres_costo_materiales,
-     _pres_costo_total,
-     _cli_codigo,
-     _pres_encargado, 0);
+    (
+        _cli_codigo,
+        _pres_descripcion,
+        _pres_lugar_trabajo,
+        now(),
+        '',
+        NULL,
+        _pres_costo_mano_obra,
+        _pres_costo_materiales,
+        _pres_costo_total,
+        _pres_forma_pago,
+        _pres_encargado,
+        0,
+        1);
     -- 0: situacion: nuevo
     SET _pres_cod = LAST_INSERT_ID();
     UPDATE presupuesto SET pres_hash_emision = md5(_pres_cod) WHERE pres_cod = _pres_cod;
 END $$
 
-CALL pa_presupuesto_insert(1, 'santa', '100', '120', '220', 1, 'x', @s);
+
 
 -- Tabla: presupuesto
 -- DROP PROCEDURE IF EXISTS pa_presupuesto_update;
 
-CREATE PROCEDURE pa_presupuesto_update(IN _pres_cod int(11),
-                                       IN _pres_forma_pago char(30),
-                                       IN _pres_lugar_trabajo varchar(45),
-                                       IN _pres_costo_mano_obra decimal(8, 2),
-                                       IN _pres_costo_materiales decimal(8, 2),
-                                       IN _pres_costo_total decimal(8, 2),
-                                       IN _cli_codigo int(11),
-                                       IN _pres_encargado varchar(100))
+CREATE PROCEDURE pa_presupuesto_update(
+    IN _pres_cod int(11),
+    IN _cli_codigo int(11),
+    IN _pres_descripcion varchar(255),
+    IN _pres_lugar_trabajo varchar(45),
+    IN _pres_costo_mano_obra decimal(8, 2),
+    IN _pres_costo_materiales decimal(8, 2),
+    IN _pres_costo_total decimal(8, 2),
+    IN _pres_forma_pago char(30),
+    IN _pres_encargado varchar(100))
 BEGIN
     UPDATE presupuesto
-    SET pres_forma_pago       = _pres_forma_pago,
+    SET cli_codigo            = _cli_codigo,
+        pres_descripcion      = _pres_descripcion,
         pres_lugar_trabajo    = _pres_lugar_trabajo,
         pres_costo_mano_obra  = _pres_costo_mano_obra,
         pres_costo_materiales = _pres_costo_materiales,
         pres_costo_total      = _pres_costo_total,
-        cli_codigo            = _cli_codigo,
+        pres_forma_pago       = _pres_forma_pago,
         pres_encargado        = _pres_encargado
     WHERE pres_cod = _pres_cod;
 END $$
 
-CALL pa_presupuesto_update(27, 1, 'santa', 4, 202.48, 206.8, 3, '');
+
 
 -- Tabla: presupuesto
 -- DROP PROCEDURE IF EXISTS pa_presupuesto_activate;

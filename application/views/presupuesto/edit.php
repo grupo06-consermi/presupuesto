@@ -74,6 +74,20 @@
                 <div class="row">
                     <div class="col-xs-12 col-md-8">
                         <div class="form-group">
+                            <label for="pres_descripcion" class="control-label">Descripción del presupuesto:</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-map-marker"></i>
+                                </div>
+                                <textarea name="pres_descripcion" id="pres_descripcion" type="text"
+                                          class="form-control"><?php echo $pres_row->pres_descripcion; ?></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-md-8">
+                        <div class="form-group">
                             <label for="lugar_trabajo" class="control-label">Lugar Trabajo</label>
                             <div class="input-group">
                                 <div class="input-group-addon">

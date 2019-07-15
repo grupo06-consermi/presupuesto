@@ -60,6 +60,7 @@
 
         public function guardar($pres_id = 0) {
             $this->presupuesto_model->pres_cod              = IssetOr($_POST['pres_cod'], 0);
+            $this->presupuesto_model->pres_descripcion      = $_POST['pres_descripcion'];
             $this->presupuesto_model->pres_fecha_emision    = ''; // DAL = now() //; $_POST['fechaEmision'];
             $this->presupuesto_model->pres_fecha_recepcion  = ''; // null $_POST['fechaRecepcion'];
             $this->presupuesto_model->pres_forma_pago       = $_POST['formaPago'];
@@ -91,4 +92,11 @@
             $records = $this->presupuesto_model->listar();
             $this->load->view('presupuesto/index', compact('records'));
         }
+
+        public  function borrar($pres_id){
+            $this->presupuesto_model->borrar($pres_id);
+            $records = $this->presupuesto_model->listar();
+            $this->load->view('presupuesto/index', compact('records'));
+        }
+
     }

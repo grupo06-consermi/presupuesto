@@ -4,6 +4,7 @@
     class Presupuesto_model extends CI_Model
     {
         var $pres_cod;
+        var $pres_descripcion;
         var $pres_fecha_emision;
         var $pres_fecha_recepcion;
         var $pres_forma_pago;
@@ -65,13 +66,14 @@
         }
 
         public function insertar() {
-            $rs       = $this->db->query("CALL pa_presupuesto_insert(?,?,?,?,?,?,?,@pres_cod)", [
-                $this->pres_forma_pago,
+            $rs       = $this->db->query("CALL pa_presupuesto_insert(?,?,?,?,?,?,?,?,@pres_cod)", [
+                $this->cli_codigo,
+                $this->pres_descripcion,
                 $this->pres_lugar_trabajo,
                 $this->pres_costo_mano_obra,
                 $this->pres_costo_materiales,
                 $this->pres_costo_total,
-                $this->cli_codigo,
+                $this->pres_forma_pago,
                 $this->pres_encargado
             ]);
             $query    = $this->db->query("SELECT @pres_cod as pres_cod");
@@ -110,14 +112,15 @@
 
         public function actualizar() {
 
-            $rs = $this->db->query("CALL pa_presupuesto_update(?,?,?,?,?,?,?,?)", [
+            $rs = $this->db->query("CALL pa_presupuesto_update(?,?,?,?,?,?,?,?,?)", [
                 $this->pres_cod,
-                $this->pres_forma_pago,
+                $this->cli_codigo,
+                $this->pres_descripcion,
                 $this->pres_lugar_trabajo,
                 $this->pres_costo_mano_obra,
                 $this->pres_costo_materiales,
                 $this->pres_costo_total,
-                $this->cli_codigo,
+                $this->pres_forma_pago,
                 $this->pres_encargado
             ]);
 
@@ -156,6 +159,19 @@
                 return 0;
             }
         }
+
+
+        function borrar($pres_id) {
+
+            $rs = $this->db->query("
+                UPDATE presupuesto 
+                SET pres_estado = 0
+                WHERE pres_cod = '$pres_id';
+            ");
+
+            return $rs ? 1 : 0;
+        }
+
 
         function setAsAceptado($pres_id) {
             $PRES_ACEPTADO = PRES_ACEPTADO;
