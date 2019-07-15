@@ -62,6 +62,17 @@
                 WHERE pre_cod = $pres_cod;
             ");
 
+            $this->db->query("
+                 UPDATE producto prod, 
+                    (SELECT prod_cod, SUM(actpro_cant_presup - actpro_cant_usado) AS stock_reponer
+                    FROM actividad_productos 
+                        INNER JOIN actividad ON actividad_productos.act_cod = actividad.act_cod
+                    WHERE actividad.pres_cod = '$pres_cod'
+                    GROUP BY prod_cod) AS act
+                 SET prod.prod_stock_reponer = prod.prod_stock_reponer + act.stock_reponer
+                 WHERE prod.prod_cod = act.prod_cod;
+            ");
+
             $PRES_EN_EJECUCION = PRES_EN_EJECUCION;
 
             $this->db->query("
@@ -69,16 +80,6 @@
                 SET pres_situacion = '$PRES_EN_EJECUCION'
                 WHERE pres_cod = '$pres_cod';            
             ");
-
-            /*foreach ($this->prod_list as $d) {
-             // descontar stock e indicar reposicion
-             $rs = $this->db->query("
-                     UPDATE producto
-                     SET prod_stock = if(prod_stock - $d[cantidad] >= 0, prod_stock - $d[cantidad], 0),
-                         prod_stock_reponer = if(prod_stock - $d[cantidad] < 0, $d[cantidad] - prod_stock, 0)
-                     WHERE prod_cod = $d[codigo];
-             ");
-         }*/
 
             if ($rs) {
                 $query   = $this->db->query("SELECT @ord_cod as ord_cod");

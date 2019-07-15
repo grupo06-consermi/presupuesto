@@ -235,7 +235,7 @@
                                                         class="fa fa-edit"></i></button>
                                             <button type="button" class="btn btn-sm btn-danger"
                                                     onclick="Presupuesto.remove_empleado('<?= $i ?>')"><i
-                                                        class="fa fa-edit"></i></button>
+                                                        class="fa fa-close"></i></button>
                                         <td>
                                     </tr>
                                 <?php } ?>
@@ -296,8 +296,19 @@
                     </div>
                 </div>
                 <hr>
-
             </form>
+            <div class="col-xs-12">
+                <div class="form-group">
+                    <a href='<?php echo site_url(['ejecucion', 'create_pdf', $pres_row->pres_cod]) ?>'
+                       class='btn btn-primary' id='btnGenerarPDF'> <i class='fa fa-file-pdf-o '></i> Generar PDF</a>
+                    <?php if (file_exists(APPPATH."documentos/presupuesto_$pres_row->pres_cod.pdf")) { ?>
+                        <a href='<?php echo site_url(['ejecucion', 'send_pdf', $pres_row->pres_cod, 'presupuesto_edit']) ?>'
+                           class='btn btn-primary ' id='btnCancelar'>
+                            <i class='fa fa-send'></i> Enviar PDF al cliente</a>
+                        <span> <?= isset($rpta) ? $rpta : ''; ?> </span>
+                    <?php } ?>
+                </div>
+            </div>
         </div>
         <div class="panel-footer">
             <button data-callback="Presupuesto.save_presupuesto('<?= site_url('presupuesto/guardar'); ?>')"

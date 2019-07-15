@@ -5,6 +5,9 @@
      * @property  ejecucion_model $ejecucion_model
      * @property  almacen_model $almacen_model
      * @property  phpmailer_lib phpmailer_lib
+     * @property  cliente_model cliente_model
+     * @property  producto_model producto_model
+     * @property  empleado_model empleado_model
      */
     class Ejecucion extends CI_Controller
     {
@@ -67,7 +70,6 @@
             }
             $rows = $this->ejecucion_model->fetch_all_state();
             $this->load->view('ejecuciones/index', compact('rows', 'result'));
-
         }
 
         public function destroy($id) {
@@ -98,7 +100,16 @@
             $pres_row     = $this->presupuesto_model->getByID($pres_id);
             $presdet_list = $this->presupuesto_model->getDetalles($pres_id);
 
-            if ($page) {
+            if ($page == 'presupuesto_edit') {
+                $pres_row  = $this->presupuesto_model->getByID($pres_id);
+                $prod_list = $this->presupuesto_model->getDetalles($pres_id);
+                $empl_list = $this->presupuesto_model->getManoObra($pres_id);
+                $clientes  = $this->cliente_model->fetch_all();
+                $products  = $this->producto_model->fetch_all();
+                $empleados = $this->empleado_model->fetch_all();
+                $this->load->view('presupuesto/edit', compact('pres_row', 'clientes', 'prod_list', 'empl_list', 'products', 'empleados', 'rpta'));
+
+            } elseif ($page == 'presupuesto_show') {
                 $pres_row  = $this->presupuesto_model->getByID($pres_id);
                 $prod_list = $this->presupuesto_model->getDetalles($pres_id);
                 $empl_list = $this->presupuesto_model->getManoObra($pres_id);
@@ -106,6 +117,7 @@
                 $products  = $this->producto_model->fetch_all();
                 $empleados = $this->empleado_model->fetch_all();
                 $this->load->view('presupuesto/show', compact('pres_row', 'clientes', 'prod_list', 'empl_list', 'products', 'empleados', 'rpta'));
+
             } else {
                 $this->load->view('ejecuciones/create', compact('pres_id', 'page', 'pres_row', 'presdet_list', 'rpta'));
             }

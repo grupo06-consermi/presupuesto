@@ -45,6 +45,10 @@
                                 <i class="fa fa-plus"></i>
                                 <span>Agregar producto</span>
                             </button>
+                            <button onclick="Compra.load_from_presupuesto('<?= site_url('compra/getProductosFaltantes'); ?>')"
+                                    type="button" class="btn btn-warning"><i class="fa fa-plus"></i>
+                                <span>Cargar desde presupuestos</span>
+                            </button>
                         </div>
                         <div class="table-responsive">
                             <table id="tbl_productos" class="table table-striped table-bordered table-hover">

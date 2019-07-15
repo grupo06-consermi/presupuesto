@@ -85,17 +85,20 @@
                                     </td>
                                     <td>
                                         <div class="btn-group btn-group-sm">
-                                            <?php if ($row->pres_situacion == PRES_NUEVO) { ?>
-                                                <a title="Editar"
-                                                   href="<?= site_url(array('presupuesto', 'edit', $row->pres_cod)) ?>"
-                                                   class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
-                                                <a title="Eliminar"
-                                                   href="<?= site_url(array('presupuesto', 'destroy', $row->pres_cod)) ?>"
-                                                   class="btn btn-danger btn-sm"><i class="fa fa-remove"></i></a>
-                                            <?php } else { ?>
+                                            <?php if ($row->pres_situacion >= PRES_ACEPTADO) { ?>
                                                 <a title="Ver"
                                                    href="<?= site_url(array('presupuesto', 'show', $row->pres_cod)) ?>"
                                                    class="btn btn-warning btn-sm"><i class="fa fa-eye"></i></a>
+                                            <?php } ?>
+                                            <?php if ($row->pres_situacion == PRES_NUEVO || $row->pres_situacion == PRES_ENVIADO) { ?>
+                                                <a title="Editar"
+                                                   href="<?= site_url(array('presupuesto', 'edit', $row->pres_cod)) ?>"
+                                                   class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
+                                            <?php } ?>
+                                            <?php if ($row->pres_situacion == PRES_NUEVO || $row->pres_situacion == PRES_ENVIADO || $row->pres_situacion == PRES_ANULADO) { ?>
+                                                <a title="Eliminar"
+                                                   href="<?= site_url(array('presupuesto', 'destroy', $row->pres_cod)) ?>"
+                                                   class="btn btn-danger btn-sm"><i class="fa fa-remove"></i></a>
                                             <?php } ?>
                                         </div>
                                     </td>

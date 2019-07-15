@@ -177,6 +177,52 @@ var Compra = function () {
         $('#action', form).val('edit');
     };
 
+    var load_from_presupuesto = function (url) {
+        $.ajax({
+            url        : url,
+            type       : 'POST',
+            contentType: false,
+            data       : {},
+            processData: false,
+            error      : function (XMLHttpRequest, textStatus, errorThrown) {
+                console.log("Error: " + XMLHttpRequest + ' ' + textStatus + ' ' + errorThrown);
+            }
+        }).done(function (data) {
+            var obj        = jsonParse(data);
+            comp_prod_list = [];
+
+            for (var i = 0; i < obj.length; i++) {
+                comp_prod_actual = {
+                    index   : i,
+                    id      : i,
+                    codigo  : obj[i]['prod_cod'],
+                    precio  : obj[i]['prod_precio_compra'],
+                    cantidad: toFloat(obj[i]['actpro_cant_presup']) - toFloat(obj[i]['actpro_cant_usado']),
+                    total   : (toFloat(obj[i]['actpro_cant_presup']) - toFloat(obj[i]['actpro_cant_usado'])) * toFloat(obj[i]['prod_precio_compra']),
+                };
+                comp_prod_list.push(comp_prod_actual);
+
+                var trElement = $('<tr>');
+                trElement.attr('data-index', comp_prod_actual.index);
+                var tdProducto = $('<td>', {text: obj[i]['prod_nombre_comercial']});
+                var tdPrecio   = $('<td>', {text: toFloat(obj[i]['prod_precio_compra']).toFixed(2)});
+                var tdCantidad = $('<td>', {text: comp_prod_actual.cantidad});
+                var tdImporte  = $('<td>', {text: comp_prod_actual.total});
+                var btnEdit    = '<button type="button" class="btn btn-sm btn-primary" onclick="Compra.edit_producto(' + comp_prod_actual.index + ')"><i class="fa fa-edit"></i></button>';
+                var btnDelete  = '<button type="button" class="btn btn-sm btn-danger" onclick="Compra.remove_producto(' + comp_prod_actual.index + ')"><i class="fa fa-close"></i></button>';
+                var tdAcciones = $('<td>' + btnEdit + btnDelete + '</td>');
+
+                trElement.append(tdProducto);
+                trElement.append(tdPrecio);
+                trElement.append(tdCantidad);
+                trElement.append(tdImporte);
+                trElement.append(tdAcciones);
+                _tbl_productos.find('tbody').append(trElement);
+            }
+            calcularTotal();
+        });
+    };
+
     var save_compra = function (url) {
 
         var form_data = new FormData();
@@ -187,7 +233,6 @@ var Compra = function () {
         form_data.append('prod_list', JSON.stringify(comp_prod_list));
 
         console.log(comp_prod_list);
-
 
         $.ajax({
             url        : url,
@@ -216,14 +261,15 @@ var Compra = function () {
     };
 
     return {
-        init           : init,
-        add_producto   : add_producto,
-        edit_producto  : edit_producto,
-        reset_producto : reset_producto,
-        save_compra    : save_compra,
-        calcularTotal  : calcularTotal,
-        loadProductos  : loadProductos,
-        remove_producto: remove_producto,
-        pres_prod_list : comp_prod_list
+        init                 : init,
+        add_producto         : add_producto,
+        edit_producto        : edit_producto,
+        reset_producto       : reset_producto,
+        save_compra          : save_compra,
+        calcularTotal        : calcularTotal,
+        loadProductos        : loadProductos,
+        remove_producto      : remove_producto,
+        pres_prod_list       : comp_prod_list,
+        load_from_presupuesto: load_from_presupuesto
     };
 }();

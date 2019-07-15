@@ -11,7 +11,7 @@
         public function __construct() {
             parent::__construct();
             verificarLogin();
-            if ($this->router->method != 'registrar') {
+            if ($this->router->method != 'registrar' && $this->router->method != 'getProductosFaltantes') {
                 $this->load->view('index/header');
                 $this->load->view('index/menu');
             }
@@ -43,6 +43,11 @@
         public function detalles($comp_id) {
             $compdet_list = $this->CompraModel->getDetalles($comp_id);
             $this->load->view('compra/detalles', compact('compdet_list', 'comp_id'));
+        }
+
+        public function getProductosFaltantes() {
+            $compdet_list = $this->CompraModel->getProductosFaltantes();
+            echo json_encode($compdet_list);
         }
 
         public function Listar() {

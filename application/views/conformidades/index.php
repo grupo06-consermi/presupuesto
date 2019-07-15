@@ -28,13 +28,15 @@
         <div class="col-xs-12">
             <table class="table table-striped table-bordered">
                 <thead>
-                <!--<th>Código</th>-->
-                <th>Fecha Inicio</th>
-                <th>Fecha Fin</th>
-                <th>Estado</th>
-                <th># Conformidad</th>
-                <th># Presupuesto</th>
-                <th>Acciones</th>
+                <tr>
+                    <!--<th>Código</th>-->
+                    <th>Fecha Inicio</th>
+                    <th>Fecha Fin</th>
+                    <th>Estado</th>
+                    <th># Conformidad</th>
+                    <th># Presupuesto</th>
+                    <th hidden>Acciones</th>
+                </tr>
                 </thead>
                 <tbody>
                 <?php foreach ($rows as $row): ?>
@@ -45,7 +47,7 @@
                                 '<i class="fa fa-fw fa-remove"></i>' ?></td>
                         <td><?= $row->conf_act_conformidad ?></td>
                         <td><?= $row->pres_cod ?></td>
-                        <td>
+                        <td hidden>
                             <div class="btn-group btn-group-sm">
                                 <a title="Editar" class="btn btn-primary"
                                    href="<?= site_url('conformidad/edit/'.$row->conf_cod) ?>">
@@ -55,7 +57,6 @@
                                    href="<?= site_url('conformidad/destroy/'.$row->conf_cod) ?>">
                                     <i class="fa fa-fw fa-remove"></i>
                                 </a>
-
                             </div>
                         </td>
                     </tr>
