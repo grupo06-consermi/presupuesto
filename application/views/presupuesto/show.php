@@ -281,23 +281,19 @@
             </button>
             <?php if ($pres_row->pres_situacion < PRES_EN_EJECUCION) { ?>
                 <a href='<?php echo site_url(['ejecucion', 'create_pdf', $pres_row->pres_cod]) ?>'
-                   class='btn btn-primary'
-                   id='btnCancelar'>Generar PDF</a>
-
+                   class='btn btn-primary' id='btnGenerarPDF'> <i class='fa fa-file-pdf-o '></i> Generar PDF</a>
                 <?php if (file_exists(APPPATH."documentos/presupuesto_$pres_row->pres_cod.pdf")) { ?>
-                    <a href='<?php echo site_url(['ejecucion', 'send_pdf', $pres_row->pres_cod, 'presupuesto/show']) ?>'
-                       class='btn btn-primary'
-                       id='btnCancelar'>Enviar PDF</a>
+                    <a href='<?php echo site_url(['ejecucion', 'send_pdf', $pres_row->pres_cod, 'presupuesto_edit']) ?>'
+                       class='btn btn-primary ' id='btnCancelar'>
+                        <i class='fa fa-send'></i> Enviar PDF al cliente</a>
                     <span> <?= isset($rpta) ? $rpta : ''; ?> </span>
                 <?php } ?>
             <?php } else { ?>
                 <a href='<?php echo site_url(['ejecucion', 'create_pdf', $pres_row->pres_cod]) ?>'
-                   class='btn btn-primary'
-                   id='btnCancelar'>Ver PDF</a>
+                   class='btn btn-primary' id='btnGenerarPDF'> <i class='fa fa-file-pdf-o '></i> Ver PDF</a>
             <?php } ?>
-
             <a href="<?= site_url('presupuesto') ?>" class="btn btn-default">
-                <i class="fa fa-backward"></i>
+                <i class="fa fa-arrow-left"></i>
                 <span>Atras</span>
             </a>
         </div>

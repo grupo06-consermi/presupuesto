@@ -4,7 +4,6 @@
     $page    = IssetOr($page, 'ejecucion');
 ?>
 <div style='padding: 30px;'>
-
     <div class="row">
         <div class="col-xs-12 col-md-offset-0 col-md-12">
             <h3 class="page-header">Registrar Orden de Ejecucion</h3>
@@ -82,6 +81,9 @@
                     </div>
                 </div>
                 <?php if (isset($presdet_list)) { ?>
+                    <div class="col-sm-12" style='margin-bottom: 15px;'>
+                        Estos productos se utilizarán para realizar esta orden de ejecución:
+                    </div>
                     <div class="col-sm-12">
                         <table class='table'>
                             <thead>
@@ -108,26 +110,23 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="col-xs-12" style='margin-bottom: 15px;'>
-                        Estos productos se utilizarán para realizar esta orden de ejecucion.
-                    </div>
                 <?php } ?>
                 <div class="col-xs-12">
                     <div class="form-group">
-                        <button class="btn btn-success" type="submit">
-                            <i class="fa fa-fw fa-save"></i> Guardar
-                        </button>
+                        <button class="btn btn-success" type="submit"><i class="fa fa-fw fa-save"></i> Guardar</button>
                         <a href='<?php echo site_url($page) ?>' class='btn btn-danger' id='btnCancelar'>Cancelar</a>
-                        &nbsp;&nbsp;
-                        <a href='<?php echo site_url(['ejecucion', 'create_pdf', $pres_id]) ?>' class='btn btn-primary'
-                           id='btnCancelar'>Generar PDF</a>
-
-                        <?php if (file_exists(APPPATH."documentos/presupuesto_$pres_id.pdf")) { ?>
-                            <a href='<?php echo site_url(['ejecucion', 'send_pdf', $pres_id]) ?>'
+                        <div hidden>
+                            <a href='<?php echo site_url(['ejecucion', 'create_pdf', $pres_id]) ?>'
                                class='btn btn-primary'
-                               id='btnCancelar'>Enviar PDF</a>
-                            <span> <?= isset($rpta) ? $rpta : ''; ?> </span>
-                        <?php } ?>
+                               id='btnCancelar'>Generar PDF</a>
+
+                            <?php if (file_exists(APPPATH."documentos/presupuesto_$pres_id.pdf")) { ?>
+                                <a href='<?php echo site_url(['ejecucion', 'send_pdf', $pres_id]) ?>'
+                                   class='btn btn-primary'
+                                   id='btnCancelar'>Enviar PDF</a>
+                                <span> <?= isset($rpta) ? $rpta : ''; ?> </span>
+                            <?php } ?>
+                        </div>
                     </div>
                 </div>
             </form>

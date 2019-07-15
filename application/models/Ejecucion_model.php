@@ -70,16 +70,6 @@
                 WHERE pres_cod = '$pres_cod';            
             ");
 
-            /*foreach ($this->prod_list as $d) {
-             // descontar stock e indicar reposicion
-             $rs = $this->db->query("
-                     UPDATE producto
-                     SET prod_stock = if(prod_stock - $d[cantidad] >= 0, prod_stock - $d[cantidad], 0),
-                         prod_stock_reponer = if(prod_stock - $d[cantidad] < 0, $d[cantidad] - prod_stock, 0)
-                     WHERE prod_cod = $d[codigo];
-             ");
-         }*/
-
             if ($rs) {
                 $query   = $this->db->query("SELECT @ord_cod as ord_cod");
                 $ord_cod = $query->result_array()[0]['ord_cod'];

@@ -1,6 +1,5 @@
 <?php
     $rol_id = $_SESSION['auth.rol_id'];
-    echo $rol_id;
 ?>
 <div class="container">
     <nav class="navbar navbar-expand-lg  navbar-inverse ">
