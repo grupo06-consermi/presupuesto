@@ -6,7 +6,7 @@ CREATE PROCEDURE pa_presupuesto_getRow(
     IN _pres_cod int(11)
 )
 BEGIN
-    SELECT pres_cod, pres_descripcion, pres_fecha_emision, pres_fecha_recepcion, pres_forma_pago,
+    SELECT pres_cod, pres_descripcion, pres_numero, pres_fecha_emision, pres_fecha_recepcion, pres_forma_pago,
            pres_lugar_trabajo, pres_estado, pres_costo_mano_obra, pres_costo_materiales,
            pres_costo_total, cli.cli_codigo, cli_razon_social, pres_encargado
     FROM presupuesto pre
@@ -21,7 +21,7 @@ CREATE PROCEDURE pa_presupuesto_getByID(
     IN _pres_cod int(11)
 )
 BEGIN
-    SELECT pres_cod, pres_descripcion, pres_fecha_emision, pres_fecha_recepcion, pres_forma_pago,
+    SELECT pres_cod, pres_descripcion, pres_numero, pres_fecha_emision, pres_fecha_recepcion, pres_forma_pago,
            pres_lugar_trabajo, pres_estado, pres_costo_mano_obra, pres_costo_materiales,
            pres_costo_total, cli.cli_codigo, cli_razon_social, cli_email, pres_encargado, pres_situacion
     FROM presupuesto pre

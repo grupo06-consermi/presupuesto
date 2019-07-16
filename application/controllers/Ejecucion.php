@@ -85,8 +85,9 @@
         }
 
         public function create_pdf($pres_id) {
-            $pres = $this->presupuesto_model->getByID($pres_id);
-            $this->load->view('presupuesto/presupuesto_pdf', compact('pres'));
+            $pres     = $this->presupuesto_model->getByID($pres_id);
+            $detalles = $this->presupuesto_model->getDetalles($pres_id);
+            $this->load->view('presupuesto/presupuesto_pdf', compact('pres', 'detalles'));
         }
 
         public function send_pdf($pres_id, $page = '') {
